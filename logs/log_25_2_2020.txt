@@ -1,0 +1,30 @@
+
+ 
+ ******************************** 
+ Log timestamp:
+ Wed Mar 25 2020 02:33:28 GMT+0100 (Central European Standard Time) 
+ Log id: 
+ 3231eafe-f8ab-4877-a0a9-1a8cd71465e2 
+ 
+ Log message: 
+ Nastepny jakis event na serverze... 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Wed Mar 25 2020 02:33:28 GMT+0100 (Central European Standard Time) 
+ Log id: 
+ 2beffc45-6595-42fe-aacb-299ce27b9ff4 
+ 
+ Log message: 
+ Kolejny log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Wed Mar 25 2020 02:33:28 GMT+0100 (Central European Standard Time) 
+ Log id: 
+ 418f6d58-5626-4ca5-ab76-9dc894ea30f6 
+ 
+ Log message: 
+ Pierwszy log 
