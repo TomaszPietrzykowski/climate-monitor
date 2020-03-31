@@ -1,0 +1,420 @@
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 21:52:48 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ a9235a54-9901-4970-9774-dead951decc3 
+ 
+ Log message: 
+ Kolejny log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 21:52:48 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ f178fa47-4c16-4bc4-9b19-e5d502c20af3 
+ 
+ Log message: 
+ Nastepny jakis event na serverze... 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 21:52:48 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ efd98c31-a540-4fcd-b0d1-3e69df79d78d 
+ 
+ Log message: 
+ Pierwszy log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 21:59:51 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 47a167cb-3456-48b5-a16d-59ef7e06786f 
+ 
+ Log message: 
+ Kolejny log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 21:59:51 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 7a8d6446-2cf8-4970-8529-bd26cf241410 
+ 
+ Log message: 
+ Pierwszy log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 21:59:51 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ e860a993-591e-4140-abea-372ec4793859 
+ 
+ Log message: 
+ Nastepny jakis event na serverze... 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:00:18 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 2fdc7a59-835c-4ed7-8c90-90ffbe31384e 
+ 
+ Log message: 
+ Pierwszy log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:00:18 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 7d42efc7-412e-4543-8fa6-54ca0c1c1df4 
+ 
+ Log message: 
+ Kolejny log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:00:18 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 724d2af4-5bb1-4d3e-87e1-039efac7e231 
+ 
+ Log message: 
+ Nastepny jakis event na serverze... 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:00:56 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 72a97579-4a4d-4c2e-a4c5-2621bd19b63c 
+ 
+ Log message: 
+ Pierwszy log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:00:56 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 14ef2e7b-d845-4152-ba66-545b170e3fe3 
+ 
+ Log message: 
+ Nastepny jakis event na serverze... 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:00:56 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ d8c56b02-f58d-4810-8b26-938696ecaa56 
+ 
+ Log message: 
+ Kolejny log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:01:06 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ e2afba19-8f76-488e-96f1-49c3029ae1cf 
+ 
+ Log message: 
+ Pierwszy log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:01:06 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ f6286a1c-24c7-45e0-b597-a8521f5feb4c 
+ 
+ Log message: 
+ Kolejny log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:01:06 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ bc846519-21c8-4195-b006-cc60a9585e4f 
+ 
+ Log message: 
+ Nastepny jakis event na serverze... 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:01:36 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ aea74295-1e53-4ace-af5b-510c41832948 
+ 
+ Log message: 
+ Pierwszy log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:01:36 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ ef0de501-8980-427c-80fb-4aea635643e8 
+ 
+ Log message: 
+ Nastepny jakis event na serverze... 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:01:36 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 2d78c471-6789-49bc-84ee-864a588275b1 
+ 
+ Log message: 
+ Kolejny log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:01:49 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ dc7e0106-cb77-49c5-aa9b-dcc213631dd0 
+ 
+ Log message: 
+ Nastepny jakis event na serverze... 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:01:49 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 3730d82a-ef01-42c1-a252-f7bce9e8296c 
+ 
+ Log message: 
+ Pierwszy log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:01:50 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 4df5da5e-fbbb-43da-aac0-b4a0eb1793b7 
+ 
+ Log message: 
+ Kolejny log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:02:01 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 83ae299f-fd44-48f5-998c-8145b06af9c9 
+ 
+ Log message: 
+ Kolejny log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:02:01 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 167c7c5f-139d-477a-a277-a84e1ca5df03 
+ 
+ Log message: 
+ Pierwszy log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:02:01 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 4bd55361-0d22-4f54-ae76-3a0af8c7993b 
+ 
+ Log message: 
+ Nastepny jakis event na serverze... 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:02:11 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ cc773670-6769-4060-93f7-f95c07dc5f47 
+ 
+ Log message: 
+ Pierwszy log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:02:11 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 66a61596-e802-4e1b-9e5f-9b311e1ca028 
+ 
+ Log message: 
+ Nastepny jakis event na serverze... 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:02:11 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 17b2e228-359a-4f23-bcbb-267660a9f797 
+ 
+ Log message: 
+ Kolejny log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:02:35 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 9163fde6-92bd-40de-bfff-a5c5fc1c0fed 
+ 
+ Log message: 
+ Pierwszy log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:02:35 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 48d6be3f-7426-4e0d-b3cd-303d5d1e96b8 
+ 
+ Log message: 
+ Kolejny log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:02:35 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 47547f24-f158-4f26-8040-7073e4872e2e 
+ 
+ Log message: 
+ Nastepny jakis event na serverze... 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:02:59 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ e8ee44d3-c275-4efa-b201-72c2a812cc9c 
+ 
+ Log message: 
+ Kolejny log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:02:59 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 1f862cfc-1cf7-42bf-8767-3e546e10019a 
+ 
+ Log message: 
+ Pierwszy log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:02:59 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 9a8ba72a-7400-4742-ba19-16059e635206 
+ 
+ Log message: 
+ Nastepny jakis event na serverze... 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:04:06 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ be16495e-bf90-45ff-82f3-ff22d30896e8 
+ 
+ Log message: 
+ Kolejny log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:04:06 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ faef80ae-0478-4052-a437-a2b14b1dbb84 
+ 
+ Log message: 
+ Pierwszy log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:04:06 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ ca46cc26-1df3-4184-acf2-8450f3cfd68b 
+ 
+ Log message: 
+ Nastepny jakis event na serverze... 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:04:59 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ ebaa957a-3d69-40f3-8f96-c137bd0456a4 
+ 
+ Log message: 
+ Pierwszy log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:04:59 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 86bfe162-cb40-4d59-9731-53cd668fbd6e 
+ 
+ Log message: 
+ Kolejny log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:04:59 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 132c1cff-870a-4e01-b60d-43f836512640 
+ 
+ Log message: 
+ Nastepny jakis event na serverze... 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:05:27 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 015c7a6b-72f9-4cc9-a00c-30bc44c61cc7 
+ 
+ Log message: 
+ Kolejny log 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:05:27 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 22ec2655-46e5-490f-9b01-ef60f1c4a37d 
+ 
+ Log message: 
+ Nastepny jakis event na serverze... 
+
+ 
+ ******************************** 
+ Log timestamp:
+ Tue Mar 31 2020 22:05:27 GMT+0200 (Central European Summer Time) 
+ Log id: 
+ 4d189503-37f1-417f-89a6-6bbcfe8dcc93 
+ 
+ Log message: 
+ Pierwszy log 
