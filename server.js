@@ -13,13 +13,14 @@ mongoose
     //options object - settings dealing with deprication warnings:
     useNewUrlParser: true,
     useCreateIndex: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useUnifiedTopology: true
     // .connect() returns a promise
   })
   .then(con => {
-    // with .then we have access to connection obj: con
+    // with .then we have access to connection obj, here: con
     console.log(
-      `DB successfuly connected... \nuser: ${con.connections[0].user}`
+      `MongoDB successfuly connected...... \nuser: ${con.connections[0].user}`
     )
   })
   .catch(() => {
