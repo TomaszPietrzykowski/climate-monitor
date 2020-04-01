@@ -1,11 +1,34 @@
 const chartDataModel = require("../model/chartDataModel")
 
-exports.getChartData = (req, res) => {
-  res
-    .status(200)
-    .json(
-      "GET request for CHART DATA received. Controller not yet implemented..."
-    )
+exports.getAllChartData = async (req, res) => {
+  try {
+    const data = await chartDataModel.find()
+    res.status(200).json({
+      status: "success",
+      data: data
+    })
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.errmsg
+    })
+  }
+}
+exports.getChartData = async (req, res) => {
+  try {
+    const dataset = await chartDataModel.findOne({
+      datasetID: req.params.dataset
+    })
+    res.status(200).json({
+      status: "success",
+      data: dataset
+    })
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.errmsg
+    })
+  }
 }
 exports.createChartData = async (req, res) => {
   try {

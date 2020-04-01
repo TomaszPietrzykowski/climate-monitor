@@ -6,8 +6,12 @@ const router = express.Router()
 
 router
   .route("/")
-  .get(chartDataController.getChartData)
   .post(chartDataController.createChartData)
+  .get(chartDataController.getAllChartData)
+
+router
+  .route("/:dataset")
+  .get(chartDataController.getChartData)
   .put(chartDataController.updateChartData)
   .delete(chartDataController.deleteChartData)
 
