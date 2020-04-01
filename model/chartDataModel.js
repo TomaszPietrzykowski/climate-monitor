@@ -4,7 +4,8 @@ const mongoose = require("mongoose")
 const chartDataSchema = new mongoose.Schema({
   datasetID: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   labels: {
     type: Array,
@@ -16,8 +17,7 @@ const chartDataSchema = new mongoose.Schema({
   },
   title: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   }
 })
 // --- model:
