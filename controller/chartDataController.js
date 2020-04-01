@@ -44,12 +44,28 @@ exports.createChartData = async (req, res) => {
     })
   }
 }
-exports.updateChartData = (req, res) => {
-  res
-    .status(200)
-    .json(
-      "PUT request for CHART DATA received. Controller not yet implemented..."
+exports.updateChartData = async (req, res) => {
+  try {
+    const updated = await chartDataModel.findOneAndUpdate(
+      {
+        datasetID: req.params.dataset
+      },
+      req.body,
+      {
+        new: true,
+        runValidators: true
+      }
     )
+    res.status(200).json({
+      status: "success",
+      data: updated
+    })
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.errmsg
+    })
+  }
 }
 exports.deleteChartData = (req, res) => {
   res
