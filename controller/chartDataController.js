@@ -44,6 +44,29 @@ exports.createChartData = async (req, res) => {
     })
   }
 }
+exports.replaceChartData = async (req, res) => {
+  try {
+    const updated = await chartDataModel.findOneAndReplace(
+      {
+        datasetID: req.params.dataset
+      },
+      req.body,
+      {
+        new: true,
+        runValidators: true
+      }
+    )
+    res.status(200).json({
+      status: "success",
+      data: updated
+    })
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.errmsg
+    })
+  }
+}
 exports.updateChartData = async (req, res) => {
   try {
     const updated = await chartDataModel.findOneAndUpdate(
@@ -67,10 +90,19 @@ exports.updateChartData = async (req, res) => {
     })
   }
 }
-exports.deleteChartData = (req, res) => {
-  res
-    .status(200)
-    .json(
-      "DELETE request for CHART DATA received. Controller not yet implemented..."
-    )
+exports.deleteChartData = async (req, res) => {
+  try {
+    await chartDataModel.findOneAndDelete({
+      datasetID: req.params.dataset
+    })
+    res.status(204).json({
+      status: "success",
+      data: null
+    })
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.errmsg
+    })
+  }
 }

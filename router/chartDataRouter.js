@@ -12,7 +12,8 @@ router
 router
   .route("/:dataset")
   .get(chartDataController.getChartData)
-  .put(chartDataController.updateChartData)
+  .put(chartDataController.replaceChartData)
+  .patch(chartDataController.updateChartData)
   .delete(chartDataController.deleteChartData)
 
 module.exports = router
