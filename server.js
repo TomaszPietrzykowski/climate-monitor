@@ -29,29 +29,29 @@ mongoose
     console.log("DB connection failed")
   })
 
-// Mongoose constructor:
-// --- schema:
-const chartDataSchema = new mongoose.Schema({
-  datasetID: {
-    type: String,
-    required: true
-  },
-  labels: {
-    type: Array,
-    required: true
-  },
-  values: {
-    type: Array,
-    required: true
-  },
-  title: {
-    type: String,
-    required: true,
-    unique: true
-  }
-})
-// --- model:
-const chartDataModel = mongoose.model("co2-data", chartDataSchema)
+// // Mongoose constructor:
+// // --- schema:
+// const chartDataSchema = new mongoose.Schema({
+//   datasetID: {
+//     type: String,
+//     required: true
+//   },
+//   labels: {
+//     type: Array,
+//     required: true
+//   },
+//   values: {
+//     type: Array,
+//     required: true
+//   },
+//   title: {
+//     type: String,
+//     required: true,
+//     unique: true
+//   }
+// })
+// // --- model:
+// const chartDataModel = mongoose.model("co2-data", chartDataSchema)
 // --- instance/document:
 // const TestData = new chartDataModel({
 //   datasetID: "dailyco2",

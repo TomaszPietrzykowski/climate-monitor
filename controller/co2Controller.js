@@ -1,3 +1,5 @@
+const chartDataModel = require("../model/chartDataModel")
+
 exports.getLatestCo2 = (req, res) => {
   res
     .status(200)
