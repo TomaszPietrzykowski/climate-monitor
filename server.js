@@ -12,7 +12,7 @@ const DB = process.env.MONGO_ACCESS_STRING.replace(
 
 mongoose
   .connect(DB, {
-    //options object - settings dealing with deprication warnings:
+    //options object - settings dealing with deprecation warnings:
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
