@@ -32,6 +32,10 @@ mongoose
 // Mongoose constructor:
 // --- schema:
 const chartDataSchema = new mongoose.Schema({
+  datasetID: {
+    type: String,
+    required: true
+  },
   labels: {
     type: Array,
     required: true
@@ -47,18 +51,19 @@ const chartDataSchema = new mongoose.Schema({
   }
 })
 // --- model:
-const chartDataModel = mongoose.model("ChartData", chartDataSchema)
+const chartDataModel = mongoose.model("co2-data", chartDataSchema)
 // --- instance/document:
-const TestData = new chartDataModel({
-  labels: [],
-  values: [],
-  title: "testchartdata"
-})
-// --- execution:
-// --- .save() returns a promise with access to newly created document
-TestData.save()
-  .then(doc => console.log(doc))
-  .catch(err => console.log(err))
+// const TestData = new chartDataModel({
+//   datasetID: "dailyco2",
+//   labels: [1950, 1951, 1952],
+//   values: [318, 320, 321],
+//   title: "Modern days daily CO2"
+// })
+// // --- execution:
+// // --- .save() returns a promise with access to newly created document
+// TestData.save()
+//   .then(doc => console.log(doc))
+//   .catch(err => console.log(err))
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}......`))
