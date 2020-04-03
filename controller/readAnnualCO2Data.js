@@ -1,13 +1,14 @@
 var FTPClient = require("ftp")
 var c = new FTPClient()
-
-const readFTPData = async (ftpHost, ftpPath) => {
+// const ftpHost = "aftp.cmdl.noaa.gov"
+// const ftpPath = "products/trends/co2/co2_annmean_mlo.txt"
+const readAnnualCO2Data = async () => {
   c.connect({
-    host: ftpHost
+    host: "aftp.cmdl.noaa.gov"
   })
   c.on("ready", function() {
     console.log("connected to ftp...")
-    c.get(ftpPath, function(err, stream) {
+    c.get("products/trends/co2/co2_annmean_mlo.txt", function(err, stream) {
       if (err) throw err
       var content = ""
       stream.on("data", function(chunk) {
@@ -33,4 +34,4 @@ const readFTPData = async (ftpHost, ftpPath) => {
   })
 }
 
-module.exports = readFTPData
+module.exports = readAnnualCO2Data

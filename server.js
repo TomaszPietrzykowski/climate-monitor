@@ -1,5 +1,8 @@
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
+// const readFTP = require("./controller/dataUpdateController")
+const readAnnualCO2Data = require("./controller/readAnnualCO2Data")
+const readDailyValues = require("./controller/readDailyValues")
 
 dotenv.config({ path: "./config.env" })
 
@@ -28,6 +31,9 @@ mongoose
   .catch(() => {
     console.log("DB connection failed")
   })
+
+readDailyValues()
+readAnnualCO2Data()
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}......`))
