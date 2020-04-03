@@ -1,10 +1,8 @@
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 // const readFTP = require("./controller/dataUpdateController")
-const readFTPData = require("./controller/readFTP")
-
-const ftpHost = "aftp.cmdl.noaa.gov"
-const ftpPath = "products/trends/co2/co2_annmean_mlo.txt"
+const readAnnualCO2Data = require("./controller/readAnnualCO2Data")
+const readDailyValues = require("./controller/readDailyValues")
 
 dotenv.config({ path: "./config.env" })
 
@@ -34,7 +32,8 @@ mongoose
     console.log("DB connection failed")
   })
 
-readFTPData(ftpHost, ftpPath)
+readDailyValues()
+readAnnualCO2Data()
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}......`))
