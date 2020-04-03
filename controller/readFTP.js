@@ -1,4 +1,3 @@
-// var fs = require("fs")
 var FTPClient = require("ftp")
 var c = new FTPClient()
 
