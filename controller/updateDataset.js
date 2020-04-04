@@ -6,13 +6,13 @@ const updateDataset = async (id, data) => {
       {
         datasetID: id
       },
-      data,
+      { ...data, lastUpdate: Date.now() },
       {
         new: true,
         runValidators: true
       }
     )
-    console.log("Dataset updated..")
+    console.log("Dataset updated...")
   } catch (err) {
     console.log(err)
   }

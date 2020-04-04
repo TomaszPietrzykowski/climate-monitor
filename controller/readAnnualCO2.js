@@ -1,14 +1,9 @@
-<<<<<<< HEAD:controller/readAnnualCO2Data.js
-var FTPClient = require("ftp")
-var c = new FTPClient()
-=======
 const FTPClient = require("ftp")
 const c = new FTPClient()
 const updateDataset = require("./updateDataset")
->>>>>>> develop:controller/readAnnualCO2.js
 // const ftpHost = "aftp.cmdl.noaa.gov"
 // const ftpPath = "products/trends/co2/co2_annmean_mlo.txt"
-const readAnnualCO2Data = async () => {
+const readAnnualCO2 = async () => {
   c.connect({
     host: "aftp.cmdl.noaa.gov"
   })
@@ -33,7 +28,7 @@ const readAnnualCO2Data = async () => {
           }
         })
         const output = { labels: outputLabels, values: outputValues }
-        console.log(output)
+        // console.log(output)
         updateDataset("annualco2", output)
         return output
       })
@@ -41,4 +36,4 @@ const readAnnualCO2Data = async () => {
   })
 }
 
-module.exports = readAnnualCO2Data
+module.exports = readAnnualCO2

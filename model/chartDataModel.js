@@ -2,8 +2,17 @@ const mongoose = require("mongoose")
 // Mongoose constructor:
 // --- schema:
 const chartDataSchema = new mongoose.Schema({
+  lastUpdate: {
+    type: Date,
+    default: Date.now()
+  },
+  description: {
+    type: String,
+    trim: true
+  },
   datasetID: {
     type: String,
+    trim: true,
     required: true,
     unique: true
   },
