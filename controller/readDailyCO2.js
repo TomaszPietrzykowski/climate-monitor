@@ -2,7 +2,7 @@ var FTPClient = require("ftp")
 var c = new FTPClient()
 const updateDataset = require("./updateDataset")
 
-const readDailyValues = async () => {
+const readDailyCO2 = async () => {
   c.connect({
     host: "aftp.cmdl.noaa.gov"
   })
@@ -29,7 +29,22 @@ const readDailyValues = async () => {
           }
         })
         const output = { labels: outputLabels, values: outputValues }
+        const latestOutput = {
+          labels: [
+            output.labels[output.labels.length - 1],
+            output.labels[output.labels.length - 367],
+            output.labels[output.labels.length - 1828],
+            output.labels[output.labels.length - 3654]
+          ],
+          values: [
+            output.values[output.values.length - 1],
+            output.values[output.values.length - 367],
+            output.values[output.values.length - 1828],
+            output.values[output.values.length - 3654]
+          ]
+        }
         updateDataset("dailyco2", output)
+        updateDataset("latestco2", latestOutput)
         console.log(
           `\n***** climatemonitor.info *****\n\n * Latest CO2 data: ${
             output.values[output.values.length - 1]
@@ -43,10 +58,11 @@ const readDailyValues = async () => {
             output.values[output.values.length - 3646]
           }\n\n******************************.`
         )
+        // console.log(output)
         return output
       })
     })
   })
 }
 
-module.exports = readDailyValues
+module.exports = readDailyCO2

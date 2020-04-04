@@ -12,7 +12,7 @@ const updateDataset = async (id, data) => {
         runValidators: true
       }
     )
-    console.log("Dataset updated...")
+    console.log(`Dataset id: ${id} updated...`)
   } catch (err) {
     console.log(err)
   }
