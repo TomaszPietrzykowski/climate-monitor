@@ -1,5 +1,6 @@
 var FTPClient = require("ftp")
 var c = new FTPClient()
+const updateDataset = require("./updateDataset")
 
 const readDailyValues = async () => {
   c.connect({
@@ -28,6 +29,7 @@ const readDailyValues = async () => {
           }
         })
         const output = { labels: outputLabels, values: outputValues }
+        updateDataset("dailyco2", output)
         console.log(
           `\n***** climatemonitor.info *****\n\n * Latest CO2 data: ${
             output.values[output.values.length - 1]
