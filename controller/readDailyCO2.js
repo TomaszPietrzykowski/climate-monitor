@@ -1,7 +1,6 @@
-// var fs = require("fs")
 var FTPClient = require("ftp")
 var c = new FTPClient()
-//ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_trend_gl.txt
+
 const readDailyValues = async () => {
   c.connect({
     host: "aftp.cmdl.noaa.gov"
