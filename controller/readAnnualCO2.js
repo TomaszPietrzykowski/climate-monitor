@@ -1,6 +1,6 @@
-// var fs = require("fs")
-var FTPClient = require("ftp")
-var c = new FTPClient()
+const FTPClient = require("ftp")
+const c = new FTPClient()
+const updateDataset = require("./updateDataset")
 // const ftpHost = "aftp.cmdl.noaa.gov"
 // const ftpPath = "products/trends/co2/co2_annmean_mlo.txt"
 const readAnnualCO2Data = async () => {
@@ -29,6 +29,7 @@ const readAnnualCO2Data = async () => {
         })
         const output = { labels: outputLabels, values: outputValues }
         console.log(output)
+        updateDataset("annualco2", output)
         return output
       })
     })
