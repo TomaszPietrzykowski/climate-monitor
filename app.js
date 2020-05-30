@@ -4,6 +4,7 @@ const dotenv = require("dotenv")
 
 const chartDataRouter = require("./router/chartDataRouter")
 const co2 = require("./controller/co2Controller")
+const n2o = require("./controller/n2oController")
 
 dotenv.config({ path: "./config.env" })
 
@@ -46,6 +47,12 @@ mongoose
 // co2.readAnnualCO2IncreaseML()
 // co2.readMonthlyCO2ML()
 // co2.readMonthlyCO2GL()
+// ch4.readAnnualCH4()
+// ch4.readAnnualGrowthRateCH4()
+// ch4.readMonthlyCH4GL()
+// n2o.readAnnualN2O()
+// n2o.readAnnualGrowthRateN2O()
+// n2o.readMonthlyN2OGL()
 
 const PORT = process.env.PORT || 5000
 const server = app.listen(PORT, () =>

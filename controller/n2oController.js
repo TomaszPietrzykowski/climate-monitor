@@ -4,16 +4,16 @@ const { updateDataset } = require("./dbController")
 const { parseTXT } = require("../utilities/tools")
 
 const host = "aftp.cmdl.noaa.gov"
-const path = "products/trends/ch4/"
+const path = "products/trends/n2o/"
 
-exports.readAnnualCH4 = async () => {
+exports.readAnnualN2O = async () => {
   const c = new FTPClient()
   c.connect({
     host,
   })
   c.on("ready", function () {
     console.log("connected to ftp...")
-    c.get(`${path}ch4_annmean_gl.txt`, function (err, stream) {
+    c.get(`${path}n2o_annmean_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
       stream.on("data", function (chunk) {
@@ -28,19 +28,19 @@ exports.readAnnualCH4 = async () => {
           values.push(set[1] * 1)
         })
         const output = { labels, values }
-        updateDataset("annualch4gl", output)
+        updateDataset("annualn2ogl", output)
       })
     })
   })
 }
-exports.readAnnualGrowthRateCH4 = async () => {
+exports.readAnnualGrowthRateN2O = async () => {
   const c = new FTPClient()
   c.connect({
     host,
   })
   c.on("ready", function () {
     console.log("connected to ftp...")
-    c.get(`${path}ch4_gr_gl.txt`, function (err, stream) {
+    c.get(`${path}n2o_gr_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
       stream.on("data", function (chunk) {
@@ -55,19 +55,19 @@ exports.readAnnualGrowthRateCH4 = async () => {
           values.push(set[1] * 1)
         })
         const output = { labels, values }
-        updateDataset("annualch4grgl", output)
+        updateDataset("annualn2ogrgl", output)
       })
     })
   })
 }
-exports.readMonthlyCH4GL = async () => {
+exports.readMonthlyN2OGL = async () => {
   const c = new FTPClient()
   c.connect({
     host,
   })
   c.on("ready", function () {
     console.log("connected to ftp...")
-    c.get(`${path}ch4_mm_gl.txt`, function (err, stream) {
+    c.get(`${path}n2o_mm_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
       stream.on("data", function (chunk) {
@@ -84,7 +84,7 @@ exports.readMonthlyCH4GL = async () => {
           trend.push(set[5] * 1)
         })
         const output = { labels, values, trend }
-        updateDataset("monthlych4gl", output)
+        updateDataset("monthlyn2ogl", output)
       })
     })
   })
