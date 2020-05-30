@@ -3,9 +3,8 @@ const app = express()
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 
-const readDailyCO2 = require("./controller/readDailyCO2")
-const readAnnualCO2 = require("./controller/readAnnualCO2")
 const chartDataRouter = require("./router/chartDataRouter")
+const noaa = require("./controller/sourceController")
 
 dotenv.config({ path: "./config.env" })
 
@@ -23,7 +22,6 @@ const DB = process.env.MONGO_ACCESS_STRING.replace(
 
 mongoose
   .connect(DB, {
-    //options object - settings dealing with deprecation warnings:
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
@@ -38,8 +36,8 @@ mongoose
     console.log("DB connection failed")
   })
 
-readDailyCO2()
-readAnnualCO2()
+noaa.readDailyCO2()
+noaa.readAnnualCO2()
 
 const PORT = process.env.PORT || 5000
 const server = app.listen(PORT, () =>
