@@ -38,8 +38,14 @@ mongoose
     console.log("DB connection failed")
   })
 
-noaa.readDailyCO2()
-noaa.readAnnualCO2()
+// noaa.readDailyCO2()
+noaa.readWeeklyCO2()
+// noaa.readAnnualCO2GL()
+// noaa.readAnnualCO2ML()
+// noaa.readAnnualCO2IncreaseGL()
+// noaa.readAnnualCO2IncreaseML()
+// noaa.readMonthlyCO2ML()
+// noaa.readMonthlyCO2GL()
 
 const PORT = process.env.PORT || 5000
 const server = app.listen(PORT, () =>

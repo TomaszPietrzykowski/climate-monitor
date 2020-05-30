@@ -26,6 +26,12 @@ const chartDataSchema = new mongoose.Schema({
   trend: {
     type: Array,
   },
+  uncertainty: {
+    type: Array,
+  },
+  since1800: {
+    type: Array,
+  },
   title: {
     type: String,
     required: true,
