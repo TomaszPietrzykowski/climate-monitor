@@ -1,5 +1,4 @@
 const express = require("express")
-const app = express()
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 
@@ -8,7 +7,10 @@ const noaa = require("./controller/sourceController")
 
 dotenv.config({ path: "./config.env" })
 
+const app = express()
+
 // Middleware cycle:
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json()) // <-- body parser
 
 // -- routing

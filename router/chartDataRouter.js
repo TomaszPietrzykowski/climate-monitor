@@ -1,19 +1,19 @@
 const express = require("express")
 
-const chartDataController = require("../controller/chartDataController")
+const dbController = require("../controller/dbController")
 
 const router = express.Router()
 
 router
   .route("/")
-  .post(chartDataController.createChartData)
-  .get(chartDataController.getAllChartData)
+  .post(dbController.createChartData)
+  .get(dbController.getAllChartData)
 
 router
   .route("/:dataset")
-  .get(chartDataController.getChartData)
-  .put(chartDataController.replaceChartData)
-  .patch(chartDataController.updateChartData)
-  .delete(chartDataController.deleteChartData)
+  .get(dbController.getChartData)
+  .put(dbController.replaceChartData)
+  .patch(dbController.updateChartData)
+  .delete(dbController.deleteChartData)
 
 module.exports = router

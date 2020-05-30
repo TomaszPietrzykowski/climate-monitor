@@ -1,5 +1,5 @@
 const FTPClient = require("ftp")
-const updateDataset = require("./updateDataset")
+const { updateDataset } = require("./dbController")
 
 exports.readDailyCO2 = async () => {
   const c = new FTPClient()
