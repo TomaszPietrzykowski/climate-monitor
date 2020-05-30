@@ -5,7 +5,8 @@ exports.getAllChartData = async (req, res) => {
     const data = await chartDataModel.find()
     res.status(200).json({
       status: "success",
-      data: data,
+      results: data.length,
+      data,
     })
   } catch (err) {
     res.status(404).json({

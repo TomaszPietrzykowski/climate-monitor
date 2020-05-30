@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 
 const chartDataRouter = require("./router/chartDataRouter")
-const noaa = require("./controller/sourceController")
+const co2 = require("./controller/co2Controller")
 
 dotenv.config({ path: "./config.env" })
 
@@ -38,14 +38,14 @@ mongoose
     console.log("DB connection failed")
   })
 
-// noaa.readDailyCO2()
-noaa.readWeeklyCO2()
-// noaa.readAnnualCO2GL()
-// noaa.readAnnualCO2ML()
-// noaa.readAnnualCO2IncreaseGL()
-// noaa.readAnnualCO2IncreaseML()
-// noaa.readMonthlyCO2ML()
-// noaa.readMonthlyCO2GL()
+// co2.readDailyCO2()
+// co2.readWeeklyCO2()
+// co2.readAnnualCO2GL()
+// co2.readAnnualCO2ML()
+// co2.readAnnualCO2IncreaseGL()
+// co2.readAnnualCO2IncreaseML()
+// co2.readMonthlyCO2ML()
+// co2.readMonthlyCO2GL()
 
 const PORT = process.env.PORT || 5000
 const server = app.listen(PORT, () =>

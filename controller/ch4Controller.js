@@ -4,6 +4,7 @@ const { updateDataset } = require("./dbController")
 const { parseTXT } = require("../utilities/tools")
 
 const host = "aftp.cmdl.noaa.gov"
+const path = "products/trends/co2/"
 
 exports.readDailyCO2 = async () => {
   const c = new FTPClient()
@@ -12,7 +13,7 @@ exports.readDailyCO2 = async () => {
   })
   c.on("ready", function () {
     console.log("connected to ftp...")
-    c.get("products/trends/co2/co2_trend_gl.txt", function (err, stream) {
+    c.get(`${path}co2_trend_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
       stream.on("data", function (chunk) {
@@ -83,7 +84,7 @@ exports.readAnnualCO2GL = async () => {
   })
   c.on("ready", function () {
     console.log("connected to ftp...")
-    c.get("products/trends/co2/co2_annmean_gl.txt", function (err, stream) {
+    c.get(`${path}co2_annmean_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
       stream.on("data", function (chunk) {
@@ -110,7 +111,7 @@ exports.readAnnualCO2ML = async () => {
   })
   c.on("ready", function () {
     console.log("connected to ftp...")
-    c.get("products/trends/co2/co2_annmean_mlo.txt", function (err, stream) {
+    c.get(`${path}co2_annmean_mlo.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
       stream.on("data", function (chunk) {
@@ -138,7 +139,7 @@ exports.readAnnualCO2IncreaseGL = async () => {
   })
   c.on("ready", function () {
     console.log("connected to ftp...")
-    c.get("products/trends/co2/co2_gr_gl.txt", function (err, stream) {
+    c.get(`${path}co2_gr_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
       stream.on("data", function (chunk) {
@@ -165,7 +166,7 @@ exports.readAnnualCO2IncreaseML = async () => {
   })
   c.on("ready", function () {
     console.log("connected to ftp...")
-    c.get("products/trends/co2/co2_gr_mlo.txt", function (err, stream) {
+    c.get(`${path}co2_gr_mlo.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
       stream.on("data", function (chunk) {
@@ -192,7 +193,7 @@ exports.readMonthlyCO2ML = async () => {
   })
   c.on("ready", function () {
     console.log("connected to ftp...")
-    c.get("products/trends/co2/co2_mm_mlo.txt", function (err, stream) {
+    c.get(`${path}co2_mm_mlo.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
       stream.on("data", function (chunk) {
@@ -221,7 +222,7 @@ exports.readMonthlyCO2GL = async () => {
   })
   c.on("ready", function () {
     console.log("connected to ftp...")
-    c.get("products/trends/co2/co2_mm_gl.txt", function (err, stream) {
+    c.get(`${path}co2_mm_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
       stream.on("data", function (chunk) {
@@ -250,7 +251,7 @@ exports.readWeeklyCO2 = async () => {
   })
   c.on("ready", function () {
     console.log("connected to ftp...")
-    c.get("products/trends/co2/co2_weekly_mlo.txt", function (err, stream) {
+    c.get(`${path}co2_weekly_mlo.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
       stream.on("data", function (chunk) {

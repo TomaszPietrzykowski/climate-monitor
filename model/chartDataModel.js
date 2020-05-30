@@ -32,6 +32,9 @@ const chartDataSchema = new mongoose.Schema({
   since1800: {
     type: Array,
   },
+  growthRate: {
+    type: Array,
+  },
   title: {
     type: String,
     required: true,
