@@ -30,6 +30,7 @@ exports.readAnnualSF6 = catchError(async () => {
         })
         const output = { labels, values }
         updateDataset("annualsf6gl", output)
+        c.end()
       })
     })
   })
@@ -58,6 +59,7 @@ exports.readAnnualGrowthRateSF6 = catchError(async () => {
         })
         const output = { labels, values }
         updateDataset("annualsf6grgl", output)
+        c.end()
       })
     })
   })
@@ -88,6 +90,7 @@ exports.readMonthlySF6GL = catchError(async () => {
         })
         const output = { labels, values, trend }
         updateDataset("monthlysf6gl", output)
+        c.end()
       })
     })
   })

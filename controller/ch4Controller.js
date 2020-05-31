@@ -30,6 +30,7 @@ exports.readAnnualCH4 = catchError(async () => {
         })
         const output = { labels, values }
         updateDataset("annualch4gl", output)
+        c.end()
       })
     })
   })
@@ -57,6 +58,7 @@ exports.readAnnualGrowthRateCH4 = catchError(async () => {
         })
         const output = { labels, values }
         updateDataset("annualch4grgl", output)
+        c.end()
       })
     })
   })
@@ -86,6 +88,7 @@ exports.readMonthlyCH4GL = catchError(async () => {
         })
         const output = { labels, values, trend }
         updateDataset("monthlych4gl", output)
+        c.end()
       })
     })
   })

@@ -73,6 +73,7 @@ exports.readDailyCO2 = catchError(async () => {
             output.values[output.values.length - 3646]
           }\n\n******************************.`
         )
+        c.end()
       })
     })
   })
@@ -101,6 +102,7 @@ exports.readAnnualCO2GL = catchError(async () => {
         })
         const output = { labels: outputLabels, values: outputValues }
         updateDataset("annualco2gl", output)
+        c.end()
       })
     })
   })
@@ -128,6 +130,7 @@ exports.readAnnualCO2ML = catchError(async () => {
         })
         const output = { labels: outputLabels, values: outputValues }
         updateDataset("annualco2ml", output)
+        c.end()
       })
     })
   })
@@ -156,6 +159,7 @@ exports.readAnnualCO2IncreaseGL = catchError(async () => {
         })
         const output = { labels: outputLabels, values: outputValues }
         updateDataset("annualco2increasegl", output)
+        c.end()
       })
     })
   })
@@ -183,6 +187,7 @@ exports.readAnnualCO2IncreaseML = catchError(async () => {
         })
         const output = { labels: outputLabels, values: outputValues }
         updateDataset("annualco2increaseml", output)
+        c.end()
       })
     })
   })
@@ -212,6 +217,7 @@ exports.readMonthlyCO2ML = catchError(async () => {
         })
         const output = { labels, values, trend }
         updateDataset("monthlyco2ml", output)
+        c.end()
       })
     })
   })
@@ -241,6 +247,7 @@ exports.readMonthlyCO2GL = catchError(async () => {
         })
         const output = { labels, values, trend }
         updateDataset("monthlyco2gl", output)
+        c.end()
       })
     })
   })
@@ -270,6 +277,7 @@ exports.readWeeklyCO2 = catchError(async () => {
         })
         const output = { labels, values, since1800 }
         updateDataset("weeklyco2", output)
+        c.end()
       })
     })
   })

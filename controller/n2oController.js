@@ -30,6 +30,7 @@ exports.readAnnualN2O = catchError(async () => {
         })
         const output = { labels, values }
         updateDataset("annualn2ogl", output)
+        c.end()
       })
     })
   })
@@ -58,6 +59,7 @@ exports.readAnnualGrowthRateN2O = catchError(async () => {
         })
         const output = { labels, values }
         updateDataset("annualn2ogrgl", output)
+        c.end()
       })
     })
   })
@@ -88,6 +90,7 @@ exports.readMonthlyN2OGL = catchError(async () => {
         })
         const output = { labels, values, trend }
         updateDataset("monthlyn2ogl", output)
+        c.end()
       })
     })
   })
