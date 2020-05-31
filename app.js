@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 
+const globalErrorHandler = require("./controller/errorController")
 const chartDataRouter = require("./router/chartDataRouter")
 const co2 = require("./controller/co2Controller")
 const ch4 = require("./controller/ch4Controller")
@@ -18,6 +19,14 @@ app.use(express.json()) // <-- body parser
 
 // -- routing
 app.use("/api/v1/chartdata", chartDataRouter)
+
+// catch all invalid routes - push err to error middleware by passing arg to next()
+app.all("*", (req, res, next) => {
+  next(new AppError(`Couldn't find ${req.originalUrl}`, 404))
+})
+
+//global error handling middleware
+app.use(globalErrorHandler)
 
 // -- db CONNECTION
 const DB = process.env.MONGO_ACCESS_STRING.replace(

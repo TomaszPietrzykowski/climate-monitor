@@ -2,11 +2,12 @@ const FTPClient = require("ftp")
 
 const { updateDataset } = require("./dbController")
 const { parseTXT } = require("../utilities/tools")
+const catchError = require("../utilities/catchError")
 
 const host = "aftp.cmdl.noaa.gov"
 const path = "products/trends/n2o/"
 
-exports.readAnnualN2O = async () => {
+exports.readAnnualN2O = catchError(async () => {
   const c = new FTPClient()
   c.connect({
     host,
@@ -32,8 +33,9 @@ exports.readAnnualN2O = async () => {
       })
     })
   })
-}
-exports.readAnnualGrowthRateN2O = async () => {
+})
+
+exports.readAnnualGrowthRateN2O = catchError(async () => {
   const c = new FTPClient()
   c.connect({
     host,
@@ -59,8 +61,9 @@ exports.readAnnualGrowthRateN2O = async () => {
       })
     })
   })
-}
-exports.readMonthlyN2OGL = async () => {
+})
+
+exports.readMonthlyN2OGL = catchError(async () => {
   const c = new FTPClient()
   c.connect({
     host,
@@ -88,4 +91,4 @@ exports.readMonthlyN2OGL = async () => {
       })
     })
   })
-}
+})

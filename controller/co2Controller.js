@@ -2,11 +2,12 @@ const FTPClient = require("ftp")
 
 const { updateDataset } = require("./dbController")
 const { parseTXT } = require("../utilities/tools")
+const catchError = require("../utilities/catchError")
 
 const host = "aftp.cmdl.noaa.gov"
 const path = "products/trends/co2/"
 
-exports.readDailyCO2 = async () => {
+exports.readDailyCO2 = catchError(async () => {
   const c = new FTPClient()
   c.connect({
     host,
@@ -75,9 +76,9 @@ exports.readDailyCO2 = async () => {
       })
     })
   })
-}
+})
 
-exports.readAnnualCO2GL = async () => {
+exports.readAnnualCO2GL = catchError(async () => {
   const c = new FTPClient()
   c.connect({
     host,
@@ -103,8 +104,8 @@ exports.readAnnualCO2GL = async () => {
       })
     })
   })
-}
-exports.readAnnualCO2ML = async () => {
+})
+exports.readAnnualCO2ML = catchError(async () => {
   const c = new FTPClient()
   c.connect({
     host,
@@ -130,9 +131,9 @@ exports.readAnnualCO2ML = async () => {
       })
     })
   })
-}
+})
 
-exports.readAnnualCO2IncreaseGL = async () => {
+exports.readAnnualCO2IncreaseGL = catchError(async () => {
   const c = new FTPClient()
   c.connect({
     host,
@@ -158,8 +159,8 @@ exports.readAnnualCO2IncreaseGL = async () => {
       })
     })
   })
-}
-exports.readAnnualCO2IncreaseML = async () => {
+})
+exports.readAnnualCO2IncreaseML = catchError(async () => {
   const c = new FTPClient()
   c.connect({
     host,
@@ -185,8 +186,8 @@ exports.readAnnualCO2IncreaseML = async () => {
       })
     })
   })
-}
-exports.readMonthlyCO2ML = async () => {
+})
+exports.readMonthlyCO2ML = catchError(async () => {
   const c = new FTPClient()
   c.connect({
     host,
@@ -214,8 +215,8 @@ exports.readMonthlyCO2ML = async () => {
       })
     })
   })
-}
-exports.readMonthlyCO2GL = async () => {
+})
+exports.readMonthlyCO2GL = catchError(async () => {
   const c = new FTPClient()
   c.connect({
     host,
@@ -243,8 +244,8 @@ exports.readMonthlyCO2GL = async () => {
       })
     })
   })
-}
-exports.readWeeklyCO2 = async () => {
+})
+exports.readWeeklyCO2 = catchError(async () => {
   const c = new FTPClient()
   c.connect({
     host,
@@ -272,4 +273,4 @@ exports.readWeeklyCO2 = async () => {
       })
     })
   })
-}
+})

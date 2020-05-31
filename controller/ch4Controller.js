@@ -2,11 +2,12 @@ const FTPClient = require("ftp")
 
 const { updateDataset } = require("./dbController")
 const { parseTXT } = require("../utilities/tools")
+const catchError = require("../utilities/catchError")
 
 const host = "aftp.cmdl.noaa.gov"
 const path = "products/trends/ch4/"
 
-exports.readAnnualCH4 = async () => {
+exports.readAnnualCH4 = catchError(async () => {
   const c = new FTPClient()
   c.connect({
     host,
@@ -32,8 +33,8 @@ exports.readAnnualCH4 = async () => {
       })
     })
   })
-}
-exports.readAnnualGrowthRateCH4 = async () => {
+})
+exports.readAnnualGrowthRateCH4 = catchError(async () => {
   const c = new FTPClient()
   c.connect({
     host,
@@ -59,8 +60,8 @@ exports.readAnnualGrowthRateCH4 = async () => {
       })
     })
   })
-}
-exports.readMonthlyCH4GL = async () => {
+})
+exports.readMonthlyCH4GL = catchError(async () => {
   const c = new FTPClient()
   c.connect({
     host,
@@ -88,4 +89,4 @@ exports.readMonthlyCH4GL = async () => {
       })
     })
   })
-}
+})

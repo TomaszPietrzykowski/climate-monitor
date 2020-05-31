@@ -1,6 +1,8 @@
 const chartDataModel = require("../model/chartDataModel")
 
-exports.getAllChartData = async (req, res) => {
+const catchError = require("../utilities/catchError")
+
+exports.getAllChartData = catchError(async (req, res) => {
   try {
     const data = await chartDataModel.find()
     res.status(200).json({
@@ -14,113 +16,80 @@ exports.getAllChartData = async (req, res) => {
       message: err.errmsg,
     })
   }
-}
-exports.getChartData = async (req, res) => {
-  try {
-    const dataset = await chartDataModel.findOne({
+})
+
+exports.getChartData = catchError(async (req, res) => {
+  const dataset = await chartDataModel.findOne({
+    datasetID: req.params.dataset,
+  })
+  res.status(200).json({
+    status: "success",
+    data: dataset,
+  })
+})
+
+exports.createChartData = catchError(async (req, res) => {
+  const newDataset = await chartDataModel.create(req.body)
+  res.status(201).json({
+    status: "success",
+    data: newDataset,
+  })
+})
+
+exports.replaceChartData = catchError(async (req, res) => {
+  const updated = await chartDataModel.findOneAndReplace(
+    {
       datasetID: req.params.dataset,
-    })
-    res.status(200).json({
-      status: "success",
-      data: dataset,
-    })
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.errmsg,
-    })
-  }
-}
-exports.createChartData = async (req, res) => {
-  try {
-    const newDataset = await chartDataModel.create(req.body)
-    res.status(201).json({
-      status: "success",
-      data: newDataset,
-    })
-  } catch (err) {
-    res.status(400).json({
-      status: "fail",
-      message: err.errmsg,
-    })
-  }
-}
-exports.replaceChartData = async (req, res) => {
-  try {
-    const updated = await chartDataModel.findOneAndReplace(
-      {
-        datasetID: req.params.dataset,
-      },
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
-    )
-    res.status(200).json({
-      status: "success",
-      data: updated,
-    })
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.errmsg,
-    })
-  }
-}
-exports.updateChartData = async (req, res) => {
-  try {
-    const updated = await chartDataModel.findOneAndUpdate(
-      {
-        datasetID: req.params.dataset,
-      },
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
-    )
-    res.status(200).json({
-      status: "success",
-      data: updated,
-    })
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.errmsg,
-    })
-  }
-}
-exports.deleteChartData = async (req, res) => {
-  try {
-    await chartDataModel.findOneAndDelete({
+    },
+    req.body,
+    {
+      new: true,
+      runValidators: true,
+    }
+  )
+  res.status(200).json({
+    status: "success",
+    data: updated,
+  })
+})
+
+exports.updateChartData = catchError(async (req, res) => {
+  const updated = await chartDataModel.findOneAndUpdate(
+    {
       datasetID: req.params.dataset,
-    })
-    res.status(204).json({
-      status: "success",
-      data: null,
-    })
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.errmsg,
-    })
-  }
-}
-exports.updateDataset = async (id, data) => {
-  try {
-    await chartDataModel.findOneAndUpdate(
-      {
-        datasetID: id,
-      },
-      { ...data, lastUpdate: Date.now() },
-      {
-        new: true,
-        runValidators: true,
-      }
-    )
-    console.log(`Dataset id: ${id} updated...`)
-  } catch (err) {
-    console.log(err)
-  }
-}
+    },
+    req.body,
+    {
+      new: true,
+      runValidators: true,
+    }
+  )
+  res.status(200).json({
+    status: "success",
+    data: updated,
+  })
+})
+
+exports.deleteChartData = catchError(async (req, res) => {
+  await chartDataModel.findOneAndDelete({
+    datasetID: req.params.dataset,
+  })
+  res.status(204).json({
+    status: "success",
+    data: null,
+  })
+})
+
+exports.updateDataset = catchError(async (id, data) => {
+  await chartDataModel.findOneAndUpdate(
+    {
+      datasetID: id,
+    },
+    { ...data, lastUpdate: Date.now() },
+    {
+      new: true,
+      runValidators: true,
+    }
+  )
+  console.log(`Dataset id: ${id} updated...`)
+})
