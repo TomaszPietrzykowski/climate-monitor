@@ -1,6 +1,7 @@
 const chartDataModel = require("../model/chartDataModel")
 
 const catchError = require("../utilities/catchError")
+const logger = require("../Logger")
 
 exports.getAllChartData = catchError(async (req, res) => {
   try {
@@ -91,5 +92,5 @@ exports.updateDataset = catchError(async (id, data) => {
       runValidators: true,
     }
   )
-  console.log(`Dataset id: ${id} updated...`)
+  logger.log(`Dataset id: ${id} updated...`)
 })

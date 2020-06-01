@@ -3,6 +3,7 @@ const FTPClient = require("ftp")
 const { updateDataset } = require("./dbController")
 const { parseTXT } = require("../utilities/tools")
 const catchError = require("../utilities/catchError")
+const logger = require("../Logger")
 
 const host = "aftp.cmdl.noaa.gov"
 const path = "products/trends/ch4/"
@@ -13,7 +14,7 @@ exports.readAnnualCH4 = catchError(async () => {
     host,
   })
   c.on("ready", function () {
-    console.log("connected to ftp...")
+    logger.log("connected to ftp...")
     c.get(`${path}ch4_annmean_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
@@ -41,7 +42,7 @@ exports.readAnnualGrowthRateCH4 = catchError(async () => {
     host,
   })
   c.on("ready", function () {
-    console.log("connected to ftp...")
+    logger.log("connected to ftp...")
     c.get(`${path}ch4_gr_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
@@ -69,7 +70,7 @@ exports.readMonthlyCH4GL = catchError(async () => {
     host,
   })
   c.on("ready", function () {
-    console.log("connected to ftp...")
+    logger.log("connected to ftp...")
     c.get(`${path}ch4_mm_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""

@@ -3,6 +3,7 @@ const FTPClient = require("ftp")
 const { updateDataset } = require("./dbController")
 const { parseTXT } = require("../utilities/tools")
 const catchError = require("../utilities/catchError")
+const logger = require("../Logger")
 
 const host = "aftp.cmdl.noaa.gov"
 const path = "products/trends/sf6/"
@@ -13,7 +14,7 @@ exports.readAnnualSF6 = catchError(async () => {
     host,
   })
   c.on("ready", function () {
-    console.log("connected to ftp...")
+    logger.log("connected to ftp...")
     c.get(`${path}sf6_annmean_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
@@ -42,7 +43,7 @@ exports.readAnnualGrowthRateSF6 = catchError(async () => {
     host,
   })
   c.on("ready", function () {
-    console.log("connected to ftp...")
+    logger.log("connected to ftp...")
     c.get(`${path}sf6_gr_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
@@ -71,7 +72,7 @@ exports.readMonthlySF6GL = catchError(async () => {
     host,
   })
   c.on("ready", function () {
-    console.log("connected to ftp...")
+    logger.log("connected to ftp...")
     c.get(`${path}sf6_mm_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""

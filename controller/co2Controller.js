@@ -3,6 +3,7 @@ const FTPClient = require("ftp")
 const { updateDataset } = require("./dbController")
 const { parseTXT } = require("../utilities/tools")
 const catchError = require("../utilities/catchError")
+const logger = require("../Logger")
 
 const host = "aftp.cmdl.noaa.gov"
 const path = "products/trends/co2/"
@@ -13,7 +14,7 @@ exports.readDailyCO2 = catchError(async () => {
     host,
   })
   c.on("ready", function () {
-    console.log("connected to ftp...")
+    logger.log("connected to ftp...")
     c.get(`${path}co2_trend_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
@@ -60,19 +61,6 @@ exports.readDailyCO2 = catchError(async () => {
         }
         updateDataset("dailyco2", output)
         updateDataset("latestco2", latestOutput)
-        console.log(
-          `\n***** climatemonitor.info *****\n\n * Latest CO2 data: ${
-            output.values[output.values.length - 1]
-          } ppm *\n\nMesurment taken on: ${
-            output.labels[output.labels.length - 1]
-          } value: ${
-            output.values[output.values.length - 1]
-          }\nCorresponding reading 1 year ago: ${
-            output.values[output.values.length - 365]
-          }\nCorresponding reading 10 years ago: ${
-            output.values[output.values.length - 3646]
-          }\n\n******************************.`
-        )
         c.end()
       })
     })
@@ -85,7 +73,7 @@ exports.readAnnualCO2GL = catchError(async () => {
     host,
   })
   c.on("ready", function () {
-    console.log("connected to ftp...")
+    logger.log("connected to ftp...")
     c.get(`${path}co2_annmean_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
@@ -113,7 +101,7 @@ exports.readAnnualCO2ML = catchError(async () => {
     host,
   })
   c.on("ready", function () {
-    console.log("connected to ftp...")
+    logger.log("connected to ftp...")
     c.get(`${path}co2_annmean_mlo.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
@@ -142,7 +130,7 @@ exports.readAnnualCO2IncreaseGL = catchError(async () => {
     host,
   })
   c.on("ready", function () {
-    console.log("connected to ftp...")
+    logger.log("connected to ftp...")
     c.get(`${path}co2_gr_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
@@ -170,7 +158,7 @@ exports.readAnnualCO2IncreaseML = catchError(async () => {
     host,
   })
   c.on("ready", function () {
-    console.log("connected to ftp...")
+    logger.log("connected to ftp...")
     c.get(`${path}co2_gr_mlo.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
@@ -198,7 +186,7 @@ exports.readMonthlyCO2ML = catchError(async () => {
     host,
   })
   c.on("ready", function () {
-    console.log("connected to ftp...")
+    logger.log("connected to ftp...")
     c.get(`${path}co2_mm_mlo.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
@@ -228,7 +216,7 @@ exports.readMonthlyCO2GL = catchError(async () => {
     host,
   })
   c.on("ready", function () {
-    console.log("connected to ftp...")
+    logger.log("connected to ftp...")
     c.get(`${path}co2_mm_gl.txt`, function (err, stream) {
       if (err) throw err
       let content = ""
@@ -258,7 +246,7 @@ exports.readWeeklyCO2 = catchError(async () => {
     host,
   })
   c.on("ready", function () {
-    console.log("connected to ftp...")
+    logger.log("connected to ftp...")
     c.get(`${path}co2_weekly_mlo.txt`, function (err, stream) {
       if (err) throw err
       let content = ""

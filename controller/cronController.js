@@ -3,6 +3,7 @@ const co2 = require("./co2Controller")
 const ch4 = require("./ch4Controller")
 const n2o = require("./n2oController")
 const sf6 = require("./sf6Controller")
+const temp = require("./berkeleyController")
 
 // -----------------------
 
@@ -61,6 +62,19 @@ const runAnnualOtherUpdate = () => {
   }, 10000)
 }
 
+const runATempUpdate = () => {
+  temp.getAnnualTempAnomalyLS()
+  // setTimeout(() => {
+  //   co2.readAnnualCO2GL()
+  //   setTimeout(() => {
+  //     co2.readAnnualCO2IncreaseGL()
+  //     setTimeout(() => {
+  //       co2.readAnnualCO2IncreaseML()
+  //     }, 10000)
+  //   }, 10000)
+  // }, 10000)
+}
+
 const dailyUpdate = new CronJob(
   "0 0 0,6,12,18 * * *",
   runDailyUpdate,
@@ -92,9 +106,18 @@ const annualOtherUpdate = new CronJob(
   true,
   "America/Los_Angeles"
 )
+
+const annualTempUpdate = new CronJob(
+  "0 3 4 * * *",
+  runATempUpdate,
+  null,
+  true,
+  "America/Los_Angeles"
+)
 exports.run = () => {
   dailyUpdate.start()
   monthlyUpdate.start()
   annualCO2Update.start()
   annualOtherUpdate.start()
+  annualTempUpdate.start()
 }
