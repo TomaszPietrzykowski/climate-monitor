@@ -76,7 +76,7 @@ const runATempUpdate = () => {
 }
 
 const dailyUpdate = new CronJob(
-  "0 0 0,6,12,18 * * *",
+  "0 0 6,18 * * *",
   runDailyUpdate,
   null,
   true,
@@ -92,7 +92,7 @@ const monthlyUpdate = new CronJob(
 )
 
 const annualCO2Update = new CronJob(
-  "0 30 4 1,7,14,28 * *",
+  "0 30 4 7,28 * *",
   runAnnualCO2Update,
   null,
   true,
@@ -100,7 +100,7 @@ const annualCO2Update = new CronJob(
 )
 
 const annualOtherUpdate = new CronJob(
-  "0 45 5 2,5,12,27 * *",
+  "0 45 5 2,17 * *",
   runAnnualOtherUpdate,
   null,
   true,
