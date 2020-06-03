@@ -59,8 +59,8 @@ exports.readDailyCO2 = catchError(async () => {
             t[t.length - 3654],
           ],
         }
-        updateDataset("dailyco2", output)
-        updateDataset("latestco2", latestOutput)
+        updateDataset("daily_co2", output)
+        updateDataset("latest_co2", latestOutput)
         c.end()
       })
     })
@@ -89,7 +89,7 @@ exports.readAnnualCO2GL = catchError(async () => {
           outputValues.push(set[1] * 1)
         })
         const output = { labels: outputLabels, values: outputValues }
-        updateDataset("annualco2gl", output)
+        updateDataset("annual_co2_gl", output)
         c.end()
       })
     })
@@ -117,7 +117,7 @@ exports.readAnnualCO2ML = catchError(async () => {
           outputValues.push(set[1] * 1)
         })
         const output = { labels: outputLabels, values: outputValues }
-        updateDataset("annualco2ml", output)
+        updateDataset("annual_co2_ml", output)
         c.end()
       })
     })
@@ -146,7 +146,7 @@ exports.readAnnualCO2IncreaseGL = catchError(async () => {
           outputValues.push(set[1] * 1)
         })
         const output = { labels: outputLabels, values: outputValues }
-        updateDataset("annualco2increasegl", output)
+        updateDataset("annual_co2_increase_gl", output)
         c.end()
       })
     })
@@ -174,7 +174,7 @@ exports.readAnnualCO2IncreaseML = catchError(async () => {
           outputValues.push(set[1] * 1)
         })
         const output = { labels: outputLabels, values: outputValues }
-        updateDataset("annualco2increaseml", output)
+        updateDataset("annual_co2_increase_ml", output)
         c.end()
       })
     })
@@ -204,7 +204,7 @@ exports.readMonthlyCO2ML = catchError(async () => {
           trend.push(set[5] * 1)
         })
         const output = { labels, values, trend }
-        updateDataset("monthlyco2ml", output)
+        updateDataset("monthly_co2_ml", output)
         c.end()
       })
     })
@@ -234,7 +234,7 @@ exports.readMonthlyCO2GL = catchError(async () => {
           trend.push(set[4] * 1)
         })
         const output = { labels, values, trend }
-        updateDataset("monthlyco2gl", output)
+        updateDataset("monthly_co2_gl", output)
         c.end()
       })
     })
@@ -264,7 +264,7 @@ exports.readWeeklyCO2 = catchError(async () => {
           since1800.push(set[8] * 1)
         })
         const output = { labels, values, since1800 }
-        updateDataset("weeklyco2", output)
+        updateDataset("weekly_co2", output)
         c.end()
       })
     })

@@ -64,15 +64,15 @@ const runAnnualOtherUpdate = () => {
 
 const runATempUpdate = () => {
   temp.getAnnualTempAnomalyLS()
-  // setTimeout(() => {
-  //   co2.readAnnualCO2GL()
-  //   setTimeout(() => {
-  //     co2.readAnnualCO2IncreaseGL()
-  //     setTimeout(() => {
-  //       co2.readAnnualCO2IncreaseML()
-  //     }, 10000)
-  //   }, 10000)
-  // }, 10000)
+  setTimeout(() => {
+    temp.getMonthlyTempAnomalyLS()
+    //   setTimeout(() => {
+    //     co2.readAnnualCO2IncreaseGL()
+    //     setTimeout(() => {
+    //       co2.readAnnualCO2IncreaseML()
+    //     }, 10000)
+    //   }, 10000)
+  }, 10000)
 }
 
 const dailyUpdate = new CronJob(

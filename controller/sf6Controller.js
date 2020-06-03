@@ -30,7 +30,7 @@ exports.readAnnualSF6 = catchError(async () => {
           values.push(set[1] * 1)
         })
         const output = { labels, values }
-        updateDataset("annualsf6gl", output)
+        updateDataset("annual_sf6_gl", output)
         c.end()
       })
     })
@@ -59,7 +59,7 @@ exports.readAnnualGrowthRateSF6 = catchError(async () => {
           values.push(set[1] * 1)
         })
         const output = { labels, values }
-        updateDataset("annualsf6grgl", output)
+        updateDataset("annual_sf6_gr_gl", output)
         c.end()
       })
     })
@@ -90,7 +90,7 @@ exports.readMonthlySF6GL = catchError(async () => {
           trend.push(set[5] * 1)
         })
         const output = { labels, values, trend }
-        updateDataset("monthlysf6gl", output)
+        updateDataset("monthly_sf6_gl", output)
         c.end()
       })
     })

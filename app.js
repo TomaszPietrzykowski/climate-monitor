@@ -6,7 +6,7 @@ const cron = require("./controller/cronController")
 const globalErrorHandler = require("./controller/errorController")
 const chartDataRouter = require("./router/chartDataRouter")
 const logger = require("./Logger")
-const { getAnnualTempAnomalyLS } = require("./controller/berkeleyController")
+const { getMonthlyTempAnomalyLS } = require("./controller/berkeleyController")
 
 dotenv.config({ path: "./config.env" })
 
@@ -52,7 +52,7 @@ mongoose
 // run data update schedule
 cron.run()
 
-getAnnualTempAnomalyLS()
+getMonthlyTempAnomalyLS()
 
 const PORT = process.env.PORT || 5000
 const server = app.listen(PORT, () =>
