@@ -91,6 +91,19 @@ const parseMonthlyTemp = (input) => {
   return output
 }
 
+const parseDailyTempAnomalyLS = (inputData) => {
+  const labels = []
+  const values = []
+  const decimal = []
+  inputData.forEach((el) => {
+    labels.push(`${el[1]}-${el[2]}-${el[3]}`)
+    values.push(parseFloat(el[5]))
+    decimal.push(parseFloat(el[0]))
+  })
+  const output = { labels, values, decimal }
+  return output
+}
+
 exports.getAnnualTempAnomalyLS = async () => {
   const response = await axios.get(
     "http://berkeleyearth.lbl.gov/auto/Global/Complete_TAVG_summary.txt"
@@ -114,4 +127,15 @@ exports.getMonthlyTempAnomalyLS = async () => {
   const monthlyTemp = parseMonthlyTemp(monthlyAnomaly)
   updateDataset("monthly_land_temp_anomaly", monthlyAnomaly)
   updateDataset("monthly_land_temp", monthlyTemp)
+}
+
+exports.getDailyTempAnomalyLS = async () => {
+  const response = await axios.get(
+    "http://berkeleyearth.lbl.gov/auto/Global/Complete_TAVG_daily.txt"
+  )
+  const string = await response.data
+  const data = parseTXT(string)
+  const dailyAnomaly = parseDailyTempAnomalyLS(data)
+
+  updateDataset("daily_land_temp_anomaly", dailyAnomaly)
 }

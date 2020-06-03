@@ -1,13 +1,17 @@
 const mongoose = require("mongoose")
 
 const chartDataSchema = new mongoose.Schema({
-  lastUpdate: {
-    type: Date,
-    default: Date.now(),
+  title: {
+    type: String,
+    required: true,
   },
   description: {
     type: String,
     trim: true,
+  },
+  lastUpdate: {
+    type: Date,
+    default: Date.now(),
   },
   datasetID: {
     type: String,
@@ -35,9 +39,8 @@ const chartDataSchema = new mongoose.Schema({
   growthRate: {
     type: Array,
   },
-  title: {
-    type: String,
-    required: true,
+  decimal: {
+    type: Array,
   },
 })
 
