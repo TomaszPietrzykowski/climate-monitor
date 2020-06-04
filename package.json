@@ -24,7 +24,8 @@
     "express": "^4.17.1",
     "ftp": "^0.3.10",
     "mongoose": "^5.9.7",
-    "uuid": "^7.0.2"
+    "uuid": "^7.0.2",
+    "webdav": "^3.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"

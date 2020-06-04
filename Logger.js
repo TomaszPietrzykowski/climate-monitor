@@ -25,7 +25,7 @@ logger.on("log", (data) => {
       path.join(__dirname, "/logs", `log_${d}_${m}_${y}.txt`),
       `\n \n ******************************** \n Log message: \n ${
         data.msg
-      } \n \n Log timestamp:\n ${new Date()} \n Log id: \n ${data.log_id}`,
+      } \n \n Log timestamp:\n ${new Date()}`,
       (err) => {
         if (err) throw err
         console.log("New input in log.txt added...")
