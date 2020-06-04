@@ -26,7 +26,6 @@ exports.updateSeaLevels = async () => {
   const values = []
   const decimal = []
   initialArray.forEach((el) => {
-    //   console.log(el[2])
     labels.push(el[2].slice(0, 7))
     values.push(el[5])
     decimal.push(el[2])
@@ -63,4 +62,37 @@ exports.updateIceMass = async () => {
     const output = { labels, values, uncertainty }
     updateDataset(`${file.basename.split("_")[0]}_ice_mass`, output)
   })
+}
+
+// Ocean mass
+// https://podaac-tools.jpl.nasa.gov/drive/files/allData/tellus/L4/ocean_mass/RL06/v02/mascon_CRI/ocean_mass_200204_202003.txt
+
+exports.updateOcenMass = async () => {
+  const client = createClient("https://podaac-tools.jpl.nasa.gov/drive/files", {
+    username: "climatemonitor.info",
+    password: process.env.EARTHDATA_PASS,
+  })
+
+  const list = await client.getDirectoryContents(
+    "allData/tellus/L4/ocean_mass/RL06/v02/mascon_CRI"
+  )
+  const file = list.filter(
+    (f) => f.mime === "text/plain" && f.basename !== "README.txt"
+  )[0].basename
+
+  const data = await client.getFileContents(
+    `/allData/tellus/L4/ocean_mass/RL06/v02/mascon_CRI/${file}`,
+    { format: "text" }
+  )
+  const initialArray = parseTXT(data)
+  const labels = []
+  const values = []
+  const decimal = []
+  initialArray.forEach((el) => {
+    labels.push(el[0])
+    values.push(parseFloat(el[1]))
+    decimal.push(parseFloat(el[0]))
+  })
+  const output = { labels, values, decimal }
+  updateDataset(`global_ocean_mass`, output)
 }
