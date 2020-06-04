@@ -4,6 +4,7 @@ const ch4 = require("./ch4Controller")
 const n2o = require("./n2oController")
 const sf6 = require("./sf6Controller")
 const temp = require("./berkeleyController")
+const nasa = require("./nasaController")
 
 // -----------------------
 
@@ -78,6 +79,13 @@ const runATempUpdate = () => {
   }, 10000)
 }
 
+const runNASAUpdate = () => {
+  nasa.updateSeaLevels()
+  setTimeout(() => {
+    nasa.updateIceMass()
+  }, 10000)
+}
+
 const dailyUpdate = new CronJob(
   "0 0 6,18 * * *",
   runDailyUpdate,
@@ -117,10 +125,19 @@ const tempUpdate = new CronJob(
   true,
   "America/Los_Angeles"
 )
+
+const nasaUpdate = new CronJob(
+  "45 12 23 * * *",
+  runNASAUpdate,
+  null,
+  true,
+  "America/Los_Angeles"
+)
 exports.run = () => {
   dailyUpdate.start()
   monthlyUpdate.start()
   annualCO2Update.start()
   annualOtherUpdate.start()
   tempUpdate.start()
+  nasaUpdate.start()
 }

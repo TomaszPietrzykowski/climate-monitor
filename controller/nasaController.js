@@ -1,4 +1,3 @@
-const axios = require("axios")
 const { parseTXT } = require("../utilities/tools")
 const { updateDataset } = require("./dbController")
 const { createClient } = require("webdav")
@@ -22,11 +21,46 @@ exports.updateSeaLevels = async () => {
     `/allData/merged_alt/L2/TP_J1_OSTM/global_mean_sea_level/${file}`,
     { format: "text" }
   )
+  const initialArray = parseTXT(data)
+  const labels = []
+  const values = []
+  const decimal = []
+  initialArray.forEach((el) => {
+    //   console.log(el[2])
+    labels.push(el[2].slice(0, 7))
+    values.push(el[5])
+    decimal.push(el[2])
+  })
+  const output = { labels, values, decimal }
+  updateDataset(`sea_level_trend`, output)
+}
+exports.updateIceMass = async () => {
+  const client = createClient("https://podaac-tools.jpl.nasa.gov/drive/files", {
+    username: "climatemonitor.info",
+    password: process.env.EARTHDATA_PASS,
+  })
 
-  console.log(parseTXT(data))
-
-  //   const anomaly = parseAnnualTempAnomaly(data)
-  //   const temp = parseAnnualTemp(anomaly, e[2])
-  //   updateDataset(`annual_land_temp_anomaly_${e[1]}`, anomaly)
-  //   updateDataset(`annual_land_temp_${e[1]}`, temp)
+  const list = await client.getDirectoryContents(
+    "/allData/tellus/L4/ice_mass/RL06/v02/mascon_CRI"
+  )
+  const filtered = list.filter(
+    (f) => f.mime === "text/plain" && f.basename !== "README.txt"
+  )
+  filtered.forEach(async (file) => {
+    const data = await client.getFileContents(
+      `/allData/tellus/L4/ice_mass/RL06/v02/mascon_CRI/${file.basename}`,
+      { format: "text" }
+    )
+    const initialArray = parseTXT(data)
+    const labels = []
+    const values = []
+    const uncertainty = []
+    initialArray.forEach((el) => {
+      labels.push(el[0])
+      values.push(parseFloat(el[1]))
+      uncertainty.push(parseFloat(el[2]))
+    })
+    const output = { labels, values, uncertainty }
+    updateDataset(`${file.basename.split("_")[0]}_ice_mass`, output)
+  })
 }
