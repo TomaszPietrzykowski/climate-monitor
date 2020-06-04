@@ -63,15 +63,18 @@ const runAnnualOtherUpdate = () => {
 }
 
 const runATempUpdate = () => {
-  temp.getAnnualTempAnomalyLS()
+  temp.updateAnnualTempAnomalyLS()
   setTimeout(() => {
-    temp.getMonthlyTempAnomalyLS()
-    //   setTimeout(() => {
-    //     co2.readAnnualCO2IncreaseGL()
-    //     setTimeout(() => {
-    //       co2.readAnnualCO2IncreaseML()
-    //     }, 10000)
-    //   }, 10000)
+    temp.updateMonthlyTempAnomalyLS()
+    setTimeout(() => {
+      temp.updateDailyTempAnomalyLS()
+      setTimeout(() => {
+        temp.updateAnnualTempAnomalyLOC()
+        setTimeout(() => {
+          temp.updateMonthlyTempAnomalyLOC()
+        }, 10000)
+      }, 10000)
+    }, 10000)
   }, 10000)
 }
 
@@ -107,7 +110,7 @@ const annualOtherUpdate = new CronJob(
   "America/Los_Angeles"
 )
 
-const annualTempUpdate = new CronJob(
+const tempUpdate = new CronJob(
   "0 3 4 * * *",
   runATempUpdate,
   null,
@@ -119,5 +122,5 @@ exports.run = () => {
   monthlyUpdate.start()
   annualCO2Update.start()
   annualOtherUpdate.start()
-  annualTempUpdate.start()
+  tempUpdate.start()
 }
