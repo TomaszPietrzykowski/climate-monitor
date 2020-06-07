@@ -52,7 +52,7 @@ mongoose
 // run data update schedule
 cron.run()
 // temp.updateAnnualTempAnomalyLOC()
-// nasa.updateOcenMass()
+// nasa.updateOceanMass()
 
 const PORT = process.env.PORT || 5000
 const server = app.listen(PORT, () =>

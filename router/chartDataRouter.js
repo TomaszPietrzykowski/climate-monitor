@@ -5,6 +5,8 @@ const authController = require("../controller/authController")
 
 const router = express.Router()
 
+router.route("/endpoints").get(dbController.getEndpoints)
+
 router
   .route("/")
   .post(authController.protect, dbController.createChartData)

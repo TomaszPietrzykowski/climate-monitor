@@ -94,3 +94,12 @@ exports.updateDataset = catchError(async (id, data) => {
   )
   logger.log(`Dataset id: ${id} updated...`)
 })
+
+exports.getEndpoints = catchError(async (req, res) => {
+  const array = await chartDataModel.distinct("datasetID")
+  res.status(200).json({
+    status: "success",
+    results: array.length,
+    data: array,
+  })
+})

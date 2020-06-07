@@ -64,10 +64,7 @@ exports.updateIceMass = async () => {
   })
 }
 
-// Ocean mass
-// https://podaac-tools.jpl.nasa.gov/drive/files/allData/tellus/L4/ocean_mass/RL06/v02/mascon_CRI/ocean_mass_200204_202003.txt
-
-exports.updateOcenMass = async () => {
+exports.updateOceanMass = async () => {
   const client = createClient("https://podaac-tools.jpl.nasa.gov/drive/files", {
     username: "climatemonitor.info",
     password: process.env.EARTHDATA_PASS,

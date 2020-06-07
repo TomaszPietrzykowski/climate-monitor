@@ -83,6 +83,9 @@ const runNASAUpdate = () => {
   nasa.updateSeaLevels()
   setTimeout(() => {
     nasa.updateIceMass()
+    setTimeout(() => {
+      nasa.updateOceanMass()
+    }, 10000)
   }, 10000)
 }
 
