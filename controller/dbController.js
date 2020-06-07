@@ -4,19 +4,16 @@ const catchError = require("../utilities/catchError")
 const logger = require("../Logger")
 
 exports.getAllChartData = catchError(async (req, res) => {
-  try {
-    const data = await chartDataModel.find()
-    res.status(200).json({
-      status: "success",
-      results: data.length,
-      data,
-    })
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.errmsg,
-    })
-  }
+  const data = await chartDataModel.find()
+  res.status(200).json({
+    status: "success",
+    results: data.length,
+    data,
+  })
+  res.status(404).json({
+    status: "fail",
+    message: err.errmsg,
+  })
 })
 
 exports.getChartData = catchError(async (req, res) => {
