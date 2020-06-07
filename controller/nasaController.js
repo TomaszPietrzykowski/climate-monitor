@@ -11,7 +11,9 @@ exports.updateSeaLevels = async () => {
   const list = await client.getDirectoryContents(
     "/allData/merged_alt/L2/TP_J1_OSTM/global_mean_sea_level"
   )
-  const filtered = list.filter((f) => f.mime === "text/plain")
+  const filtered = list.filter(
+    (f) => f.mime === "text/plain" && f.basename !== "README.txt"
+  )
   const last = filtered.sort(function (a, b) {
     return new Date(b.lastmod) - new Date(a.lastmod)
   })[0].filename

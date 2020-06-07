@@ -122,7 +122,7 @@ const annualOtherUpdate = new CronJob(
 )
 
 const tempUpdate = new CronJob(
-  "0 3 4 * * *",
+  "0 3 4 12,25 * *",
   runATempUpdate,
   null,
   true,
@@ -130,7 +130,7 @@ const tempUpdate = new CronJob(
 )
 
 const nasaUpdate = new CronJob(
-  "45 12 23 * * *",
+  "45 12 23 */3 * *",
   runNASAUpdate,
   null,
   true,
