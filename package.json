@@ -1,8 +1,8 @@
 {
-  "name": "climate-monitor-backend",
+  "name": "climate-monitor",
   "version": "1.0.0",
-  "description": "Climate Monitor backend",
-  "main": "server.js",
+  "description": "Climate Monitor - latest and historical climate data",
+  "main": "app.js",
   "scripts": {
     "start": "node app",
     "dev": "nodemon app"
