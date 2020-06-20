@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TomaszPietrzykowski/climate-monitor-backend.git"
+    "url": "git+https://github.com/TomaszPietrzykowski/climate-monitor.git"
   },
   "author": "Tomasz Pietrzykowski",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TomaszPietrzykowski/climate-monitor-backend/issues"
+    "url": "https://github.com/TomaszPietrzykowski/climate-monitor/issues"
   },
-  "homepage": "https://github.com/TomaszPietrzykowski/climate-monitor-backend#readme",
+  "homepage": "https://github.com/TomaszPietrzykowski/climate-monitor#readme",
   "dependencies": {
     "axios": "^0.19.2",
     "cron": "^1.8.2",
