@@ -14,7 +14,7 @@ dotenv.config({ path: "./config.env" });
 const app = express();
 
 // Middleware cycle:
-app.use(cors());
+app.use(cors(false));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json()); // <-- body parser
 
