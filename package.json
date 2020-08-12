@@ -1,7 +1,7 @@
 {
   "name": "climate-monitor",
   "version": "1.0.0",
-  "description": "Climate Monitor - latest and historical climate data",
+  "description": "Climate Monitor - latest and historical climate data and public API",
   "main": "app.js",
   "scripts": {
     "start": "node app",
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/TomaszPietrzykowski/climate-monitor#readme",
   "dependencies": {
     "axios": "^0.19.2",
+    "cors": "^2.8.5",
     "cron": "^1.8.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
