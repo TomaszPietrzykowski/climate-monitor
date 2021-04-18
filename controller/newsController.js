@@ -3,6 +3,9 @@ const axios = require("axios");
 const catchError = require("../utilities/catchError");
 const logger = require("../Logger");
 
+// @description: Fetch news
+// @route: GET /api/news
+// @access: Public
 exports.getNews = catchError(async (req, res) => {
   const news = await newsModel.findById("607c0f011bd74a1fe04395b2");
   if (news) {
@@ -10,20 +13,19 @@ exports.getNews = catchError(async (req, res) => {
   }
 });
 
+// @description: Fetch news from NewsAPI and update db
+// @route: none
+// @access: Application
 exports.updateNewsfeed = catchError(async () => {
   const news = await axios.get(
-    `https://newsapi.org/v2/everything?q=climate+change&language=en&sortBy=publishedAt&apiKey=${process.env.NEWS_API_KEY}`
+    `https://newsapi.org/v2/everything?q=climate+change+co2&language=en&sortBy=relevance&apiKey=${process.env.NEWS_API_KEY}`
   );
   const articles = data.articles;
-  //   console.log(articles);
   if (articles.length > 1) {
     const updated = [];
     articles.forEach((article) => {
       if (
-        article.source.name &&
         article.title &&
-        article.description &&
-        article.author &&
         article.content &&
         article.url &&
         article.urlToImage

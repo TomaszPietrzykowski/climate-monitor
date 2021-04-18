@@ -1,44 +1,44 @@
-const FTPClient = require("ftp")
+const FTPClient = require("ftp");
 
-const { updateDataset } = require("./dbController")
-const { parseTXT } = require("../utilities/tools")
-const catchError = require("../utilities/catchError")
-const logger = require("../Logger")
+const { updateDataset } = require("./dbController");
+const { parseTXT, formatChartLabels } = require("../utilities/tools");
+const catchError = require("../utilities/catchError");
+const logger = require("../Logger");
 
-const host = "aftp.cmdl.noaa.gov"
-const path = "products/trends/co2/"
+const host = "aftp.cmdl.noaa.gov";
+const path = "products/trends/co2/";
 
 exports.readDailyCO2 = catchError(async () => {
-  const c = new FTPClient()
+  const c = new FTPClient();
   c.connect({
     host,
-  })
+  });
   c.on("ready", function () {
-    logger.log("connected to ftp...")
+    logger.log("connected to ftp...");
     c.get(`${path}co2_trend_gl.txt`, function (err, stream) {
-      if (err) throw err
-      let content = ""
+      if (err) throw err;
+      let content = "";
       stream.on("data", function (chunk) {
-        content += chunk.toString()
-      })
+        content += chunk.toString();
+      });
       stream.on("end", function () {
-        const data = parseTXT(content)
-        const labels = []
-        const values = []
-        const trend = []
+        const data = parseTXT(content);
+        const labels = [];
+        const values = [];
+        const trend = [];
         data.forEach((set) => {
-          labels.push(`${set[0]}-${set[1]}-${set[2]}`)
-          values.push(set[3] * 1)
-          trend.push(set[4] * 1)
-        })
+          labels.push(`${set[0]}-${set[1]}-${set[2]}`);
+          values.push(set[3] * 1);
+          trend.push(set[4] * 1);
+        });
         const output = {
-          labels,
+          labels: formatChartLabels(labels),
           values,
           trend,
-        }
-        const l = output.labels
-        const v = output.values
-        const t = output.trend
+        };
+        const l = output.labels;
+        const v = output.values;
+        const t = output.trend;
         const latestOutput = {
           labels: [
             l[l.length - 1],
@@ -58,215 +58,215 @@ exports.readDailyCO2 = catchError(async () => {
             t[t.length - 1828],
             t[t.length - 3654],
           ],
-        }
-        updateDataset("daily_co2", output)
-        updateDataset("latest_co2", latestOutput)
-        c.end()
-      })
-    })
-  })
-})
+        };
+        updateDataset("daily_co2", output);
+        updateDataset("latest_co2", latestOutput);
+        c.end();
+      });
+    });
+  });
+});
 
 exports.readAnnualCO2GL = catchError(async () => {
-  const c = new FTPClient()
+  const c = new FTPClient();
   c.connect({
     host,
-  })
+  });
   c.on("ready", function () {
-    logger.log("connected to ftp...")
+    logger.log("connected to ftp...");
     c.get(`${path}co2_annmean_gl.txt`, function (err, stream) {
-      if (err) throw err
-      let content = ""
+      if (err) throw err;
+      let content = "";
       stream.on("data", function (chunk) {
-        content += chunk.toString()
-      })
+        content += chunk.toString();
+      });
       stream.on("end", function () {
-        const data = parseTXT(content)
-        const outputLabels = []
-        const outputValues = []
+        const data = parseTXT(content);
+        const outputLabels = [];
+        const outputValues = [];
         data.forEach((set) => {
-          outputLabels.push(set[0])
-          outputValues.push(set[1] * 1)
-        })
-        const output = { labels: outputLabels, values: outputValues }
-        updateDataset("annual_co2_gl", output)
-        c.end()
-      })
-    })
-  })
-})
+          outputLabels.push(set[0]);
+          outputValues.push(set[1] * 1);
+        });
+        const output = { labels: outputLabels, values: outputValues };
+        updateDataset("annual_co2_gl", output);
+        c.end();
+      });
+    });
+  });
+});
 exports.readAnnualCO2ML = catchError(async () => {
-  const c = new FTPClient()
+  const c = new FTPClient();
   c.connect({
     host,
-  })
+  });
   c.on("ready", function () {
-    logger.log("connected to ftp...")
+    logger.log("connected to ftp...");
     c.get(`${path}co2_annmean_mlo.txt`, function (err, stream) {
-      if (err) throw err
-      let content = ""
+      if (err) throw err;
+      let content = "";
       stream.on("data", function (chunk) {
-        content += chunk.toString()
-      })
+        content += chunk.toString();
+      });
       stream.on("end", function () {
-        const data = parseTXT(content)
-        const outputLabels = []
-        const outputValues = []
+        const data = parseTXT(content);
+        const outputLabels = [];
+        const outputValues = [];
         data.forEach((set) => {
-          outputLabels.push(set[0])
-          outputValues.push(set[1] * 1)
-        })
-        const output = { labels: outputLabels, values: outputValues }
-        updateDataset("annual_co2_ml", output)
-        c.end()
-      })
-    })
-  })
-})
+          outputLabels.push(set[0]);
+          outputValues.push(set[1] * 1);
+        });
+        const output = { labels: outputLabels, values: outputValues };
+        updateDataset("annual_co2_ml", output);
+        c.end();
+      });
+    });
+  });
+});
 
 exports.readAnnualCO2IncreaseGL = catchError(async () => {
-  const c = new FTPClient()
+  const c = new FTPClient();
   c.connect({
     host,
-  })
+  });
   c.on("ready", function () {
-    logger.log("connected to ftp...")
+    logger.log("connected to ftp...");
     c.get(`${path}co2_gr_gl.txt`, function (err, stream) {
-      if (err) throw err
-      let content = ""
+      if (err) throw err;
+      let content = "";
       stream.on("data", function (chunk) {
-        content += chunk.toString()
-      })
+        content += chunk.toString();
+      });
       stream.on("end", function () {
-        const data = parseTXT(content)
-        const outputLabels = []
-        const outputValues = []
+        const data = parseTXT(content);
+        const outputLabels = [];
+        const outputValues = [];
         data.forEach((set) => {
-          outputLabels.push(set[0])
-          outputValues.push(set[1] * 1)
-        })
-        const output = { labels: outputLabels, values: outputValues }
-        updateDataset("annual_co2_increase_gl", output)
-        c.end()
-      })
-    })
-  })
-})
+          outputLabels.push(set[0]);
+          outputValues.push(set[1] * 1);
+        });
+        const output = { labels: outputLabels, values: outputValues };
+        updateDataset("annual_co2_increase_gl", output);
+        c.end();
+      });
+    });
+  });
+});
 exports.readAnnualCO2IncreaseML = catchError(async () => {
-  const c = new FTPClient()
+  const c = new FTPClient();
   c.connect({
     host,
-  })
+  });
   c.on("ready", function () {
-    logger.log("connected to ftp...")
+    logger.log("connected to ftp...");
     c.get(`${path}co2_gr_mlo.txt`, function (err, stream) {
-      if (err) throw err
-      let content = ""
+      if (err) throw err;
+      let content = "";
       stream.on("data", function (chunk) {
-        content += chunk.toString()
-      })
+        content += chunk.toString();
+      });
       stream.on("end", function () {
-        const data = parseTXT(content)
-        const outputLabels = []
-        const outputValues = []
+        const data = parseTXT(content);
+        const outputLabels = [];
+        const outputValues = [];
         data.forEach((set) => {
-          outputLabels.push(set[0])
-          outputValues.push(set[1] * 1)
-        })
-        const output = { labels: outputLabels, values: outputValues }
-        updateDataset("annual_co2_increase_ml", output)
-        c.end()
-      })
-    })
-  })
-})
+          outputLabels.push(set[0]);
+          outputValues.push(set[1] * 1);
+        });
+        const output = { labels: outputLabels, values: outputValues };
+        updateDataset("annual_co2_increase_ml", output);
+        c.end();
+      });
+    });
+  });
+});
 exports.readMonthlyCO2ML = catchError(async () => {
-  const c = new FTPClient()
+  const c = new FTPClient();
   c.connect({
     host,
-  })
+  });
   c.on("ready", function () {
-    logger.log("connected to ftp...")
+    logger.log("connected to ftp...");
     c.get(`${path}co2_mm_mlo.txt`, function (err, stream) {
-      if (err) throw err
-      let content = ""
+      if (err) throw err;
+      let content = "";
       stream.on("data", function (chunk) {
-        content += chunk.toString()
-      })
+        content += chunk.toString();
+      });
       stream.on("end", function () {
-        const data = parseTXT(content)
-        const labels = []
-        const values = []
-        const trend = []
+        const data = parseTXT(content);
+        const labels = [];
+        const values = [];
+        const trend = [];
         data.forEach((set) => {
-          labels.push(`${set[0]}-${set[1]}`)
-          values.push(set[3] * 1)
-          trend.push(set[5] * 1)
-        })
-        const output = { labels, values, trend }
-        updateDataset("monthly_co2_ml", output)
-        c.end()
-      })
-    })
-  })
-})
+          labels.push(`${set[0]}-${set[1]}`);
+          values.push(set[3] * 1);
+          trend.push(set[5] * 1);
+        });
+        const output = { labels: formatChartLabels(labels), values, trend };
+        updateDataset("monthly_co2_ml", output);
+        c.end();
+      });
+    });
+  });
+});
 exports.readMonthlyCO2GL = catchError(async () => {
-  const c = new FTPClient()
+  const c = new FTPClient();
   c.connect({
     host,
-  })
+  });
   c.on("ready", function () {
-    logger.log("connected to ftp...")
+    logger.log("connected to ftp...");
     c.get(`${path}co2_mm_gl.txt`, function (err, stream) {
-      if (err) throw err
-      let content = ""
+      if (err) throw err;
+      let content = "";
       stream.on("data", function (chunk) {
-        content += chunk.toString()
-      })
+        content += chunk.toString();
+      });
       stream.on("end", function () {
-        const data = parseTXT(content)
-        const labels = []
-        const values = []
-        const trend = []
+        const data = parseTXT(content);
+        const labels = [];
+        const values = [];
+        const trend = [];
         data.forEach((set) => {
-          labels.push(`${set[0]}-${set[1]}`)
-          values.push(set[3] * 1)
-          trend.push(set[4] * 1)
-        })
-        const output = { labels, values, trend }
-        updateDataset("monthly_co2_gl", output)
-        c.end()
-      })
-    })
-  })
-})
+          labels.push(`${set[0]}-${set[1]}`);
+          values.push(set[3] * 1);
+          trend.push(set[4] * 1);
+        });
+        const output = { labels: formatChartLabels(labels), values, trend };
+        updateDataset("monthly_co2_gl", output);
+        c.end();
+      });
+    });
+  });
+});
 exports.readWeeklyCO2 = catchError(async () => {
-  const c = new FTPClient()
+  const c = new FTPClient();
   c.connect({
     host,
-  })
+  });
   c.on("ready", function () {
-    logger.log("connected to ftp...")
+    logger.log("connected to ftp...");
     c.get(`${path}co2_weekly_mlo.txt`, function (err, stream) {
-      if (err) throw err
-      let content = ""
+      if (err) throw err;
+      let content = "";
       stream.on("data", function (chunk) {
-        content += chunk.toString()
-      })
+        content += chunk.toString();
+      });
       stream.on("end", function () {
-        const data = parseTXT(content)
-        const labels = []
-        const values = []
-        const since1800 = []
+        const data = parseTXT(content);
+        const labels = [];
+        const values = [];
+        const since1800 = [];
         data.forEach((set) => {
-          labels.push(`${set[0]}-${set[1]}-${set[2]}`)
-          values.push(set[4] * 1)
-          since1800.push(set[8] * 1)
-        })
-        const output = { labels, values, since1800 }
-        updateDataset("weekly_co2", output)
-        c.end()
-      })
-    })
-  })
-})
+          labels.push(`${set[0]}-${set[1]}-${set[2]}`);
+          values.push(set[4] * 1);
+          since1800.push(set[8] * 1);
+        });
+        const output = { labels: formatChartLabels(labels), values, since1800 };
+        updateDataset("weekly_co2", output);
+        c.end();
+      });
+    });
+  });
+});

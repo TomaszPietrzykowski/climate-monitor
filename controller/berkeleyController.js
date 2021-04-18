@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const { parseTXT } = require("../utilities/tools");
+const { parseTXT, formatChartLabels } = require("../utilities/tools");
 const { updateDataset } = require("./dbController");
 
 const endpoints = [
@@ -95,7 +95,7 @@ const parseMonthlyTempAnomaly = (inputData) => {
     values.push(parseFloat(el[2]));
     uncertainty.push(parseFloat(el[3]));
   });
-  const output = { labels, values, uncertainty };
+  const output = { labels: formatChartLabels(labels), values, uncertainty };
   return output;
 };
 
@@ -108,7 +108,7 @@ const parseMonthlyTemp = (input, averaged) => {
   });
   const newUnc = input.uncertainty.map((v) => parseFloat(v.toFixed(2)));
   const output = {
-    labels: input.labels,
+    labels: formatChartLabels(input.labels),
     values: newValues,
     uncertainty: newUnc,
   };
@@ -124,7 +124,7 @@ const parseDailyTempAnomaly = (inputData) => {
     values.push(parseFloat(el[5]));
     decimal.push(parseFloat(el[0]));
   });
-  const output = { labels, values, decimal };
+  const output = { labels: formatChartLabels(labels), values, decimal };
   return output;
 };
 
