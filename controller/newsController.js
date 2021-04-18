@@ -3,8 +3,15 @@ const axios = require("axios");
 const catchError = require("../utilities/catchError");
 const logger = require("../Logger");
 
+exports.getNews = catchError(async (req, res) => {
+  const news = await newsModel.findById("607c0f011bd74a1fe04395b2");
+  if (news) {
+    res.status(200).json(news);
+  }
+});
+
 exports.updateNewsfeed = catchError(async () => {
-  const { data } = await axios.get(
+  const news = await axios.get(
     `https://newsapi.org/v2/everything?q=climate+change&language=en&sortBy=publishedAt&apiKey=${process.env.NEWS_API_KEY}`
   );
   const articles = data.articles;

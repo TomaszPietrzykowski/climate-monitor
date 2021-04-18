@@ -7,8 +7,8 @@ const cron = require("./controller/cronController");
 const globalErrorHandler = require("./controller/errorController");
 const chartDataRouter = require("./router/chartDataRouter");
 const publicApiRouter = require("./router/publicApiRouter");
+const newsRouter = require("./router/newsRouter");
 const logger = require("./Logger");
-const newsController = require("./controller/newsController");
 
 dotenv.config({ path: "./config.env" });
 
@@ -22,6 +22,7 @@ app.use(express.json()); // <-- body parser
 // -- routing
 app.use("/api/v1/chartdata", chartDataRouter);
 app.use("/api/public/v1", publicApiRouter);
+app.use("/api/news", newsRouter);
 
 // catch all invalid routes - push err to error middleware by passing arg to next()
 app.all("*", (req, res, next) => {
@@ -55,7 +56,6 @@ mongoose
 
 // run data update schedule
 cron.run();
-// newsController.updateNewsfeed();
 
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () =>
