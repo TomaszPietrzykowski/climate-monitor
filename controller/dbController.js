@@ -122,7 +122,7 @@ exports.forgePublicDataset = catchError(async (obj) => {
 });
 
 exports.updatePublicDataset = catchError(async (id, data) => {
-  await chartDataModel.findOneAndUpdate(
+  await publicDataModel.findOneAndUpdate(
     {
       datasetID: id,
     },
