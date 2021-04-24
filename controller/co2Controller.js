@@ -1,6 +1,10 @@
 const FTPClient = require("ftp");
 
-const { updateDataset, updatePublicDataset } = require("./dbController");
+const {
+  updateDataset,
+  updatePublicDataset,
+  forgePublicDataset,
+} = require("./dbController");
 const { parseTXT, formatChartLabels } = require("../utilities/tools");
 const catchError = require("../utilities/catchError");
 const logger = require("../Logger");
@@ -95,15 +99,28 @@ exports.readAnnualCO2GL = catchError(async () => {
         content += chunk.toString();
       });
       stream.on("end", function () {
+        const publicData = [];
+        const rawLabels = [];
+        const values = [];
+        // parse txt data
         const data = parseTXT(content);
-        const outputLabels = [];
-        const outputValues = [];
         data.forEach((set) => {
-          outputLabels.push(set[0]);
-          outputValues.push(set[1] * 1);
+          rawLabels.push(set[0]);
+          values.push(parseFloat(set[1]));
         });
-        const output = { labels: outputLabels, values: outputValues };
+        // format labels
+        const labels = formatChartLabels(rawLabels);
+        // parse object data
+        labels.forEach((l, i) => {
+          publicData.push({
+            label: l,
+            value: values[i],
+          });
+        });
+
+        const output = { labels, values };
         updateDataset("annual_co2_gl", output);
+        updatePublicDataset("annual_co2_gl_public", publicData);
         c.end();
       });
     });
@@ -123,15 +140,28 @@ exports.readAnnualCO2ML = catchError(async () => {
         content += chunk.toString();
       });
       stream.on("end", function () {
+        const publicData = [];
+        const rawLabels = [];
+        const values = [];
+        // parse txt data
         const data = parseTXT(content);
-        const outputLabels = [];
-        const outputValues = [];
         data.forEach((set) => {
-          outputLabels.push(set[0]);
-          outputValues.push(set[1] * 1);
+          rawLabels.push(set[0]);
+          values.push(parseFloat(set[1]));
         });
-        const output = { labels: outputLabels, values: outputValues };
+        // format labels
+        const labels = formatChartLabels(rawLabels);
+        // parse object data
+        labels.forEach((l, i) => {
+          publicData.push({
+            label: l,
+            value: values[i],
+          });
+        });
+
+        const output = { labels, values };
         updateDataset("annual_co2_ml", output);
+        updatePublicDataset("annual_co2_ml_public", publicData);
         c.end();
       });
     });
@@ -152,15 +182,28 @@ exports.readAnnualCO2IncreaseGL = catchError(async () => {
         content += chunk.toString();
       });
       stream.on("end", function () {
+        const publicData = [];
+        const rawLabels = [];
+        const values = [];
+        // parse txt data
         const data = parseTXT(content);
-        const outputLabels = [];
-        const outputValues = [];
         data.forEach((set) => {
-          outputLabels.push(set[0]);
-          outputValues.push(set[1] * 1);
+          rawLabels.push(set[0]);
+          values.push(parseFloat(set[1]));
         });
-        const output = { labels: outputLabels, values: outputValues };
+        // format labels
+        const labels = formatChartLabels(rawLabels);
+        // parse object data
+        labels.forEach((l, i) => {
+          publicData.push({
+            label: l,
+            value: values[i],
+          });
+        });
+
+        const output = { labels, values };
         updateDataset("annual_co2_increase_gl", output);
+        updatePublicDataset("annual_co2_increase_gl_public", publicData);
         c.end();
       });
     });
@@ -180,15 +223,28 @@ exports.readAnnualCO2IncreaseML = catchError(async () => {
         content += chunk.toString();
       });
       stream.on("end", function () {
+        const publicData = [];
+        const rawLabels = [];
+        const values = [];
+        // parse txt data
         const data = parseTXT(content);
-        const outputLabels = [];
-        const outputValues = [];
         data.forEach((set) => {
-          outputLabels.push(set[0]);
-          outputValues.push(set[1] * 1);
+          rawLabels.push(set[0]);
+          values.push(parseFloat(set[1]));
         });
-        const output = { labels: outputLabels, values: outputValues };
+        // format labels
+        const labels = formatChartLabels(rawLabels);
+        // parse object data
+        labels.forEach((l, i) => {
+          publicData.push({
+            label: l,
+            value: values[i],
+          });
+        });
+
+        const output = { labels, values };
         updateDataset("annual_co2_increase_ml", output);
+        updatePublicDataset("annual_co2_increase_ml_public", publicData);
         c.end();
       });
     });
@@ -208,17 +264,32 @@ exports.readMonthlyCO2ML = catchError(async () => {
         content += chunk.toString();
       });
       stream.on("end", function () {
-        const data = parseTXT(content);
-        const labels = [];
+        const publicData = [];
+        const rawLabels = [];
         const values = [];
         const trend = [];
+        // parse txt data
+        const data = parseTXT(content);
         data.forEach((set) => {
-          labels.push(`${set[0]}-${set[1]}`);
-          values.push(set[3] * 1);
-          trend.push(set[5] * 1);
+          rawLabels.push(`${set[0]}-${set[1]}`);
+          values.push(parseFloat(set[3]));
+          trend.push(parseFloat(set[4]));
         });
-        const output = { labels: formatChartLabels(labels), values, trend };
+        // format labels
+        const labels = formatChartLabels(rawLabels);
+        // parse object data
+        labels.forEach((l, i) => {
+          publicData.push({
+            label: l,
+            value: values[i],
+            trend: trend[i],
+          });
+        });
+
+        const output = { labels, values, trend };
+
         updateDataset("monthly_co2_ml", output);
+        updatePublicDataset("monthly_co2_ml_public", publicData);
         c.end();
       });
     });
@@ -238,17 +309,31 @@ exports.readMonthlyCO2GL = catchError(async () => {
         content += chunk.toString();
       });
       stream.on("end", function () {
-        const data = parseTXT(content);
-        const labels = [];
+        const publicData = [];
+        const rawLabels = [];
         const values = [];
         const trend = [];
+        // parse txt data
+        const data = parseTXT(content);
         data.forEach((set) => {
-          labels.push(`${set[0]}-${set[1]}`);
-          values.push(set[3] * 1);
-          trend.push(set[4] * 1);
+          rawLabels.push(`${set[0]}-${set[1]}`);
+          values.push(parseFloat(set[3]));
+          trend.push(parseFloat(set[4]));
         });
-        const output = { labels: formatChartLabels(labels), values, trend };
+        // format labels
+        const labels = formatChartLabels(rawLabels);
+        // parse object data
+        labels.forEach((l, i) => {
+          publicData.push({
+            label: l,
+            value: values[i],
+            trend: trend[i],
+          });
+        });
+
+        const output = { labels, values, trend };
         updateDataset("monthly_co2_gl", output);
+        updatePublicDataset("monthly_co2_gl_public", publicData);
         c.end();
       });
     });
@@ -268,17 +353,32 @@ exports.readWeeklyCO2 = catchError(async () => {
         content += chunk.toString();
       });
       stream.on("end", function () {
-        const data = parseTXT(content);
-        const labels = [];
+        const publicData = [];
+        const rawLabels = [];
         const values = [];
         const since1800 = [];
+        // parse txt data
+        const data = parseTXT(content);
         data.forEach((set) => {
-          labels.push(`${set[0]}-${set[1]}-${set[2]}`);
-          values.push(set[4] * 1);
-          since1800.push(set[8] * 1);
+          rawLabels.push(`${set[0]}-${set[1]}-${set[2]}`);
+          values.push(parseFloat(set[4]));
+          since1800.push(parseFloat(set[8]));
         });
-        const output = { labels: formatChartLabels(labels), values, since1800 };
+        // format labels
+        const labels = formatChartLabels(rawLabels);
+        // parse object data
+        labels.forEach((l, i) => {
+          publicData.push({
+            label: l,
+            value: values[i],
+            since1800: since1800[i],
+          });
+        });
+
+        const output = { labels, values, since1800 };
+
         updateDataset("weekly_co2", output);
+        updatePublicDataset("weekly_co2_public", publicData);
         c.end();
       });
     });

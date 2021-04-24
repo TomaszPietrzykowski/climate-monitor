@@ -36,6 +36,9 @@ const publicDataSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    unit: {
+      type: String,
+    },
     datasetID: {
       type: String,
       trim: true,

@@ -118,7 +118,7 @@ exports.forgePublicDataset = catchError(async (obj) => {
     description: obj.description,
     readings: obj.readings,
   });
-  logger.log(`Dataset ${newDataset.datsetID} created`);
+  logger.log(`Dataset created`);
 });
 
 exports.updatePublicDataset = catchError(async (id, data) => {
