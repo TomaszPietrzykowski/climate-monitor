@@ -9,6 +9,21 @@ const dataSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  trend: {
+    type: Number,
+  },
+  uncertainty: {
+    type: Number,
+  },
+  since1800: {
+    type: Number,
+  },
+  growthRate: {
+    type: Number,
+  },
+  decimal: {
+    type: Number,
+  },
 });
 
 const publicDataSchema = new mongoose.Schema({
@@ -31,24 +46,6 @@ const publicDataSchema = new mongoose.Schema({
     unique: true,
   },
   readings: {
-    type: [dataSchema],
-  },
-  readings: {
-    type: [dataSchema],
-  },
-  trend: {
-    type: [dataSchema],
-  },
-  uncertainty: {
-    type: [dataSchema],
-  },
-  since1800: {
-    type: [dataSchema],
-  },
-  growthRate: {
-    type: [dataSchema],
-  },
-  decimal: {
     type: [dataSchema],
   },
 });
