@@ -26,29 +26,30 @@ const dataSchema = mongoose.Schema({
   },
 });
 
-const publicDataSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
+const publicDataSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      trim: true,
+    },
+    datasetID: {
+      type: String,
+      trim: true,
+      required: true,
+      unique: true,
+    },
+    readings: {
+      type: [dataSchema],
+    },
   },
-  description: {
-    type: String,
-    trim: true,
-  },
-  lastUpdate: {
-    type: Date,
-    default: Date.now(),
-  },
-  datasetID: {
-    type: String,
-    trim: true,
-    required: true,
-    unique: true,
-  },
-  readings: {
-    type: [dataSchema],
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const publicDataModel = mongoose.model("Public_Dataset", publicDataSchema);
 

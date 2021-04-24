@@ -8,7 +8,7 @@ const globalErrorHandler = require("./controller/errorController");
 const chartDataRouter = require("./router/chartDataRouter");
 const publicApiRouter = require("./router/publicApiRouter");
 const newsRouter = require("./router/newsRouter");
-const temp = require("./controller/berkeleyController");
+const co2 = require("./controller/co2Controller");
 const logger = require("./Logger");
 
 dotenv.config({ path: "./config.env" });
@@ -57,7 +57,7 @@ mongoose
 
 // run data update schedule
 cron.run();
-// temp.updateMonthlyTempAnomalyLS();
+co2.readDailyCO2();
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () =>
   console.log(`Server running on port: ${PORT}......`)

@@ -101,3 +101,46 @@ exports.getEndpoints = catchError(async (req, res) => {
     data: array,
   });
 });
+
+// -------------- PUBLIC DATA CONTROLLERS -------------
+
+exports.createPublicDataset = catchError(async (req, res) => {
+  const newDataset = await publicDataModel.create(req.body);
+  res.status(201).json({
+    status: "success",
+    data: newDataset,
+  });
+});
+exports.forgePublicDataset = catchError(async (obj) => {
+  const newDataset = await publicDataModel.create({
+    datasetID: obj.datasetID,
+    title: obj.title,
+    description: obj.description,
+    readings: obj.readings,
+  });
+  logger.log(`Dataset ${newDataset.datsetID} created`);
+});
+
+exports.updatePublicDataset = catchError(async (id, data) => {
+  await chartDataModel.findOneAndUpdate(
+    {
+      datasetID: id,
+    },
+    { readings: data },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+  logger.log(`Dataset id: ${id} updated...`);
+});
+
+exports.getPublicDataset = catchError(async (req, res) => {
+  const dataset = await publicDataModel.findOne({
+    datasetID: req.params.dataset,
+  });
+  res.status(200).json({
+    status: "success",
+    data: dataset,
+  });
+});
