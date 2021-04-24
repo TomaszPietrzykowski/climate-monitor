@@ -57,7 +57,7 @@ mongoose
 
 // run data update schedule
 cron.run();
-co2.readDailyCO2();
+// co2.readDailyCO2();
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () =>
   console.log(`Server running on port: ${PORT}......`)

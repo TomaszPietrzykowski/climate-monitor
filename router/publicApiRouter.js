@@ -5,10 +5,8 @@ const dbController = require("../controller/dbController");
 
 const router = express.Router();
 
-router
-  .route("/co2/daily")
-  .post(dbController.createPublicDataset)
-  .get(dbController.getPublicDataset);
+router.route("/:id/for/:date").get(dbController.getPublicDataForDate);
+router.route("/:id/:dataset").get(dbController.getPublicDataset);
 
 // router.route("/summary").get(publicApiController.getClimateSummary)
 

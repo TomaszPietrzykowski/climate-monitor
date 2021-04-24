@@ -30,8 +30,7 @@ exports.readDailyCO2 = catchError(async () => {
         const rawLabels = [];
         const values = [];
         const trend = [];
-        // parse raw string into an array of arrays of strings
-        // get data targeting index of nested array
+        // parse data from txt
         const data = parseTXT(content);
         data.forEach((set) => {
           rawLabels.push(`${set[0]}-${set[1]}-${set[2]}`);
@@ -78,7 +77,7 @@ exports.readDailyCO2 = catchError(async () => {
         };
         updateDataset("daily_co2", output);
         updateDataset("latest_co2", latestOutput);
-        updatePublicDataset("daily_co2_public", publicData);
+        updatePublicDataset("co2_daily_public", publicData);
         c.end();
       });
     });
@@ -120,7 +119,7 @@ exports.readAnnualCO2GL = catchError(async () => {
 
         const output = { labels, values };
         updateDataset("annual_co2_gl", output);
-        updatePublicDataset("annual_co2_gl_public", publicData);
+        updatePublicDataset("co2_annual_gl_public", publicData);
         c.end();
       });
     });
@@ -161,7 +160,7 @@ exports.readAnnualCO2ML = catchError(async () => {
 
         const output = { labels, values };
         updateDataset("annual_co2_ml", output);
-        updatePublicDataset("annual_co2_ml_public", publicData);
+        updatePublicDataset("co2_annual_ml_public", publicData);
         c.end();
       });
     });
@@ -203,7 +202,7 @@ exports.readAnnualCO2IncreaseGL = catchError(async () => {
 
         const output = { labels, values };
         updateDataset("annual_co2_increase_gl", output);
-        updatePublicDataset("annual_co2_increase_gl_public", publicData);
+        updatePublicDataset("co2_annual_increase_gl_public", publicData);
         c.end();
       });
     });
@@ -244,7 +243,7 @@ exports.readAnnualCO2IncreaseML = catchError(async () => {
 
         const output = { labels, values };
         updateDataset("annual_co2_increase_ml", output);
-        updatePublicDataset("annual_co2_increase_ml_public", publicData);
+        updatePublicDataset("co2_annual_increase_ml_public", publicData);
         c.end();
       });
     });
@@ -289,7 +288,7 @@ exports.readMonthlyCO2ML = catchError(async () => {
         const output = { labels, values, trend };
 
         updateDataset("monthly_co2_ml", output);
-        updatePublicDataset("monthly_co2_ml_public", publicData);
+        updatePublicDataset("co2_monthly_ml_public", publicData);
         c.end();
       });
     });
@@ -333,7 +332,7 @@ exports.readMonthlyCO2GL = catchError(async () => {
 
         const output = { labels, values, trend };
         updateDataset("monthly_co2_gl", output);
-        updatePublicDataset("monthly_co2_gl_public", publicData);
+        updatePublicDataset("co2_monthly_gl_public", publicData);
         c.end();
       });
     });
@@ -378,7 +377,7 @@ exports.readWeeklyCO2 = catchError(async () => {
         const output = { labels, values, since1800 };
 
         updateDataset("weekly_co2", output);
-        updatePublicDataset("weekly_co2_public", publicData);
+        updatePublicDataset("co2_weekly_public", publicData);
         c.end();
       });
     });

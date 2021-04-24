@@ -136,11 +136,44 @@ exports.updatePublicDataset = catchError(async (id, data) => {
 });
 
 exports.getPublicDataset = catchError(async (req, res) => {
-  const dataset = await publicDataModel.findOne({
-    datasetID: req.params.dataset,
+  const id = req.params.id;
+  const dataset = req.params.dataset;
+  const datasetID = `${id.toLowerCase()}_${dataset.toLowerCase()}_public`;
+  const data = await publicDataModel.findOne({
+    datasetID: datasetID,
   });
   res.status(200).json({
     status: "success",
-    data: dataset,
+    data: data,
   });
+});
+
+exports.getPublicDataForDate = catchError(async (req, res) => {
+  const id = req.params.id;
+  const date = req.params.date;
+  const dataset =
+    date.length === 4
+      ? "annual_ml"
+      : date.length === 7
+      ? "monthly_ml"
+      : "daily";
+  const datasetID = `${id.toLowerCase()}_${dataset}_public`;
+  const data = await publicDataModel.findOne({
+    datasetID: datasetID,
+  });
+  const reading = data.readings.filter((r) => r.label == date.toString())[0];
+  // UNFINISHED
+  if (reading) {
+    res.status(200).json({
+      status: "success",
+      data: reading,
+    });
+  } else {
+    res.status(400).json({
+      status: "fail",
+      message: `No data for the date or querry outside data scope: ${
+        data.readings[0].label
+      } - ${data.readings[data.readings.length - 1].label}`,
+    });
+  }
 });
