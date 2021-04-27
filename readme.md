@@ -9,17 +9,17 @@
 Examlpes:
 
 ```
-'https://climatemonitor.info/api/public/v1/co2/daily'
-'https://climatemonitor.info/api/public/v1/co2/monthly'
-'https://climatemonitor.info/api/public/v1/co2/annual'
-'https://climatemonitor.info/api/public/v1/co2/for/2019'
-'https://climatemonitor.info/api/public/v1/co2/for/20116-04-15'
+https://climatemonitor.info/api/public/v1/co2/daily
+https://climatemonitor.info/api/public/v1/co2/monthly
+https://climatemonitor.info/api/public/v1/co2/annual
+https://climatemonitor.info/api/public/v1/co2/for/2019
+https://climatemonitor.info/api/public/v1/co2/for/20116-04-15
 ```
 
 ### ROOT ENDPOINT
 
 ```
-'https://climatemonitor.info/api/public/v1'
+https://climatemonitor.info/api/public/v1
 ```
 
 ### FACTOR
@@ -100,41 +100,41 @@ success, fail and error.
 
 Requested data is always provided in `data` object.
 
-```
+```json
 {
-    "status": "success",
-    "data": {
-        "label": "2012-09-03",
-        "value": 389.43,
-        "unit": "ppm"
-    }
+  "status": "success",
+  "data": {
+    "label": "2012-09-03",
+    "value": 389.43,
+    "unit": "ppm"
+  }
 }
 ```
 
 Response containing full datatset:
 
-```
+```json
 {
-    "status": "success",
-    "data": {
-        "title": "Annual CO2 global",
-        "description": "Temporary description",
-        "readings": [
-            {
-                "label": "1980",
-                "value": 338.91
-            },
-        // data content (...)
-            {
-                "label": "2020",
-                "value": 412.46
-            }
-        ],
-        "unit": "ppm",
-        "source": "www.climatemonitor.info",
-        "sourceUrl": "https://climatemonitor.info",
-        "lastUpdate": "2021-04-24T18:24:25.789Z"
-    }
+  "status": "success",
+  "data": {
+    "title": "Annual CO2 global",
+    "description": "Temporary description",
+    "readings": [
+      {
+        "label": "1980",
+        "value": 338.91
+      },
+      // data content (...)
+      {
+        "label": "2020",
+        "value": 412.46
+      }
+    ],
+    "unit": "ppm",
+    "source": "www.climatemonitor.info",
+    "sourceUrl": "https://climatemonitor.info",
+    "lastUpdate": "2021-04-24T18:24:25.789Z"
+  }
 }
 ```
 
@@ -142,7 +142,7 @@ Response containing full datatset:
 
 Response status 4xx, client-side errors, e.g. invalid request.
 
-```
+```json
 {
     "status": "fail",
     "message": "Requested date is outside of dataset scope:
@@ -154,19 +154,19 @@ Response status 4xx, client-side errors, e.g. invalid request.
 
 Response status 5xx, server-side errors
 
-```
+```json
 {
-    "status": "error",
-    "err": {
-        "statusCode": 500,
-        "message": "Internal server error, unable to get response from API",
-    }
+  "status": "error",
+  "err": {
+    "statusCode": 500,
+    "message": "Internal server error, unable to get response from API"
+  }
 }
 ```
 
 ## ALL AVAILABLE ENDPOINTS
 
-All requests to root endpoint:
+GET requests to root endpoint:
 
 ```
 https://climatemonitor.info/api/public/v1
