@@ -9,6 +9,7 @@ const chartDataRouter = require("./router/chartDataRouter");
 const publicApiRouter = require("./router/publicApiRouter");
 const newsRouter = require("./router/newsRouter");
 const news = require("./controller/newsController");
+const co2 = require("./controller/co2Controller");
 const logger = require("./Logger");
 const validate = require("./utilities/tools").validateDateQueryScope;
 
@@ -59,6 +60,7 @@ mongoose
 // run data update schedule
 cron.run();
 // --- TESTS ---
+// co2.readDailyCO2();
 // console.log(
 //   validate([{ label: "2011-01-01" }, { label: "2012-01-01" }], "2011-06-01")
 // );

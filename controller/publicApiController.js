@@ -1,120 +1,106 @@
-const chartDataModel = require("../model/chartDataModel")
+const chartDataModel = require("../model/chartDataModel");
+const publicDataModel = require("../model/publicDataModel");
+const tools = require("../utilities/tools");
 
-const catchError = require("../utilities/catchError")
-const logger = require("../Logger")
+const catchError = require("../utilities/catchError");
+const logger = require("../Logger");
 
-const parseObjectData = (dataset) => {
-  const responseArray = []
-  dataset.labels.forEach((v, i) => {
-    const obj = { label: v, value: dataset.values[i] }
-    responseArray.push(obj)
-  })
-  return responseArray
-}
-
-const getLastValue = (obj) => {
-  const res = {
-    label: obj.labels[obj.labels.length - 1],
-    value: obj.values[obj.values.length - 1],
-  }
-  return res
-}
-
-exports.getLatestCo2 = catchError(async (req, res) => {
-  const dataset = await chartDataModel.findOne({
-    datasetID: "latest_co2",
-  })
-  const data = parseObjectData(dataset)
+exports.getPublicDataset = catchError(async (req, res) => {
+  const id = req.params.id;
+  const dataset = req.params.dataset;
+  const datasetID = `${id.toLowerCase()}_${dataset.toLowerCase()}_public`;
+  const data = await publicDataModel.findOne({
+    datasetID: datasetID,
+  });
   res.status(200).json({
     status: "success",
-    lastUpdate: dataset.lastUpdate,
-    description:
-      "Latest available reading for earth atmospheric CO2 (ppm) and corresponding readings for 1, 5 and 10 years ago. Data parsed by *climatemonitor.info*, data source: NOAA @ aftp.cmdl.noaa.gov",
-    data: data,
-  })
-})
-
-exports.getMonthlyCo2 = catchError(async (req, res) => {
-  const dataset = await chartDataModel.findOne({
-    datasetID: "monthly_co2_ml",
-  })
-  const data = parseObjectData(dataset)
-  res.status(200).json({
-    status: "success",
-    lastUpdate: dataset.lastUpdate,
-    description:
-      "Monthly average earth atmospheric CO2 values (ppm). Measurements taken at Mauna Loa Observatory, Hawaii. Data parsed by *climatemonitor.info*, data source: NOAA @ aftp.cmdl.noaa.gov",
-    data: data,
-  })
-})
-
-exports.getAnnualCo2 = catchError(async (req, res) => {
-  const dataset = await chartDataModel.findOne({
-    datasetID: "annual_co2_ml",
-  })
-  const data = parseObjectData(dataset)
-  res.status(200).json({
-    status: "success",
-    lastUpdate: dataset.lastUpdate,
-    description:
-      "Annual average earth atmospheric CO2 values (ppm). Measurements taken at Mauna Loa Observatory, Hawaii. Data parsed by *climatemonitor.info*, data source: NOAA @ aftp.cmdl.noaa.gov",
-    data: data,
-  })
-})
-
-exports.getClimateSummary = catchError(async (req, res) => {
-  const co2 = await chartDataModel.findOne({
-    datasetID: "latest_co2",
-  })
-  const ch4 = await chartDataModel.findOne({
-    datasetID: "monthly_ch4_gl",
-  })
-  const n2o = await chartDataModel.findOne({
-    datasetID: "monthly_n2o_gl",
-  })
-  const sf6 = await chartDataModel.findOne({
-    datasetID: "monthly_sf6_gl",
-  })
-  const temp = await chartDataModel.findOne({
-    datasetID: "monthly_land_temp_anomaly_avg",
-  })
-  const latest_CO2 = getLastValue(co2)
-  const latest_CH4 = getLastValue(ch4)
-  const latest_N2O = getLastValue(n2o)
-  const latest_SF6 = getLastValue(sf6)
-  const latest_temp = getLastValue(temp)
-  res.status(200).json({
-    status: "success",
-    lastUpdate: co2.lastUpdate,
-    description:
-      "Latest available data summary on main climate change factors: levels of main greenhouse gases (co2, ch4, n2o, sf6), global temperature, sea levels and ice mass anomalies. Data parsed by *climatemonitor.info*, data sources: NOAA @ aftp.cmdl.noaa.gov, NASA @ ... , berkeley...",
     data: {
-      co2: {
-        description: "Earth atmospheric Carbon Dioxide (CO2)",
-        ...latest_CO2,
-        unit: "ppm",
-      },
-      ch4: {
-        description: "Earth atmospheric Methane (CH4)",
-        ...latest_CH4,
-        unit: "ppb",
-      },
-      n2o: {
-        description: "Earth atmospheric Nitrous Oxide (N2O)",
-        ...latest_N2O,
-        unit: "ppb",
-      },
-      sf6: {
-        description: "Earth atmospheric Sulfur Hexafluoride (SF6)",
-        ...latest_SF6,
-        unit: "ppt",
-      },
-      temp: {
-        description:
-          "Land-surface average temperature anomaly relative to the 1951-1980 average (8.64°C)",
-        ...latest_temp,
-        unit: "°C",
-      },
+      title: data.title,
+      description: data.description,
+      readings: data.readings,
+      unit: data.unit,
+      source: "www.climatemonitor.info",
+      sourceUrl: "https://climatemonitor.info",
+      lastUpdate: data.updatedAt,
     },
-  })
-})
+  });
+});
+
+exports.getPublicDataForDate = catchError(async (req, res) => {
+  const id = req.params.id;
+  const date = req.params.date;
+  let dataset = null;
+
+  if (date.length === 4) {
+    dataset = "annual_ml";
+  } else if (date.length === 7 && date.split("-").length === 2) {
+    dataset = "monthly_ml";
+  } else if (date.length === 10 && date.split("-").length === 3) {
+    dataset = "daily";
+  }
+  // check query format
+  if (dataset) {
+    const datasetID = `${id.toLowerCase()}_${dataset}_public`;
+    const data = await publicDataModel.findOne({
+      datasetID: datasetID,
+    });
+    // check if date is in scope
+    if (tools.validateDateQueryScope(data.readings, date)) {
+      const reading = data.readings.filter(
+        (r) => r.label == date.toString()
+      )[0];
+      if (reading) {
+        res.status(200).json({
+          status: "success",
+          data: {
+            label: reading.label,
+            value: reading.value,
+            unit: data.unit,
+          },
+        });
+      } else {
+        res.status(400).json({
+          status: "fail",
+          message: `No data for query: ${date}`,
+        });
+      }
+    } else {
+      res.status(400).json({
+        status: "fail",
+        message: `Requested date is outside of dataset scope: ${
+          data.readings[0].label
+        } - ${data.readings[data.readings.length - 1].label}`,
+      });
+    }
+  } else {
+    res.status(400).json({
+      status: "fail",
+      message:
+        "Incorrect querry format. Supported formats: YYYY, YYYY-MM, YYYY-MM-DD",
+    });
+  }
+});
+
+exports.getLatestReading = catchError(async (req, res) => {
+  const id = req.params.id;
+  let factor = id === "co2" ? "daily" : "placeholder";
+  // build up conditional to target the highest density dataset for each factor /\ /\
+
+  const datasetID = `${id.toLowerCase()}_${factor.toLowerCase()}_public`;
+  const dataset = await publicDataModel.findOne({
+    datasetID,
+  });
+  const reading = dataset.readings[dataset.readings.length - 1];
+  const data = {
+    label: reading.label,
+    value: reading.value,
+    unit: dataset.unit,
+  };
+  if (reading.trend) {
+    data.trend = reading.trend;
+  }
+  res.status(200).json({
+    status: "success",
+    data,
+  });
+});

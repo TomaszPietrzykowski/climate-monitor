@@ -222,10 +222,7 @@ Earth co2 annaul average:
 /co2/for/2016
 ```
 
----
-
-TO DO:
-get latest reading
+Latest available reading
 
 ```
 /co2/latest
