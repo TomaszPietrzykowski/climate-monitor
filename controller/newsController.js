@@ -20,8 +20,8 @@ exports.updateNewsfeed = catchError(async () => {
   const news = await axios.get(
     `https://newsapi.org/v2/everything?q=climate+change+co2&language=en&sortBy=relevance&apiKey=${process.env.NEWS_API_KEY}`
   );
-  const articles = data.articles;
-  if (articles.length > 1) {
+  const articles = news.data.articles;
+  if (articles && articles.length > 1) {
     const updated = [];
     articles.forEach((article) => {
       if (
@@ -45,5 +45,10 @@ exports.updateNewsfeed = catchError(async () => {
     let output = await newsModel.findById("607c0f011bd74a1fe04395b2");
     output.articles = updated;
     await output.save();
+    logger.log("news updated");
+  } else {
+    logger.log(
+      `FAILED TO UPDATE NEWS: articles array length: ${articles.length}`
+    );
   }
 });
