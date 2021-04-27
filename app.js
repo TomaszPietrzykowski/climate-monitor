@@ -8,8 +8,9 @@ const globalErrorHandler = require("./controller/errorController");
 const chartDataRouter = require("./router/chartDataRouter");
 const publicApiRouter = require("./router/publicApiRouter");
 const newsRouter = require("./router/newsRouter");
-const co2 = require("./controller/co2Controller");
+const news = require("./controller/newsController");
 const logger = require("./Logger");
+const validate = require("./utilities/tools").validateDateQueryScope;
 
 dotenv.config({ path: "./config.env" });
 
@@ -57,7 +58,11 @@ mongoose
 
 // run data update schedule
 cron.run();
-// co2.readDailyCO2();
+// --- TESTS ---
+// console.log(
+//   validate([{ label: "2011-01-01" }, { label: "2012-01-01" }], "2011-06-01")
+// );
+// news.updateNewsfeed();
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () =>
   console.log(`Server running on port: ${PORT}......`)

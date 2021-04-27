@@ -42,3 +42,19 @@ exports.formatChartLabels = (labels) => {
 
   return newArray;
 };
+exports.validateDateQueryScope = (dataArray, query) => {
+  //constructors
+  const min = new Date(dataArray[0].label);
+  const max = new Date(dataArray[dataArray.length - 1].label);
+  const date = new Date(query);
+  // validate
+  if (
+    date.getTime() === min.getTime() ||
+    date.getTime() === max.getTime() ||
+    (date > min && date < max)
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
