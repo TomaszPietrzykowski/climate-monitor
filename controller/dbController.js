@@ -166,7 +166,11 @@ exports.getPublicDataForDate = catchError(async (req, res) => {
   if (reading) {
     res.status(200).json({
       status: "success",
-      data: reading,
+      data: {
+        label: reading.label,
+        value: reading.value,
+        unit: data.unit,
+      },
     });
   } else {
     res.status(400).json({
