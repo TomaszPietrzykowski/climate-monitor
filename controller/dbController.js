@@ -145,7 +145,15 @@ exports.getPublicDataset = catchError(async (req, res) => {
   });
   res.status(200).json({
     status: "success",
-    data: data,
+    data: {
+      title: data.title,
+      description: data.description,
+      readings: data.readings,
+      unit: data.unit,
+      source: "www.climatemonitor.info",
+      sourceUrl: "https://climatemonitor.info",
+      lastUpdate: data.updatedAt,
+    },
   });
 });
 
