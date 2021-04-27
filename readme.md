@@ -124,7 +124,6 @@ Response containing full datatset:
         "label": "1980",
         "value": 338.91
       },
-      // data content (...)
       {
         "label": "2020",
         "value": 412.46
