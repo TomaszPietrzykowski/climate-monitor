@@ -98,18 +98,6 @@ exports.getLatestReading = catchError(async (req, res) => {
   if (reading.trend) {
     data.trend = reading.trend;
   }
-  if (reading.uncertainty) {
-    data.uncertainty = reading.uncertainty;
-  }
-  if (reading.since1800) {
-    data.since1800 = reading.since1800;
-  }
-  if (reading.growthRate) {
-    data.growthRate = reading.growthRate;
-  }
-  if (reading.decimal) {
-    data.decimal = reading.decimal;
-  }
   res.status(200).json({
     status: "success",
     data,

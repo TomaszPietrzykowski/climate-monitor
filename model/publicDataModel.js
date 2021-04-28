@@ -13,18 +13,6 @@ const dataSchema = mongoose.Schema(
     trend: {
       type: Number,
     },
-    uncertainty: {
-      type: Number,
-    },
-    since1800: {
-      type: Number,
-    },
-    growthRate: {
-      type: Number,
-    },
-    decimal: {
-      type: Number,
-    },
   },
   { _id: false }
 );

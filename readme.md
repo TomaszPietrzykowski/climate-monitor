@@ -26,13 +26,47 @@ https://climatemonitor.info/api/public/v1
 
 #### Availaible factors:
 
-atmospheric CO2 .../co2/...
-atmospheric CH4 .../ch4/...
-atmospheric SF6 .../sf6/...
-atmospheric N2O .../n2o/...
-temperatures .../temp/...
-glaciers .../glacier/...
-ocean mass .../ocean/...
+Earth atmospheric carbon dioxide (CO2)
+
+```
+<ROOT ENDPOINT>/co2/<QUERY>
+```
+
+Earth atmospheric methane (CH4)
+
+```
+<ROOT ENDPOINT>/ch4/<QUERY>
+```
+
+Earth atmospheric sulfur hexafluoride (SF6)
+
+```
+<ROOT ENDPOINT>/sf6/<QUERY>
+```
+
+Earth atmospheric dinitrogen oxide (N2O)
+
+```
+<ROOT ENDPOINT>/n2o/<QUERY>
+```
+
+Earth averege temperatures and temperature anomalies
+
+```
+<ROOT ENDPOINT>/temperature/<QUERY>
+```
+
+Arctica's and Antarctica's glaciers mass loss
+
+```
+<ROOT ENDPOINT>/glaciers/<QUERY>
+```
+
+Sea level trends and global ocean mass
+
+```
+<ROOT ENDPOINT>/ocean/<QUERY>
+```
 
 ### QUERY
 
@@ -91,6 +125,8 @@ https://climatemonitor.info/api/public/v1/co2/for/2018-05-12
 https://climatemonitor.info/api/public/v1/co2/for/2012
 ```
 
+---
+
 ## RESPONSE STRUCTURE
 
 Response from API is provided in JSend format with possible outcomes:
@@ -143,9 +179,8 @@ Response status 4xx, client-side errors, e.g. invalid request.
 
 ```json
 {
-    "status": "fail",
-    "message": "Requested date is outside of dataset scope:
-    2011-01-01 - 2021-04-26"
+  "status": "fail",
+  "message": "Requested date is outside of dataset scope: 2011-01-01 - 2021-04-26"
 }
 ```
 
@@ -158,14 +193,16 @@ Response status 5xx, server-side errors
   "status": "error",
   "err": {
     "statusCode": 500,
-    "message": "Internal server error, unable to get response from API"
+    "message": "Internal server error"
   }
 }
 ```
 
+---
+
 ## ALL AVAILABLE ENDPOINTS
 
-GET requests to root endpoint:
+#####GET requests to root endpoint:
 
 ```
 https://climatemonitor.info/api/public/v1
@@ -221,8 +258,16 @@ Earth co2 annaul average:
 /co2/for/2016
 ```
 
-Latest available reading
+Latest available daily co2 reading from Mauna Loa Observatory, Hawaii:
 
 ```
 /co2/latest
+```
+
+##### Earth atmospheric methane (CH4)
+
+Earth daily co2:
+
+```
+/ch4/daily
 ```
