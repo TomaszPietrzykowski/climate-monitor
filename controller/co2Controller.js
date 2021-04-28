@@ -167,6 +167,10 @@ exports.readAnnualCO2ML = catchError(async () => {
   });
 });
 
+//
+//  -------------------------  W O R K B E N CH  ---------------------------------
+//
+
 exports.readAnnualCO2IncreaseGL = catchError(async () => {
   const c = new FTPClient();
   c.connect({
@@ -202,7 +206,7 @@ exports.readAnnualCO2IncreaseGL = catchError(async () => {
 
         const output = { labels, values };
         updateDataset("annual_co2_increase_gl", output);
-        updatePublicDataset("co2_annual_increase_gl_public", publicData);
+        updatePublicDataset("co2__increase_gl_public", publicData);
         c.end();
       });
     });
@@ -243,7 +247,7 @@ exports.readAnnualCO2IncreaseML = catchError(async () => {
 
         const output = { labels, values };
         updateDataset("annual_co2_increase_ml", output);
-        updatePublicDataset("co2_annual_increase_ml_public", publicData);
+        updatePublicDataset("co2_increase_ml_public", publicData);
         c.end();
       });
     });

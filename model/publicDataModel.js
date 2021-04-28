@@ -13,6 +13,9 @@ const dataSchema = mongoose.Schema(
     trend: {
       type: Number,
     },
+    since1800: {
+      type: Number,
+    },
   },
   { _id: false }
 );

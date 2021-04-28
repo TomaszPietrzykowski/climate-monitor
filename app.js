@@ -11,7 +11,7 @@ const newsRouter = require("./router/newsRouter");
 const news = require("./controller/newsController");
 const co2 = require("./controller/co2Controller");
 const logger = require("./Logger");
-const validate = require("./utilities/tools").validateDateQueryScope;
+const tools = require("./controller/dbController");
 
 dotenv.config({ path: "./config.env" });
 
@@ -60,6 +60,16 @@ mongoose
 // run data update schedule
 cron.run();
 // --- TESTS ---
+
+// Create public dataset:
+// tools.forgePublicDataset({
+//   datasetID: "co2_increase_public",
+//   title: "Annual global CO2 increase",
+//   description: "temporary description",
+//   unit: "ppm",
+//   readings: [],
+// });
+
 // co2.readDailyCO2();
 // console.log(
 //   validate([{ label: "2011-01-01" }, { label: "2012-01-01" }], "2011-06-01")
