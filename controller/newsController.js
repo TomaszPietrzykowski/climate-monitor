@@ -17,38 +17,46 @@ exports.getNews = catchError(async (req, res) => {
 // @route: none
 // @access: Application
 exports.updateNewsfeed = catchError(async () => {
-  const news = await axios.get(
-    `https://newsapi.org/v2/everything?q=climate+change+co2&language=en&sortBy=relevance&apiKey=${process.env.NEWS_API_KEY}`
-  );
-  const articles = news.data.articles;
-  if (articles && articles.length > 1) {
-    const updated = [];
-    articles.forEach((article) => {
-      if (
-        article.title &&
-        article.content &&
-        article.url &&
-        article.urlToImage
-      ) {
-        updated.push({
-          source: article.source.name,
-          title: article.title,
-          description: article.description,
-          author: article.author,
-          content: article.content,
-          url: article.url,
-          image: article.urlToImage,
-          publishedAt: article.publishedAt.substring(0, 10),
-        });
-      }
-    });
+  const updated = [];
+  const counter = [1, 2, 3, 4, 5];
+
+  for (const page of counter) {
+    const news = await axios.get(
+      `https://newsapi.org/v2/everything?q=climate+change&language=en&sortBy=relevance&apiKey=${process.env.NEWS_API_KEY}&page=${page}`
+    );
+    const articles = news.data.articles;
+    if (articles && articles.length > 1) {
+      articles.forEach((article) => {
+        if (
+          article.title &&
+          article.content &&
+          article.url &&
+          article.urlToImage &&
+          updated.filter((art) => art.title === article.title).length === 0
+        ) {
+          updated.push({
+            source: article.source.name,
+            title: article.title,
+            description: article.description,
+            author: article.author,
+            content: article.content,
+            url: article.url,
+            image: article.urlToImage,
+            publishedAt: article.publishedAt.substring(0, 10),
+          });
+        }
+      });
+    }
+  }
+  console.log(`Before update, array length: ${updated.length}`);
+  if (updated.length > 10) {
     let output = await newsModel.findById("607c0f011bd74a1fe04395b2");
     output.articles = updated;
     await output.save();
-    logger.log("news updated");
+    logger.log(`NEWS UPDATED, array length: ${updated.length}`);
   } else {
     logger.log(
-      `FAILED TO UPDATE NEWS: articles array length: ${articles.length}`
+      `FAILED TO UPDATE NEWS, articles array length: ${updated.length}`
     );
   }
 });

@@ -71,6 +71,7 @@ cron.run();
 // });
 
 // ch4.readMonthlyCH4GL();
+news.updateNewsfeed();
 // console.log(
 //   validate([{ label: "2011-01-01" }, { label: "2012-01-01" }], "2011-06-01")
 // );
