@@ -216,6 +216,18 @@ Earth daily co2:
 /co2/daily
 ```
 
+Earth co2 weekly average from Mauna Loa Observatory, Hawaii:
+
+```
+/co2/weekly_ml
+```
+
+Earth co2 weekly global average:
+
+```
+/co2/weekly_gl
+```
+
 Earth co2 monthly average from Mauna Loa Observatory, Hawaii:
 
 ```
@@ -238,6 +250,18 @@ Earth co2 annual average from Mauna Loa Observatory, Hawaii:
 
 ```
 /co2/annual_ml
+```
+
+Annual global CO2 increase:
+
+```
+/co2/increase_gl
+```
+
+Annual CO2 increase, Mauna Loa Observatory, Hawaii:
+
+```
+/co2/increase_ml
 ```
 
 Earth co2 reading for the date:
@@ -266,8 +290,20 @@ Latest available daily co2 reading from Mauna Loa Observatory, Hawaii:
 
 ##### Earth atmospheric methane (CH4)
 
-Earth daily co2:
+Monthly global atmospheric methane:
 
 ```
-/ch4/daily
+/ch4/monthly
+```
+
+Annual global atmospheric methane:
+
+```
+/ch4/annual
+```
+
+Annual atmospheric methane growth rate:
+
+```
+/ch4/growth
 ```

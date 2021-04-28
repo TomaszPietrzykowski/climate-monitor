@@ -49,13 +49,20 @@ exports.getPublicDataForDate = catchError(async (req, res) => {
         (r) => r.label == date.toString()
       )[0];
       if (reading) {
+        const output = {
+          label: reading.label,
+          value: reading.value,
+          unit: data.unit,
+        };
+        if (reading.trend) {
+          output.trend = reading.trend;
+        }
+        if (reading.since1800) {
+          output.since1800 = reading.since1800;
+        }
         res.status(200).json({
           status: "success",
-          data: {
-            label: reading.label,
-            value: reading.value,
-            unit: data.unit,
-          },
+          data: reading,
         });
       } else {
         res.status(400).json({

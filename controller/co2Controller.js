@@ -167,10 +167,6 @@ exports.readAnnualCO2ML = catchError(async () => {
   });
 });
 
-//
-//  -------------------------  W O R K B E N CH  ---------------------------------
-//
-
 exports.readAnnualCO2IncreaseGL = catchError(async () => {
   const c = new FTPClient();
   c.connect({

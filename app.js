@@ -9,7 +9,7 @@ const chartDataRouter = require("./router/chartDataRouter");
 const publicApiRouter = require("./router/publicApiRouter");
 const newsRouter = require("./router/newsRouter");
 const news = require("./controller/newsController");
-const co2 = require("./controller/co2Controller");
+const ch4 = require("./controller/ch4Controller");
 const logger = require("./Logger");
 const tools = require("./controller/dbController");
 
@@ -63,14 +63,14 @@ cron.run();
 
 // Create public dataset:
 // tools.forgePublicDataset({
-//   datasetID: "co2_increase_public",
-//   title: "Annual global CO2 increase",
+//   datasetID: "ch4_growth_public",
+//   title: "Annual atmospheric methane growth rate",
 //   description: "temporary description",
-//   unit: "ppm",
+//   unit: "ppb",
 //   readings: [],
 // });
 
-// co2.readDailyCO2();
+// ch4.readMonthlyCH4GL();
 // console.log(
 //   validate([{ label: "2011-01-01" }, { label: "2012-01-01" }], "2011-06-01")
 // );

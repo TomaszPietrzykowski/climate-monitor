@@ -1,6 +1,6 @@
 const FTPClient = require("ftp");
 
-const { updateDataset } = require("./dbController");
+const { updateDataset, updatePublicDataset } = require("./dbController");
 const { parseTXT, formatChartLabels } = require("../utilities/tools");
 const catchError = require("../utilities/catchError");
 const logger = require("../Logger");
@@ -22,15 +22,28 @@ exports.readAnnualCH4 = catchError(async () => {
         content += chunk.toString();
       });
       stream.on("end", function () {
-        const data = parseTXT(content);
-        const labels = [];
+        const publicData = [];
+        const rawLabels = [];
         const values = [];
+        // parse txt data
+        const data = parseTXT(content);
         data.forEach((set) => {
-          labels.push(set[0]);
-          values.push(set[1] * 1);
+          rawLabels.push(set[0]);
+          values.push(parseFloat(set[1]));
         });
+        // format labels
+        const labels = formatChartLabels(rawLabels);
+        // parse object data
+        labels.forEach((l, i) => {
+          publicData.push({
+            label: l,
+            value: values[i],
+          });
+        });
+
         const output = { labels, values };
         updateDataset("annual_ch4_gl", output);
+        updatePublicDataset("ch4_annual_public", publicData);
         c.end();
       });
     });
@@ -50,15 +63,27 @@ exports.readAnnualGrowthRateCH4 = catchError(async () => {
         content += chunk.toString();
       });
       stream.on("end", function () {
-        const data = parseTXT(content);
-        const labels = [];
+        const publicData = [];
+        const rawLabels = [];
         const values = [];
+        // parse txt data
+        const data = parseTXT(content);
         data.forEach((set) => {
-          labels.push(set[0]);
-          values.push(set[1] * 1);
+          rawLabels.push(set[0]);
+          values.push(parseFloat(set[1]));
+        });
+        // format labels
+        const labels = formatChartLabels(rawLabels);
+        // parse object data
+        labels.forEach((l, i) => {
+          publicData.push({
+            label: l,
+            value: values[i],
+          });
         });
         const output = { labels, values };
         updateDataset("annual_ch4_gr_gl", output);
+        updatePublicDataset("ch4_growth_public", publicData);
         c.end();
       });
     });
@@ -78,17 +103,32 @@ exports.readMonthlyCH4GL = catchError(async () => {
         content += chunk.toString();
       });
       stream.on("end", function () {
-        const data = parseTXT(content);
-        const labels = [];
+        const publicData = [];
+        const rawLabels = [];
         const values = [];
         const trend = [];
+
+        const data = parseTXT(content);
         data.forEach((set) => {
-          labels.push(`${set[0]}-${set[1]}`);
-          values.push(set[3] * 1);
-          trend.push(set[5] * 1);
+          rawLabels.push(`${set[0]}-${set[1]}`);
+          values.push(parseFloat(set[3]));
+          trend.push(parseFloat(set[5]));
         });
-        const output = { labels: formatChartLabels(labels), values, trend };
+
+        // format labels
+        const labels = formatChartLabels(rawLabels);
+        // parse object data
+        labels.forEach((l, i) => {
+          publicData.push({
+            label: l,
+            value: values[i],
+            trend: trend[i],
+          });
+        });
+
+        const output = { labels, values, trend };
         updateDataset("monthly_ch4_gl", output);
+        updatePublicDataset("ch4_monthly_public", publicData);
         c.end();
       });
     });
