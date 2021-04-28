@@ -107,6 +107,7 @@ const parseMonthlyTemp = (input, averaged) => {
     return parseFloat((v + tempFactor).toFixed(2));
   });
   const newUnc = input.uncertainty.map((v) => parseFloat(v.toFixed(2)));
+  console.log(input.labels[0], input.labels[input.labels.length / 2]);
   const output = {
     labels: formatChartLabels(input.labels),
     values: newValues,
@@ -168,8 +169,25 @@ exports.updateAnnualTempAnomalyLOC = async () => {
 
 exports.updateMonthlyTempAnomalyLOC = async () => {
   const data = await getBerkeley(`Land_and_Ocean_complete.txt`);
+  const filteredLabels = [];
+  const filteredValues = [];
+  const filteredUncertainty = [];
+
   const anomaly = parseMonthlyTempAnomaly(data);
-  const temp = parseMonthlyTemp(anomaly, [
+  console.log(anomaly.labels[0]);
+  anomaly.labels.forEach((el, i) => {
+    if (filteredLabels.filter((lab) => lab === el).length === 0) {
+      filteredLabels.push(el);
+      filteredValues.push(anomaly.values[i]);
+      filteredUncertainty.push(anomaly.uncertainty[i]);
+    }
+  });
+  const filtered = {
+    labels: filteredLabels,
+    values: filteredValues,
+    uncertainty: filteredUncertainty,
+  };
+  const temp = parseMonthlyTemp(filtered, [
     12.29,
     12.5,
     13.12,
@@ -183,6 +201,6 @@ exports.updateMonthlyTempAnomalyLOC = async () => {
     13.29,
     12.55,
   ]);
-  updateDataset(`monthly_loc_temp_anomaly`, anomaly);
+  updateDataset(`monthly_loc_temp_anomaly`, filtered);
   updateDataset(`monthly_loc_temp`, temp);
 };

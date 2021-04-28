@@ -9,7 +9,7 @@ const chartDataRouter = require("./router/chartDataRouter");
 const publicApiRouter = require("./router/publicApiRouter");
 const newsRouter = require("./router/newsRouter");
 const news = require("./controller/newsController");
-const ch4 = require("./controller/ch4Controller");
+const ber = require("./controller/berkeleyController");
 const logger = require("./Logger");
 const tools = require("./controller/dbController");
 
@@ -71,7 +71,7 @@ cron.run();
 // });
 
 // ch4.readMonthlyCH4GL();
-news.updateNewsfeed();
+ber.updateMonthlyTempAnomalyLOC();
 // console.log(
 //   validate([{ label: "2011-01-01" }, { label: "2012-01-01" }], "2011-06-01")
 // );

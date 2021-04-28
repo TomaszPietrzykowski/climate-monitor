@@ -10,6 +10,11 @@ exports.getNews = catchError(async (req, res) => {
   const news = await newsModel.findById("607c0f011bd74a1fe04395b2");
   if (news) {
     res.status(200).json(news);
+  } else {
+    res.status(404).json({
+      status: "fail",
+      message: "No data found in database",
+    });
   }
 });
 
@@ -48,7 +53,6 @@ exports.updateNewsfeed = catchError(async () => {
       });
     }
   }
-  console.log(`Before update, array length: ${updated.length}`);
   if (updated.length > 10) {
     let output = await newsModel.findById("607c0f011bd74a1fe04395b2");
     output.articles = updated;
