@@ -107,7 +107,6 @@ const parseMonthlyTemp = (input, averaged) => {
     return parseFloat((v + tempFactor).toFixed(2));
   });
   const newUnc = input.uncertainty.map((v) => parseFloat(v.toFixed(2)));
-  console.log(input.labels[0], input.labels[input.labels.length / 2]);
   const output = {
     labels: formatChartLabels(input.labels),
     values: newValues,
@@ -174,7 +173,6 @@ exports.updateMonthlyTempAnomalyLOC = async () => {
   const filteredUncertainty = [];
 
   const anomaly = parseMonthlyTempAnomaly(data);
-  console.log(anomaly.labels[0]);
   anomaly.labels.forEach((el, i) => {
     if (filteredLabels.filter((lab) => lab === el).length === 0) {
       filteredLabels.push(el);
