@@ -1,6 +1,8 @@
-# Public API
+# Public REST API
 
 ## REQUEST STRUCTURE
+
+##### GET request to:
 
 ```
 <ROOT ENDPOINT>/<FACTOR>/<QUERY>
@@ -210,43 +212,49 @@ https://climatemonitor.info/api/public/v1
 
 ##### Earth atmospheric CO2
 
-Earth daily co2:
+Latest available daily CO2 reading from Mauna Loa Observatory, Hawaii:
+
+```
+/co2/latest
+```
+
+Earth daily CO2:
 
 ```
 /co2/daily
 ```
 
-Earth co2 weekly average from Mauna Loa Observatory, Hawaii:
+Earth CO2 weekly average from Mauna Loa Observatory, Hawaii:
 
 ```
 /co2/weekly_ml
 ```
 
-Earth co2 weekly global average:
+Earth CO2 weekly global average:
 
 ```
 /co2/weekly_gl
 ```
 
-Earth co2 monthly average from Mauna Loa Observatory, Hawaii:
+Earth CO2 monthly average from Mauna Loa Observatory, Hawaii:
 
 ```
 /co2/monthly_ml
 ```
 
-Earth co2 monthly global average:
+Earth CO2 monthly global average:
 
 ```
 /co2/monthly_gl
 ```
 
-Earth co2 annual global average:
+Earth CO2 annual global average:
 
 ```
 /co2/annual_gl
 ```
 
-Earth co2 annual average from Mauna Loa Observatory, Hawaii:
+Earth CO2 annual average from Mauna Loa Observatory, Hawaii:
 
 ```
 /co2/annual_ml
@@ -264,13 +272,13 @@ Annual CO2 increase, Mauna Loa Observatory, Hawaii:
 /co2/increase_ml
 ```
 
-Earth co2 reading for the date:
+Earth CO2 reading for the date:
 
 ```
 /co2/for/2016-04-102
 ```
 
-Earth co2 monthly average:
+Earth CO2 monthly average:
 
 ```
 /co2/for/2016-04
@@ -282,28 +290,62 @@ Earth co2 annaul average:
 /co2/for/2016
 ```
 
-Latest available daily co2 reading from Mauna Loa Observatory, Hawaii:
-
-```
-/co2/latest
-```
-
 ##### Earth atmospheric methane (CH4)
 
-Monthly global atmospheric methane:
+Monthly global atmospheric CH4:
 
 ```
 /ch4/monthly
 ```
 
-Annual global atmospheric methane:
+Annual global atmospheric CH4:
 
 ```
 /ch4/annual
 ```
 
-Annual atmospheric methane growth rate:
+Annual atmospheric CH4 growth rate:
 
 ```
 /ch4/growth
+```
+
+##### Earth atmospheric sulfur hexafluoride (SF6)
+
+Monthly global atmospheric SF6:
+
+```
+/sf6/monthly
+```
+
+Annual global atmospheric SF6:
+
+```
+/sf6/annual
+```
+
+Annual atmospheric SF6 growth rate:
+
+```
+/sf6/growth
+```
+
+##### Earth atmospheric sulfur dinitrogen oxide (N2O)
+
+Monthly global atmospheric N2O:
+
+```
+/n2o/monthly
+```
+
+Annual global atmospheric N2O:
+
+```
+/n2o/annual
+```
+
+Annual atmospheric N2O growth rate:
+
+```
+/n2o/growth
 ```
