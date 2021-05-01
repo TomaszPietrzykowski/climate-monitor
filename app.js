@@ -9,7 +9,8 @@ const chartDataRouter = require("./router/chartDataRouter");
 const publicApiRouter = require("./router/publicApiRouter");
 const newsRouter = require("./router/newsRouter");
 const news = require("./controller/newsController");
-const ber = require("./controller/berkeleyController");
+const sf6 = require("./controller/sf6Controller");
+const n2o = require("./controller/n2oController");
 const logger = require("./Logger");
 const tools = require("./controller/dbController");
 
@@ -63,15 +64,16 @@ cron.run();
 
 // Create public dataset:
 // tools.forgePublicDataset({
-//   datasetID: "ch4_growth_public",
-//   title: "Annual atmospheric methane growth rate",
+//   datasetID: "n2o_growth_public",
+//   title: "Annual atmospheric dinitrogen oxide growth rate",
 //   description: "temporary description",
 //   unit: "ppb",
 //   readings: [],
 // });
 
-// ch4.readMonthlyCH4GL();
-ber.updateMonthlyTempAnomalyLOC();
+// n2o.readAnnualN2O();
+// sf6.readAnnualSF6();
+// ber.updateMonthlyTempAnomalyLOC();
 // console.log(
 //   validate([{ label: "2011-01-01" }, { label: "2012-01-01" }], "2011-06-01")
 // );

@@ -1,8 +1,9 @@
 const FTPClient = require("ftp");
 
-const { updateDataset } = require("./dbController");
+const { updateDataset, updatePublicDataset } = require("./dbController");
 const { parseTXT, formatChartLabels } = require("../utilities/tools");
 const catchError = require("../utilities/catchError");
+const tools = require("../utilities/tools");
 const logger = require("../Logger");
 
 const host = "aftp.cmdl.noaa.gov";
@@ -22,15 +23,9 @@ exports.readAnnualSF6 = catchError(async () => {
         content += chunk.toString();
       });
       stream.on("end", function () {
-        const data = parseTXT(content);
-        const labels = [];
-        const values = [];
-        data.forEach((set) => {
-          labels.push(set[0]);
-          values.push(set[1] * 1);
-        });
-        const output = { labels, values };
-        updateDataset("annual_sf6_gl", output);
+        const output = tools.parseAnnualData(content);
+        updateDataset("annual_sf6_gl", output.chart);
+        updatePublicDataset("sf6_annual_public", output.public);
         c.end();
       });
     });
@@ -51,15 +46,9 @@ exports.readAnnualGrowthRateSF6 = catchError(async () => {
         content += chunk.toString();
       });
       stream.on("end", function () {
-        const data = parseTXT(content);
-        const labels = [];
-        const values = [];
-        data.forEach((set) => {
-          labels.push(set[0]);
-          values.push(set[1] * 1);
-        });
-        const output = { labels, values };
-        updateDataset("annual_sf6_gr_gl", output);
+        const output = tools.parseAnnualData(content);
+        updateDataset("annual_sf6_gr_gl", output.chart);
+        // updatePublicDataset("sf6_growth_public", output.public);
         c.end();
       });
     });

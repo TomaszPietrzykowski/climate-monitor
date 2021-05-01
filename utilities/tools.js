@@ -58,3 +58,26 @@ exports.validateDateQueryScope = (dataArray, query) => {
     return false;
   }
 };
+exports.parseAnnualData = (streamContent) => {
+  //constructors
+  const publicData = [];
+  const rawLabels = [];
+  const values = [];
+  // parse txt data
+  const data = this.parseTXT(streamContent);
+  data.forEach((set) => {
+    rawLabels.push(set[0]);
+    values.push(parseFloat(set[1]));
+  });
+  // format labels
+  const labels = this.formatChartLabels(rawLabels);
+  // parse object data
+  labels.forEach((l, i) => {
+    publicData.push({
+      label: l,
+      value: values[i],
+    });
+  });
+  const output = { chart: { labels, values }, public: publicData };
+  return output;
+};

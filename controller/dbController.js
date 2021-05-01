@@ -117,6 +117,7 @@ exports.forgePublicDataset = catchError(async (obj) => {
     title: obj.title,
     description: obj.description,
     readings: obj.readings,
+    unit: obj.unit,
   });
   logger.log(`Dataset created`);
 });
