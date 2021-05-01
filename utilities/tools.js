@@ -59,7 +59,6 @@ exports.validateDateQueryScope = (dataArray, query) => {
   }
 };
 exports.parseAnnualData = (streamContent) => {
-  //constructors
   const publicData = [];
   const rawLabels = [];
   const values = [];
@@ -79,5 +78,33 @@ exports.parseAnnualData = (streamContent) => {
     });
   });
   const output = { chart: { labels, values }, public: publicData };
+  return output;
+};
+exports.parseMonthlyData = (streamContent) => {
+  const publicData = [];
+  const rawLabels = [];
+  const values = [];
+  const trend = [];
+
+  const data = this.parseTXT(streamContent);
+  data.forEach((set) => {
+    rawLabels.push(`${set[0]}-${set[1]}`);
+    values.push(parseFloat(set[3]));
+    trend.push(parseFloat(set[5]));
+  });
+
+  // format labels
+  const labels = this.formatChartLabels(rawLabels);
+  // parse object data
+  labels.forEach((l, i) => {
+    publicData.push({
+      label: l,
+      value: values[i],
+      trend: trend[i],
+    });
+  });
+
+  const output = { chart: { labels, values, trend }, public: publicData };
+
   return output;
 };

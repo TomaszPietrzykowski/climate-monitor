@@ -11,6 +11,7 @@ const newsRouter = require("./router/newsRouter");
 const news = require("./controller/newsController");
 const sf6 = require("./controller/sf6Controller");
 const n2o = require("./controller/n2oController");
+const ch4 = require("./controller/ch4Controller");
 const logger = require("./Logger");
 const tools = require("./controller/dbController");
 
@@ -62,21 +63,27 @@ mongoose
 cron.run();
 // --- TESTS ---
 
-// Create public dataset:
+// Create public dataset: ****************
 // tools.forgePublicDataset({
-//   datasetID: "n2o_growth_public",
-//   title: "Annual atmospheric dinitrogen oxide growth rate",
+//   datasetID: "sf6_monthly_public",
+//   title: "Monthly global atmospheric sulfur hexafluoride SF6",
 //   description: "temporary description",
-//   unit: "ppb",
+//   unit: "ppt",
 //   readings: [],
 // });
+// ***************************************
 
+// ch4.readMonthlyCH4GL();
+// ch4.readAnnualCH4();
+// ch4.readAnnualGrowthRateCH4();
+// n2o.readMonthlyN2OGL();
 // n2o.readAnnualN2O();
+// n2o.readAnnualGrowthRateN2O();
+// sf6.readMonthlySF6GL();
 // sf6.readAnnualSF6();
+// sf6.readAnnualGrowthRateSF6();
+
 // ber.updateMonthlyTempAnomalyLOC();
-// console.log(
-//   validate([{ label: "2011-01-01" }, { label: "2012-01-01" }], "2011-06-01")
-// );
 // news.updateNewsfeed();
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () =>
