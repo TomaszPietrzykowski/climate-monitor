@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const dataSchema = mongoose.Schema(
   {
@@ -16,9 +16,12 @@ const dataSchema = mongoose.Schema(
     since1800: {
       type: Number,
     },
+    decimal: {
+      type: String,
+    },
   },
   { _id: false }
-);
+)
 
 const publicDataSchema = new mongoose.Schema(
   {
@@ -46,8 +49,8 @@ const publicDataSchema = new mongoose.Schema(
   {
     timestamps: true,
   }
-);
+)
 
-const publicDataModel = mongoose.model("Public_Dataset", publicDataSchema);
+const publicDataModel = mongoose.model("Public_Dataset", publicDataSchema)
 
-module.exports = publicDataModel;
+module.exports = publicDataModel

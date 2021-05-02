@@ -1,5 +1,9 @@
-const { parseTXT } = require("../utilities/tools")
-const { updateDataset } = require("./dbController")
+const {
+  parseTXT,
+  formatChartLabels,
+  decimalToMonth,
+} = require("../utilities/tools")
+const { updateDataset, updatePublicDataset } = require("./dbController")
 const { createClient } = require("webdav")
 
 exports.updateSeaLevels = async () => {
@@ -18,22 +22,37 @@ exports.updateSeaLevels = async () => {
     return new Date(b.lastmod) - new Date(a.lastmod)
   })[0].filename
   const file = last.split("/")[last.split("/").length - 1]
-
   const data = await client.getFileContents(
-    `/allData/merged_alt/L2/TP_J1_OSTM/global_mean_sea_level/${file}`,
+    `/allData/merged_alt/L2/TP_J1_OSTM/global_mean_sea_level/${file.replace(
+      ".txt.md5",
+      ".txt"
+    )}`,
     { format: "text" }
   )
-  const initialArray = parseTXT(data)
-  const labels = []
+  // console.log(data.substring(0, 2600))
+  const publicData = []
+  const rawLabels = []
   const values = []
   const decimal = []
+
+  const initialArray = parseTXT(data)
   initialArray.forEach((el) => {
-    labels.push(el[2].slice(0, 7))
-    values.push(el[5])
+    rawLabels.push(el[2].slice(0, 7))
     decimal.push(el[2])
+    values.push(parseFloat(el[5]))
   })
-  const output = { labels, values, decimal }
-  updateDataset(`sea_level_trend`, output)
+  const labels = formatChartLabels(decimalToMonth(rawLabels))
+  labels.forEach((label, i) => {
+    publicData.push({
+      label,
+      value: values[i],
+      decimal: decimal[i],
+    })
+  })
+
+  const output = { chart: { labels, values, decimal }, public: publicData }
+  updateDataset(`sea_level_trend`, output.chart)
+  updatePublicDataset(`ocean_level_public`, output.public)
 }
 exports.updateIceMass = async () => {
   const client = createClient("https://podaac-tools.jpl.nasa.gov/drive/files", {
@@ -83,15 +102,28 @@ exports.updateOceanMass = async () => {
     `/allData/tellus/L4/ocean_mass/RL06/v02/mascon_CRI/${file}`,
     { format: "text" }
   )
-  const initialArray = parseTXT(data)
-  const labels = []
+  const publicData = []
+  const rawLabels = []
   const values = []
   const decimal = []
+
+  const initialArray = parseTXT(data)
   initialArray.forEach((el) => {
-    labels.push(el[0])
+    rawLabels.push(el[0])
+    decimal.push(el[0])
     values.push(parseFloat(el[1]))
-    decimal.push(parseFloat(el[0]))
   })
-  const output = { labels, values, decimal }
-  updateDataset(`global_ocean_mass`, output)
+  const labels = formatChartLabels(decimalToMonth(rawLabels))
+  labels.forEach((label, i) => {
+    publicData.push({
+      label,
+      value: values[i],
+      decimal: decimal[i],
+    })
+  })
+
+  const output = { chart: { labels, values, decimal }, public: publicData }
+
+  updateDataset(`global_ocean_mass`, output.chart)
+  updatePublicDataset(`ocean_mass_public`, output.public)
 }

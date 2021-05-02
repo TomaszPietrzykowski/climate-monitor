@@ -1,47 +1,48 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const cors = require("cors");
+const express = require("express")
+const mongoose = require("mongoose")
+const dotenv = require("dotenv")
+const cors = require("cors")
 
-const cron = require("./controller/cronController");
-const globalErrorHandler = require("./controller/errorController");
-const chartDataRouter = require("./router/chartDataRouter");
-const publicApiRouter = require("./router/publicApiRouter");
-const newsRouter = require("./router/newsRouter");
-const news = require("./controller/newsController");
-const sf6 = require("./controller/sf6Controller");
-const n2o = require("./controller/n2oController");
-const ch4 = require("./controller/ch4Controller");
-const logger = require("./Logger");
-const tools = require("./controller/dbController");
+const cron = require("./controller/cronController")
+const globalErrorHandler = require("./controller/errorController")
+const chartDataRouter = require("./router/chartDataRouter")
+const publicApiRouter = require("./router/publicApiRouter")
+const newsRouter = require("./router/newsRouter")
+const news = require("./controller/newsController")
+const nasa = require("./controller/nasaController")
+const sf6 = require("./controller/sf6Controller")
+const n2o = require("./controller/n2oController")
+const ch4 = require("./controller/ch4Controller")
+const logger = require("./Logger")
+const tools = require("./controller/dbController")
 
-dotenv.config({ path: "./config.env" });
+dotenv.config({ path: "./config.env" })
 
-const app = express();
+const app = express()
 
 // Middleware cycle:
-app.use(cors(false));
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json()); // <-- body parser
+app.use(cors(false))
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json()) // <-- body parser
 
 // -- routing
-app.use("/api/v1/chartdata", chartDataRouter);
-app.use("/api/public/v1", publicApiRouter);
-app.use("/api/news", newsRouter);
+app.use("/api/v1/chartdata", chartDataRouter)
+app.use("/api/public/v1", publicApiRouter)
+app.use("/api/news", newsRouter)
 
 // catch all invalid routes - push err to error middleware by passing arg to next()
 app.all("*", (req, res, next) => {
-  next(new AppError(`Couldn't find ${req.originalUrl}`, 404));
-});
+  next(new AppError(`Couldn't find ${req.originalUrl}`, 404))
+})
 
 //global error handling middleware
-app.use(globalErrorHandler);
+app.use(globalErrorHandler)
 
 // -- db CONNECTION
 const DB = process.env.MONGO_ACCESS_STRING.replace(
   "<PASSWORD>",
   process.env.MONGO_PASSWORD
-);
+)
 
 mongoose
   .connect(DB, {
@@ -53,27 +54,29 @@ mongoose
   .then((con) => {
     console.log(
       `MongoDB successfuly connected...... \nDB user: ${con.connections[0].user}`
-    );
+    )
   })
   .catch(() => {
-    console.log("DB connection failed");
-  });
+    console.log("DB connection failed")
+  })
 
 // run data update schedule
-cron.run();
+cron.run()
 // --- TESTS ---
 
 // Create public dataset: ****************
 // tools.forgePublicDataset({
-//   datasetID: "sf6_monthly_public",
-//   title: "Monthly global atmospheric sulfur hexafluoride SF6",
-//   description: "temporary description",
-//   unit: "ppt",
+//   datasetID: "ocean_level_public",
+//   title: "Global sea levels",
+//   description:
+//     "Global mean sea level variation (mm) with respect to 20-year TOPEX/Jason collinear mean reference.",
+//   unit: "mm",
 //   readings: [],
-// });
+// })
 // ***************************************
 
-// ch4.readMonthlyCH4GL();
+nasa.updateOceanMass()
+
 // ch4.readAnnualCH4();
 // ch4.readAnnualGrowthRateCH4();
 // n2o.readMonthlyN2OGL();
@@ -85,7 +88,7 @@ cron.run();
 
 // ber.updateMonthlyTempAnomalyLOC();
 // news.updateNewsfeed();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000
 const server = app.listen(PORT, () =>
   console.log(`Server running on port: ${PORT}......`)
-);
+)
