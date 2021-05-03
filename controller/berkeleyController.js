@@ -83,14 +83,27 @@ const parseAnnualTempAnomaly = (inputData) => {
 }
 
 const parseAnnualTemp = (input, averaged) => {
+  const publicData = []
   const newValues = input.values.map((v) =>
     parseFloat((v + averaged).toFixed(2))
   )
   const newUnc = input.uncertainty.map((v) => parseFloat(v.toFixed(2)))
+
+  input.labels.forEach((label, i) => {
+    publicData.push({
+      label,
+      value: newValues[i],
+      uncertainty: newUnc[i],
+    })
+  })
+
   const output = {
-    labels: input.labels,
-    values: newValues,
-    uncertainty: newUnc,
+    chart: {
+      labels: input.labels,
+      values: newValues,
+      uncertainty: newUnc,
+    },
+    public: publicData,
   }
   return output
 }
@@ -147,9 +160,9 @@ exports.updateAnnualTempAnomalyLS = async () => {
     // console.log(`annual_anomaly_${e[1]}`)
 
     updateDataset(`annual_land_temp_anomaly_${e[1]}`, anomaly.chart)
-    // updateDataset(`annual_land_temp_${e[1]}`, temp)
+    updateDataset(`annual_land_temp_${e[1]}`, temp.chart)
     updatePublicDataset(`temp_annual_anomaly_${e[1]}_public`, anomaly.public)
-    // updatePublicDataset(`annual_${e[1]}`, temp)
+    updatePublicDataset(`temp_annual_${e[1]}_public`, temp.public)
   })
 }
 

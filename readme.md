@@ -378,3 +378,41 @@ Greenland ice mass:
 ```
 /glaciers/greenland
 ```
+
+##### Temperatures
+
+Annual land surface average:
+
+```
+/temp/annual_avg
+```
+
+Annual land surface minimum:
+
+```
+/temp/annual_min
+```
+
+Annual land surface maximum:
+
+```
+/temp/annual_max
+```
+
+Average land surface anomaly:
+
+```
+/temp/annual_anomaly_avg
+```
+
+Minimum land surface anomaly:
+
+```
+/temp/annual_anomaly_min
+```
+
+Maximum land surface anomaly:
+
+```
+/temp/annual_anomaly_max
+```

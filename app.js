@@ -76,7 +76,6 @@ cron.run()
 // ***************************************
 
 // nasa.updateIceMass()
-
 // ch4.readAnnualCH4();
 // ch4.readAnnualGrowthRateCH4();
 // n2o.readMonthlyN2OGL();
@@ -86,7 +85,8 @@ cron.run()
 // sf6.readAnnualSF6();
 // sf6.readAnnualGrowthRateSF6();
 
-ber.updateAnnualTempAnomalyLS()
+// ber.updateAnnualTempAnomalyLS()
+
 // news.updateNewsfeed();
 const PORT = process.env.PORT || 5000
 const server = app.listen(PORT, () =>
