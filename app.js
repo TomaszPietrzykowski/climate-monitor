@@ -10,6 +10,7 @@ const publicApiRouter = require("./router/publicApiRouter")
 const newsRouter = require("./router/newsRouter")
 const news = require("./controller/newsController")
 const nasa = require("./controller/nasaController")
+const ber = require("./controller/berkeleyController")
 const sf6 = require("./controller/sf6Controller")
 const n2o = require("./controller/n2oController")
 const ch4 = require("./controller/ch4Controller")
@@ -66,10 +67,10 @@ cron.run()
 
 // Create public dataset: ****************
 // tools.forgePublicDataset({
-//   datasetID: "glaciers_greenland_public",
-//   title: "Greenland ice mass",
-//   description: "Greenland mass anomaly relative to April 2002",
-//   unit: "Gt",
+//   datasetID: "temp_annual_avg_public",
+//   title: "Land surface annual temperature average",
+//   description: "temporary description",
+//   unit: "C",
 //   readings: [],
 // })
 // ***************************************
@@ -85,7 +86,7 @@ cron.run()
 // sf6.readAnnualSF6();
 // sf6.readAnnualGrowthRateSF6();
 
-// ber.updateMonthlyTempAnomalyLOC();
+ber.updateAnnualTempAnomalyLS()
 // news.updateNewsfeed();
 const PORT = process.env.PORT || 5000
 const server = app.listen(PORT, () =>

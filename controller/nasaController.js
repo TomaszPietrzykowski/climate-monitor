@@ -99,19 +99,6 @@ exports.updateIceMass = async () => {
       chart: { labels, values, decimal, uncertainty },
       public: publicData,
     }
-
-    // const initialArray = parseTXT(data)
-    // const labels = []
-    // const values = []
-    // const uncertainty = []
-    // initialArray.forEach((el) => {
-    //   labels.push(el[0])
-    //   values.push(parseFloat(el[1]))
-    //   uncertainty.push(parseFloat(el[2]))
-    // })
-    // const output = { labels, values, uncertainty }
-
-    // console.log(file.basename.split("_")[0])
     updateDataset(`${file.basename.split("_")[0]}_ice_mass`, output.chart)
     updatePublicDataset(
       `glaciers_${file.basename.split("_")[0]}_public`,
