@@ -10,6 +10,9 @@ const dataSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
+    uncertainty: {
+      type: Number,
+    },
     trend: {
       type: Number,
     },

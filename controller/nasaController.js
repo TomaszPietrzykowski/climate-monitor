@@ -71,17 +71,52 @@ exports.updateIceMass = async () => {
       `/allData/tellus/L4/ice_mass/RL06/v02/mascon_CRI/${file.basename}`,
       { format: "text" }
     )
-    const initialArray = parseTXT(data)
-    const labels = []
+
+    const publicData = []
+    const rawLabels = []
     const values = []
+    const decimal = []
     const uncertainty = []
+
+    const initialArray = parseTXT(data)
     initialArray.forEach((el) => {
-      labels.push(el[0])
+      rawLabels.push(el[0])
+      decimal.push(el[0])
       values.push(parseFloat(el[1]))
       uncertainty.push(parseFloat(el[2]))
     })
-    const output = { labels, values, uncertainty }
-    updateDataset(`${file.basename.split("_")[0]}_ice_mass`, output)
+    const labels = formatChartLabels(decimalToMonth(rawLabels))
+    labels.forEach((label, i) => {
+      publicData.push({
+        label,
+        value: values[i],
+        uncertainty: uncertainty[i],
+        decimal: decimal[i],
+      })
+    })
+
+    const output = {
+      chart: { labels, values, decimal, uncertainty },
+      public: publicData,
+    }
+
+    // const initialArray = parseTXT(data)
+    // const labels = []
+    // const values = []
+    // const uncertainty = []
+    // initialArray.forEach((el) => {
+    //   labels.push(el[0])
+    //   values.push(parseFloat(el[1]))
+    //   uncertainty.push(parseFloat(el[2]))
+    // })
+    // const output = { labels, values, uncertainty }
+
+    // console.log(file.basename.split("_")[0])
+    updateDataset(`${file.basename.split("_")[0]}_ice_mass`, output.chart)
+    updatePublicDataset(
+      `glaciers_${file.basename.split("_")[0]}_public`,
+      output.public
+    )
   })
 }
 

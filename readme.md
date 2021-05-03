@@ -52,7 +52,7 @@ Earth atmospheric dinitrogen oxide (N2O)
 <ROOT ENDPOINT>/n2o/<QUERY>
 ```
 
-Earth averege temperatures and temperature anomalies
+Earth average temperatures and temperature anomalies
 
 ```
 <ROOT ENDPOINT>/temperature/<QUERY>
@@ -74,7 +74,8 @@ Sea level trends and global ocean mass
 
 #### GET FULL DATASET
 
-Depending on datasets availaible for chosen FACTOR, e.g.:
+Depending on datasets availaible for chosen FACTOR
+link>> all available endpoints
 
 ```
 /daily
@@ -204,7 +205,7 @@ Response status 5xx, server-side errors
 
 ## ALL AVAILABLE ENDPOINTS
 
-#####GET requests to root endpoint:
+##### GET requests to root endpoint:
 
 ```
 https://climatemonitor.info/api/public/v1
@@ -330,7 +331,7 @@ Annual atmospheric SF6 growth rate:
 /sf6/growth
 ```
 
-##### Earth atmospheric sulfur dinitrogen oxide (N2O)
+##### Earth atmospheric dinitrogen oxide (N2O)
 
 Monthly global atmospheric N2O:
 
@@ -358,8 +359,22 @@ Global ocean mass:
 /ocean/mass
 ```
 
-Global ocean level variation:
+Ocean level variation:
 
 ```
 /ocean/level
+```
+
+##### Arctica and Antarctica mass loss
+
+Antarctica ice mass:
+
+```
+/glaciers/antarctica
+```
+
+Greenland ice mass:
+
+```
+/glaciers/greenland
 ```

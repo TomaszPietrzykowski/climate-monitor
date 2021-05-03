@@ -66,16 +66,15 @@ cron.run()
 
 // Create public dataset: ****************
 // tools.forgePublicDataset({
-//   datasetID: "ocean_level_public",
-//   title: "Global sea levels",
-//   description:
-//     "Global mean sea level variation (mm) with respect to 20-year TOPEX/Jason collinear mean reference.",
-//   unit: "mm",
+//   datasetID: "glaciers_greenland_public",
+//   title: "Greenland ice mass",
+//   description: "Greenland mass anomaly relative to April 2002",
+//   unit: "Gt",
 //   readings: [],
 // })
 // ***************************************
 
-nasa.updateOceanMass()
+// nasa.updateIceMass()
 
 // ch4.readAnnualCH4();
 // ch4.readAnnualGrowthRateCH4();
