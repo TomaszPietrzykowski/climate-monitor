@@ -85,7 +85,7 @@ cron.run()
 // sf6.readAnnualSF6();
 // sf6.readAnnualGrowthRateSF6();
 
-// ber.updateMonthlyTempAnomalyLS()
+ber.updateAnnualTempAnomalyLOC()
 
 // news.updateNewsfeed();
 const PORT = process.env.PORT || 5000

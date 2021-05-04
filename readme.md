@@ -205,13 +205,13 @@ Response status 5xx, server-side errors
 
 ## ALL AVAILABLE ENDPOINTS
 
-##### GET requests to root endpoint:
+GET requests to root endpoint:
 
 ```
 https://climatemonitor.info/api/public/v1
 ```
 
-##### Earth atmospheric CO2
+#### Earth atmospheric CO2
 
 Latest available daily CO2 reading from Mauna Loa Observatory, Hawaii:
 
@@ -291,7 +291,7 @@ Earth co2 annaul average:
 /co2/for/2016
 ```
 
-##### Earth atmospheric methane (CH4)
+#### Earth atmospheric methane (CH4)
 
 Monthly global atmospheric CH4:
 
@@ -311,7 +311,7 @@ Annual atmospheric CH4 growth rate:
 /ch4/growth
 ```
 
-##### Earth atmospheric sulfur hexafluoride (SF6)
+#### Earth atmospheric sulfur hexafluoride (SF6)
 
 Monthly global atmospheric SF6:
 
@@ -331,7 +331,7 @@ Annual atmospheric SF6 growth rate:
 /sf6/growth
 ```
 
-##### Earth atmospheric dinitrogen oxide (N2O)
+#### Earth atmospheric dinitrogen oxide (N2O)
 
 Monthly global atmospheric N2O:
 
@@ -351,7 +351,7 @@ Annual atmospheric N2O growth rate:
 /n2o/growth
 ```
 
-##### Global ocean levels
+#### Global ocean levels
 
 Global ocean mass:
 
@@ -365,7 +365,7 @@ Ocean level variation:
 /ocean/level
 ```
 
-##### Arctica and Antarctica mass loss
+#### Arctica and Antarctica mass loss
 
 Antarctica ice mass:
 
@@ -379,7 +379,7 @@ Greenland ice mass:
 /glaciers/greenland
 ```
 
-##### Temperatures
+#### Temperatures
 
 Annual land surface average:
 

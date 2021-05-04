@@ -218,9 +218,9 @@ exports.updateDailyTempAnomalyLS = async () => {
 exports.updateAnnualTempAnomalyLOC = async () => {
   const data = await getBerkeley(`Land_and_Ocean_summary.txt`)
   const anomaly = parseAnnualTempAnomaly(data)
-  const temp = parseAnnualTemp(anomaly, 14.18)
-  updateDataset(`annual_loc_temp_anomaly`, anomaly)
-  updateDataset(`annual_loc_temp`, temp)
+  const temp = parseAnnualTemp(anomaly.chart, 14.18)
+  updateDataset(`annual_loc_temp_anomaly`, anomaly.chart)
+  updateDataset(`annual_loc_temp`, temp.chart)
 }
 
 exports.updateMonthlyTempAnomalyLOC = async () => {
