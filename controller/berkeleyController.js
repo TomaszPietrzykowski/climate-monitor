@@ -1,4 +1,6 @@
 const axios = require("axios")
+const AppError = require("../utilities/appError")
+const catchError = require("../utilities/catchError")
 
 const { parseTXTNaN, formatChartLabels } = require("../utilities/tools")
 const { updateDataset, updatePublicDataset } = require("./dbController")
@@ -108,19 +110,32 @@ const parseAnnualTemp = (input, averaged) => {
   return output
 }
 const parseMonthlyTempAnomaly = (inputData) => {
-  const labels = []
+  const publicData = []
+  const rawLabels = []
   const values = []
   const uncertainty = []
   inputData.forEach((el) => {
-    labels.push(`${el[0]}-${el[1]}`)
-    values.push(parseFloat(el[2]))
-    uncertainty.push(parseFloat(el[3]))
+    if (!isNaN(parseFloat(el[2]))) {
+      rawLabels.push(`${el[0]}-${el[1]}`)
+      values.push(parseFloat(el[2]))
+      uncertainty.push(parseFloat(el[3]))
+    }
   })
-  const output = { labels: formatChartLabels(labels), values, uncertainty }
+  const labels = formatChartLabels(rawLabels)
+  labels.forEach((label, i) => {
+    publicData.push({
+      label,
+      value: values[i],
+      uncertainty: uncertainty[i],
+    })
+  })
+  const output = { chart: { labels, values, uncertainty }, public: publicData }
+
   return output
 }
 
 const parseMonthlyTemp = (input, averaged) => {
+  const publicData = []
   const newValues = input.values.map((v, i) => {
     const month = parseInt(input.labels[i].split("-")[1])
     let tempFactor = averaged[month - 1]
@@ -128,10 +143,19 @@ const parseMonthlyTemp = (input, averaged) => {
     return parseFloat((v + tempFactor).toFixed(2))
   })
   const newUnc = input.uncertainty.map((v) => parseFloat(v.toFixed(2)))
+
+  input.labels.forEach((label, i) => {
+    if (!isNaN(newValues[i])) {
+      publicData.push({
+        label,
+        value: newValues[i],
+        uncertainty: newUnc[i],
+      })
+    }
+  })
   const output = {
-    labels: formatChartLabels(input.labels),
-    values: newValues,
-    uncertainty: newUnc,
+    chart: { labels: input.labels, values: newValues, uncertainty: newUnc },
+    public: publicData,
   }
   return output
 }
@@ -157,7 +181,7 @@ exports.updateAnnualTempAnomalyLS = async () => {
     const anomaly = parseAnnualTempAnomaly(data)
     const temp = parseAnnualTemp(anomaly.chart, e[2])
 
-    // console.log(`annual_anomaly_${e[1]}`)
+    // console.log(`temp_annual_anomaly_${e[1]}_public`)
 
     updateDataset(`annual_land_temp_anomaly_${e[1]}`, anomaly.chart)
     updateDataset(`annual_land_temp_${e[1]}`, temp.chart)
@@ -168,11 +192,18 @@ exports.updateAnnualTempAnomalyLS = async () => {
 
 exports.updateMonthlyTempAnomalyLS = async () => {
   endpoints.forEach(async (e) => {
-    const data = await getBerkeley(`Complete_${e[0]}_complete.txt`)
-    const anomaly = parseMonthlyTempAnomaly(data)
-    const temp = parseMonthlyTemp(anomaly, e[3])
-    updateDataset(`monthly_land_temp_anomaly_${e[1]}`, anomaly)
-    updateDataset(`monthly_land_temp_${e[1]}`, temp)
+    try {
+      const data = await getBerkeley(`Complete_${e[0]}_complete.txt`)
+      const anomaly = parseMonthlyTempAnomaly(data)
+      const temp = parseMonthlyTemp(anomaly.chart, e[3])
+
+      updateDataset(`monthly_land_temp_anomaly_${e[1]}`, anomaly.chart)
+      updateDataset(`monthly_land_temp_${e[1]}`, temp.chart)
+      updatePublicDataset(`temp_monthly_anomaly_${e[1]}_public`, anomaly.public)
+      updatePublicDataset(`temp_monthly_${e[1]}_public`, temp.public)
+    } catch (err) {
+      throw new AppError(`Gotya! ${err}`, 500)
+    }
   })
 }
 

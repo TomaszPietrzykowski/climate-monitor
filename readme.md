@@ -399,20 +399,56 @@ Annual land surface maximum:
 /temp/annual_max
 ```
 
-Average land surface anomaly:
+Average annual land surface anomaly:
 
 ```
 /temp/annual_anomaly_avg
 ```
 
-Minimum land surface anomaly:
+Minimum annual land surface anomaly:
 
 ```
 /temp/annual_anomaly_min
 ```
 
-Maximum land surface anomaly:
+Maximum annual land surface anomaly:
 
 ```
 /temp/annual_anomaly_max
+```
+
+Monthly land surface average:
+
+```
+/temp/monthly_avg
+```
+
+Monthly land surface minimum:
+
+```
+/temp/monthly_min
+```
+
+Monthly land surface maximum:
+
+```
+/temp/monthly_max
+```
+
+Average monthly land surface anomaly:
+
+```
+/temp/monthly_anomaly_avg
+```
+
+Minimum monthly land surface anomaly:
+
+```
+/temp/monthly_anomaly_min
+```
+
+Maximum monthly land surface anomaly:
+
+```
+/temp/monthly_anomaly_max
 ```
