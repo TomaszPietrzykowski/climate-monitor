@@ -221,6 +221,8 @@ exports.updateAnnualTempAnomalyLOC = async () => {
   const temp = parseAnnualTemp(anomaly.chart, 14.18)
   updateDataset(`annual_loc_temp_anomaly`, anomaly.chart)
   updateDataset(`annual_loc_temp`, temp.chart)
+  updatePublicDataset(`temp_annual_loc_anomaly_public`, anomaly.public)
+  updatePublicDataset(`temp_annual_loc_public`, temp.public)
 }
 
 exports.updateMonthlyTempAnomalyLOC = async () => {
@@ -230,11 +232,11 @@ exports.updateMonthlyTempAnomalyLOC = async () => {
   const filteredUncertainty = []
 
   const anomaly = parseMonthlyTempAnomaly(data)
-  anomaly.labels.forEach((el, i) => {
+  anomaly.chart.labels.forEach((el, i) => {
     if (filteredLabels.filter((lab) => lab === el).length === 0) {
       filteredLabels.push(el)
-      filteredValues.push(anomaly.values[i])
-      filteredUncertainty.push(anomaly.uncertainty[i])
+      filteredValues.push(anomaly.chart.values[i])
+      filteredUncertainty.push(anomaly.chart.uncertainty[i])
     }
   })
   const filtered = {
@@ -242,6 +244,14 @@ exports.updateMonthlyTempAnomalyLOC = async () => {
     values: filteredValues,
     uncertainty: filteredUncertainty,
   }
+  const publicData = []
+  filtered.labels.forEach((label, i) => {
+    publicData.push({
+      label,
+      value: filtered.values[i],
+      uncertainty: filtered.uncertainty[i],
+    })
+  })
   const temp = parseMonthlyTemp(filtered, [
     12.29,
     12.5,
@@ -257,5 +267,7 @@ exports.updateMonthlyTempAnomalyLOC = async () => {
     12.55,
   ])
   updateDataset(`monthly_loc_temp_anomaly`, filtered)
-  updateDataset(`monthly_loc_temp`, temp)
+  updateDataset(`monthly_loc_temp`, temp.chart)
+  updatePublicDataset(`temp_monthly_loc_anomaly_public`, publicData)
+  updatePublicDataset(`temp_monthly_loc_public`, temp.public)
 }

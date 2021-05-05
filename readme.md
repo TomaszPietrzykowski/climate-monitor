@@ -417,6 +417,18 @@ Maximum annual land surface anomaly:
 /temp/annual_anomaly_max
 ```
 
+Annual land and ocen combined temperature anomaly:
+
+```
+/temp/annual_anomaly_loc
+```
+
+Annual land and ocen combined average temperature:
+
+```
+/temp/annual_loc
+```
+
 Monthly land surface average:
 
 ```
@@ -451,4 +463,16 @@ Maximum monthly land surface anomaly:
 
 ```
 /temp/monthly_anomaly_max
+```
+
+Monthly land and ocen combined temperature anomaly:
+
+```
+/temp/monthly_anomaly_loc
+```
+
+Monthly land and ocen combined average temperature:
+
+```
+/temp/monthly_loc
 ```

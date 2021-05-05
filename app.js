@@ -67,8 +67,8 @@ cron.run()
 
 // Create public dataset: ****************
 // tools.forgePublicDataset({
-//   datasetID: "temp_monthly_anomaly_avg_public",
-//   title: "Land surface monthly average temperature anomaly",
+//   datasetID: "temp_monthly_loc_anomaly_public",
+//   title: "Land and ocean combined average monthly temperature anomaly",
 //   description: "temporary description",
 //   unit: "C",
 //   readings: [],
@@ -85,7 +85,7 @@ cron.run()
 // sf6.readAnnualSF6();
 // sf6.readAnnualGrowthRateSF6();
 
-ber.updateAnnualTempAnomalyLOC()
+// ber.updateMonthlyTempAnomalyLOC()
 
 // news.updateNewsfeed();
 const PORT = process.env.PORT || 5000
