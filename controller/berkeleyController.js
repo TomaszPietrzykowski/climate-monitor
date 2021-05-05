@@ -161,15 +161,24 @@ const parseMonthlyTemp = (input, averaged) => {
 }
 
 const parseDailyTempAnomaly = (inputData) => {
-  const labels = []
+  const publicData = []
+  const rawLabels = []
   const values = []
   const decimal = []
   inputData.forEach((el) => {
-    labels.push(`${el[1]}-${el[2]}-${el[3]}`)
+    rawLabels.push(`${el[1]}-${el[2]}-${el[3]}`)
     values.push(parseFloat(el[5]))
     decimal.push(parseFloat(el[0]))
   })
-  const output = { labels: formatChartLabels(labels), values, decimal }
+  const labels = formatChartLabels(rawLabels)
+  labels.forEach((label, i) => {
+    publicData.push({
+      label,
+      value: values[i],
+      decimal: decimal[i],
+    })
+  })
+  const output = { chart: { labels, values, decimal }, public: publicData }
   return output
 }
 
@@ -209,9 +218,16 @@ exports.updateMonthlyTempAnomalyLS = async () => {
 
 exports.updateDailyTempAnomalyLS = async () => {
   endpoints.forEach(async (e) => {
-    const data = await getBerkeley(`Complete_${e[0]}_daily.txt`)
-    const anomaly = parseDailyTempAnomaly(data)
-    updateDataset(`daily_land_temp_anomaly_${e[1]}`, anomaly)
+    try {
+      const data = await getBerkeley(`Complete_${e[0]}_daily.txt`)
+      const anomaly = parseDailyTempAnomaly(data)
+      // console.log(anomaly.chart.labels[3])
+      // console.log(anomaly.public[3])
+      updateDataset(`daily_land_temp_anomaly_${e[1]}`, anomaly.chart)
+      updatePublicDataset(`daily_${e[1]}`, anomaly.public)
+    } catch (err) {
+      throw new AppError(`Gotya! ${err}`, 500)
+    }
   })
 }
 
