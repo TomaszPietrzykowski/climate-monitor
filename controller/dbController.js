@@ -3,6 +3,7 @@ const publicDataModel = require("../model/publicDataModel")
 
 const catchError = require("../utilities/catchError")
 const logger = require("../Logger")
+const AppError = require("../utilities/appError")
 
 exports.getAllChartData = catchError(async (req, res) => {
   const data = await chartDataModel.find()
@@ -122,16 +123,27 @@ exports.forgePublicDataset = catchError(async (obj) => {
   logger.log(`Dataset created`)
 })
 
-exports.updatePublicDataset = catchError(async (id, data) => {
-  await publicDataModel.findOneAndUpdate(
-    {
+exports.updatePublicDataset = async (id, data) => {
+  try {
+    const current = await publicDataModel.findOne({
       datasetID: id,
-    },
-    { readings: data },
-    {
-      new: true,
-      runValidators: true,
+    })
+    if (current) {
+      if (
+        current.readings[current.readings.length - 1].label !==
+        data[data.length - 1].label
+      ) {
+        current.readings = data
+        await current.save()
+        logger.log(`Dataset id: ${id} updated...`)
+      } else {
+        logger.log(`Dataset id: ${id} update skipped, data unchanged`)
+      }
+    } else {
+      return new AppError(`Dataset: ${id} not found`, 400)
     }
-  )
-  logger.log(`Dataset id: ${id} updated...`)
-})
+  } catch (err) {
+    logger.log(`Error updating public dataset: ${err}`)
+    return new AppError(`Error updating public dataset: ${err}`, 500)
+  }
+}

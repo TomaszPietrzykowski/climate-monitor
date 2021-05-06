@@ -82,10 +82,10 @@ cron.run()
 // n2o.readAnnualN2O();
 // n2o.readAnnualGrowthRateN2O();
 // sf6.readMonthlySF6GL();
-// sf6.readAnnualSF6();
-// sf6.readAnnualGrowthRateSF6();
+sf6.readAnnualSF6()
+// sf6.readAnnualGrowthRateSF6()
 
-ber.updateDailyTempAnomalyLS()
+// ber.updateDailyTempAnomalyLS()
 
 // news.updateNewsfeed();
 const PORT = process.env.PORT || 5000
