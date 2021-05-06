@@ -78,11 +78,11 @@ cron.run()
 // nasa.updateIceMass()
 // ch4.readAnnualCH4();
 // ch4.readAnnualGrowthRateCH4();
-// n2o.readMonthlyN2OGL();
-// n2o.readAnnualN2O();
-// n2o.readAnnualGrowthRateN2O();
-// sf6.readMonthlySF6GL();
-sf6.readAnnualSF6()
+// n2o.readMonthlyN2OGL()
+// n2o.readAnnualN2O()
+// n2o.readAnnualGrowthRateN2O()
+// sf6.readMonthlySF6GL()
+// sf6.readAnnualSF6()
 // sf6.readAnnualGrowthRateSF6()
 
 // ber.updateDailyTempAnomalyLS()

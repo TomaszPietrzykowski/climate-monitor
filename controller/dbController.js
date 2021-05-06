@@ -80,19 +80,38 @@ exports.deleteChartData = catchError(async (req, res) => {
   })
 })
 
-exports.updateDataset = catchError(async (id, data) => {
-  await chartDataModel.findOneAndUpdate(
-    {
+exports.updateDataset = async (id, data) => {
+  try {
+    const current = await chartDataModel.findOne({
       datasetID: id,
-    },
-    { ...data, lastUpdate: Date.now() },
-    {
-      new: true,
-      runValidators: true,
+    })
+    if (current) {
+      if (
+        current.labels[current.labels.length - 1] !==
+        data.labels[data.labels.length - 1]
+      ) {
+        await chartDataModel.findOneAndUpdate(
+          {
+            datasetID: id,
+          },
+          { ...data, lastUpdate: Date.now() },
+          {
+            new: true,
+            runValidators: true,
+          }
+        )
+        logger.log(`Dataset id: ${id} updated...`)
+      } else {
+        logger.log(`Dataset id: ${id} update skipped, data unchanged`)
+      }
+    } else {
+      return new AppError(`Dataset: ${id} not found`, 400)
     }
-  )
-  logger.log(`Dataset id: ${id} updated...`)
-})
+  } catch (err) {
+    logger.log(`Error updating public dataset: ${err}`)
+    return new AppError(`Error updating public dataset: ${err}`, 500)
+  }
+}
 
 exports.getEndpoints = catchError(async (req, res) => {
   const array = await chartDataModel.distinct("datasetID")
