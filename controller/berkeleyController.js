@@ -1,6 +1,5 @@
 const axios = require("axios")
-const AppError = require("../utilities/appError")
-const catchError = require("../utilities/catchError")
+const logger = require("../Logger")
 
 const { parseTXTNaN, formatChartLabels } = require("../utilities/tools")
 const { updateDataset, updatePublicDataset } = require("./dbController")
@@ -198,7 +197,7 @@ exports.updateAnnualTempAnomalyLS = async () => {
       updatePublicDataset(`temp_annual_${e[1]}_public`, temp.public)
     }
   } catch (err) {
-    throw new AppError(`Error updating annual temp anomaly: ${err}`, 500)
+    logger.log(`Error updating annual temp anomaly: ${err}`)
   }
 }
 
@@ -215,7 +214,7 @@ exports.updateMonthlyTempAnomalyLS = async () => {
       updatePublicDataset(`temp_monthly_${e[1]}_public`, temp.public)
     }
   } catch (err) {
-    throw new AppError(`Error updating monthly temp anomaly: ${err}`, 500)
+    logger.log(`Error updating monthly temp anomaly: ${err}`)
   }
 }
 
@@ -228,7 +227,7 @@ exports.updateDailyTempAnomalyLS = async () => {
       updatePublicDataset(`temp_daily_${e[1]}_public`, anomaly.public)
     }
   } catch (err) {
-    throw new AppError(`Error updating daily temp anomaly: ${err}`, 500)
+    logger.log(`Error updating daily temp anomaly: ${err}`)
   }
 }
 
@@ -242,7 +241,7 @@ exports.updateAnnualTempAnomalyLOC = async () => {
     updatePublicDataset(`temp_annual_loc_anomaly_public`, anomaly.public)
     updatePublicDataset(`temp_annual_loc_public`, temp.public)
   } catch (err) {
-    throw new AppError(`Error updating annual temp anomaly LOC: ${err}`, 500)
+    logger.log(`Error updating annual temp anomaly LOC: ${err}`)
   }
 }
 
@@ -293,6 +292,6 @@ exports.updateMonthlyTempAnomalyLOC = async () => {
     updatePublicDataset(`temp_monthly_loc_anomaly_public`, publicData)
     updatePublicDataset(`temp_monthly_loc_public`, temp.public)
   } catch (err) {
-    throw new AppError(`Error updating monthly temp anomaly LOC: ${err}`, 500)
+    logger.log(`Error updating monthly temp anomaly LOC: ${err}`)
   }
 }

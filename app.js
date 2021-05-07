@@ -14,6 +14,7 @@ const ber = require("./controller/berkeleyController")
 const sf6 = require("./controller/sf6Controller")
 const n2o = require("./controller/n2oController")
 const ch4 = require("./controller/ch4Controller")
+const co2 = require("./controller/co2Controller")
 const logger = require("./Logger")
 const tools = require("./controller/dbController")
 
@@ -75,17 +76,17 @@ cron.run()
 // })
 // ***************************************
 
-// nasa.updateIceMass()
+// nasa.updateSeaLevels()
 // ch4.readAnnualCH4();
 // ch4.readAnnualGrowthRateCH4();
-// n2o.readMonthlyN2OGL()
+co2.readDailyCO2()
 // n2o.readAnnualN2O()
 // n2o.readAnnualGrowthRateN2O()
 // sf6.readMonthlySF6GL()
 // sf6.readAnnualSF6()
 // sf6.readAnnualGrowthRateSF6()
 
-ber.updateMonthlyTempAnomalyLOC()
+// ber.updateMonthlyTempAnomalyLOC()
 
 // news.updateNewsfeed();
 const PORT = process.env.PORT || 5000

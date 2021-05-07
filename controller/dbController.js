@@ -105,11 +105,10 @@ exports.updateDataset = async (id, data) => {
         logger.log(`Dataset id: ${id} update skipped, data unchanged`)
       }
     } else {
-      return new AppError(`Dataset: ${id} not found`, 400)
+      logger.log(`Dataset: ${id} not found`)
     }
   } catch (err) {
     logger.log(`Error updating public dataset: ${err}`)
-    return new AppError(`Error updating public dataset: ${err}`, 500)
   }
 }
 
@@ -131,16 +130,20 @@ exports.createPublicDataset = catchError(async (req, res) => {
     data: newDataset,
   })
 })
-exports.forgePublicDataset = catchError(async (obj) => {
-  const newDataset = await publicDataModel.create({
-    datasetID: obj.datasetID,
-    title: obj.title,
-    description: obj.description,
-    readings: obj.readings,
-    unit: obj.unit,
-  })
-  logger.log(`Dataset created`)
-})
+exports.forgePublicDataset = async (obj) => {
+  try {
+    await publicDataModel.create({
+      datasetID: obj.datasetID,
+      title: obj.title,
+      description: obj.description,
+      readings: obj.readings,
+      unit: obj.unit,
+    })
+    logger.log(`Dataset created`)
+  } catch (err) {
+    logger.log(`Error forging public dataset: ${err}`)
+  }
+}
 
 exports.updatePublicDataset = async (id, data) => {
   try {
@@ -159,10 +162,9 @@ exports.updatePublicDataset = async (id, data) => {
         logger.log(`Dataset id: ${id} update skipped, data unchanged`)
       }
     } else {
-      return new AppError(`Dataset: ${id} not found`, 400)
+      logger.log(`Dataset: ${id} not found`)
     }
   } catch (err) {
     logger.log(`Error updating public dataset: ${err}`)
-    return new AppError(`Error updating public dataset: ${err}`, 500)
   }
 }
