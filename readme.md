@@ -1,3 +1,5 @@
+climatemonitor.info
+
 # Public REST API
 
 ## REQUEST STRUCTURE
@@ -194,10 +196,7 @@ Response status 5xx, server-side errors
 ```json
 {
   "status": "error",
-  "err": {
-    "statusCode": 500,
-    "message": "Internal server error"
-  }
+  "message": "Internal server error ;)"
 }
 ```
 
@@ -387,13 +386,9 @@ Annual land surface average:
 /temp/annual_avg
 ```
 
-Annual land surface minimum:
-
 ```
 /temp/annual_min
 ```
-
-Annual land surface maximum:
 
 ```
 /temp/annual_max
@@ -402,28 +397,24 @@ Annual land surface maximum:
 Average annual land surface anomaly:
 
 ```
-/temp/annual_anomaly_avg
-```
-
-Minimum annual land surface anomaly:
-
-```
 /temp/annual_anomaly_min
 ```
 
-Maximum annual land surface anomaly:
+```
+/temp/annual_anomaly_avg
+```
 
 ```
 /temp/annual_anomaly_max
 ```
 
-Annual land and ocen combined temperature anomaly:
+Annual land and ocean combined temperature anomaly:
 
 ```
 /temp/annual_anomaly_loc
 ```
 
-Annual land and ocen combined average temperature:
+Annual land and ocean combined average temperature:
 
 ```
 /temp/annual_loc
@@ -432,16 +423,12 @@ Annual land and ocen combined average temperature:
 Monthly land surface average:
 
 ```
-/temp/monthly_avg
-```
-
-Monthly land surface minimum:
-
-```
 /temp/monthly_min
 ```
 
-Monthly land surface maximum:
+```
+/temp/monthly_avg
+```
 
 ```
 /temp/monthly_max
@@ -450,29 +437,39 @@ Monthly land surface maximum:
 Average monthly land surface anomaly:
 
 ```
-/temp/monthly_anomaly_avg
-```
-
-Minimum monthly land surface anomaly:
-
-```
 /temp/monthly_anomaly_min
 ```
 
-Maximum monthly land surface anomaly:
+```
+/temp/monthly_anomaly_avg
+```
 
 ```
 /temp/monthly_anomaly_max
 ```
 
-Monthly land and ocen combined temperature anomaly:
+Monthly land and ocean combined temperature anomaly:
 
 ```
 /temp/monthly_anomaly_loc
 ```
 
-Monthly land and ocen combined average temperature:
+Monthly land and ocean combined average temperature:
 
 ```
 /temp/monthly_loc
+```
+
+Daily land surface average temperature anomaly (last ten years of availaible records):
+
+```
+/temp/daily_min
+```
+
+```
+/temp/daily_avg
+```
+
+```
+/temp/daily_max
 ```
