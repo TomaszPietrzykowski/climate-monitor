@@ -7,9 +7,19 @@ const logger = require("../Logger")
 // @route: GET /api/news
 // @access: Public
 exports.getNews = catchError(async (req, res) => {
+  const pageSize = 12
+  const page = Number(req.query.page) || 1
   const news = await newsModel.findById("607c0f011bd74a1fe04395b2")
-  if (news) {
-    res.status(200).json(news)
+  const count = news.articles.length
+  const pages = Math.ceil(count / pageSize)
+  if (news && news.articles) {
+    const output = news.articles.slice(
+      (page - 1) * pageSize,
+      (page - 1) * pageSize + pageSize
+    )
+    res
+      .status(200)
+      .json({ articles: output, lastUpdate: news.updatedAt, page, pages })
   } else {
     res.status(404).json({
       status: "fail",

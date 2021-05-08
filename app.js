@@ -79,7 +79,7 @@ cron.run()
 // nasa.updateSeaLevels()
 // ch4.readAnnualCH4();
 // ch4.readAnnualGrowthRateCH4();
-co2.readDailyCO2()
+// co2.readDailyCO2()
 // n2o.readAnnualN2O()
 // n2o.readAnnualGrowthRateN2O()
 // sf6.readMonthlySF6GL()
