@@ -1,51 +1,38 @@
 const express = require("express")
+const path = require("path")
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const cors = require("cors")
-
 const cron = require("./controller/cronController")
+// custom
 const globalErrorHandler = require("./controller/errorController")
 const chartDataRouter = require("./router/chartDataRouter")
 const publicApiRouter = require("./router/publicApiRouter")
 const newsRouter = require("./router/newsRouter")
-const news = require("./controller/newsController")
-const nasa = require("./controller/nasaController")
-const ber = require("./controller/berkeleyController")
-const sf6 = require("./controller/sf6Controller")
-const n2o = require("./controller/n2oController")
-const ch4 = require("./controller/ch4Controller")
-const co2 = require("./controller/co2Controller")
 const logger = require("./Logger")
-const tools = require("./controller/dbController")
-
-dotenv.config({ path: "./config.env" })
-
+// init
 const app = express()
-
-// Middleware cycle:
+dotenv.config({ path: "./config.env" })
+// middleware
 app.use(cors(false))
 app.use(express.urlencoded({ extended: false }))
-app.use(express.json()) // <-- body parser
-
-// -- routing
+app.use(express.json())
+// routing
 app.use("/api/v1/chartdata", chartDataRouter)
 app.use("/api/public/v1", publicApiRouter)
 app.use("/api/news", newsRouter)
-
-// catch all invalid routes - push err to error middleware by passing arg to next()
-app.all("*", (req, res, next) => {
-  next(new AppError(`Couldn't find ${req.originalUrl}`, 404))
-})
-
+// static
+app.use(express.static(path.join(__dirname, "/view")))
+app.get("*", (req, res) =>
+  res.sendFile(path.resolve(__dirname, "view", "index.html"))
+)
 //global error handling middleware
 app.use(globalErrorHandler)
-
-// -- db CONNECTION
+// db connection
 const DB = process.env.MONGO_ACCESS_STRING.replace(
   "<PASSWORD>",
   process.env.MONGO_PASSWORD
 )
-
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
@@ -58,38 +45,11 @@ mongoose
       `MongoDB successfuly connected...... \nDB user: ${con.connections[0].user}`
     )
   })
-  .catch(() => {
-    console.log("DB connection failed")
+  .catch((err) => {
+    logger.log(`DB connection failed\nError: ${err}`)
   })
-
-// run data update schedule
+// run data update scheduler
 cron.run()
-// --- TESTS ---
-
-// Create public dataset: ****************
-// tools.forgePublicDataset({
-//   datasetID: "temp_daily_max_public",
-//   title: "Land surface daily temperature anomaly maximum",
-//   description: "temporary description",
-//   unit: "C",
-//   readings: [],
-// })
-// ***************************************
-
-// nasa.updateSeaLevels()
-// ch4.readAnnualCH4();
-// ch4.readAnnualGrowthRateCH4();
-// co2.readDailyCO2()
-// n2o.readAnnualN2O()
-// n2o.readAnnualGrowthRateN2O()
-// sf6.readMonthlySF6GL()
-// sf6.readAnnualSF6()
-// sf6.readAnnualGrowthRateSF6()
-
-// ber.updateMonthlyTempAnomalyLOC()
-
-// news.updateNewsfeed();
+// start server
 const PORT = process.env.PORT || 5000
-const server = app.listen(PORT, () =>
-  console.log(`Server running on port: ${PORT}......`)
-)
+app.listen(PORT, () => console.log(`Server running on port: ${PORT}......`))
