@@ -9,6 +9,7 @@ const globalErrorHandler = require("./controller/errorController")
 const chartDataRouter = require("./router/chartDataRouter")
 const publicApiRouter = require("./router/publicApiRouter")
 const newsRouter = require("./router/newsRouter")
+const emailRouter = require("./router/emailRouter")
 const logger = require("./Logger")
 // init
 const app = express()
@@ -21,6 +22,7 @@ app.use(express.json())
 app.use("/api/v1/chartdata", chartDataRouter)
 app.use("/api/public/v1", publicApiRouter)
 app.use("/api/news", newsRouter)
+app.use("/api/email", emailRouter)
 // static
 app.use(express.static(path.join(__dirname, "/view")))
 app.get("*", (req, res) =>
