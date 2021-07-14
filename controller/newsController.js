@@ -7,7 +7,7 @@ const logger = require("../Logger")
 // @route: GET /api/news
 // @access: Public
 exports.getNews = catchError(async (req, res) => {
-  const pageSize = 12
+  const pageSize = 24
   const page = Number(req.query.page) || 1
   const news = await newsModel.findById("607c0f011bd74a1fe04395b2")
   const count = news.articles.length

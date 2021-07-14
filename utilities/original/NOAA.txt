@@ -1,0 +1,22 @@
+
+[ https://www.noaa.gov/ ]
+[ https://gml.noaa.gov/ ]
+
+The Global Monitoring Laboratory (GML) of the National Oceanic and Atmospheric Administration 
+conducts research that addresses three major challenges: greenhouse gas and carbon cycle feedbacks, 
+changes in clouds, aerosols, and surface radiation, and recovery of stratospheric ozone.
+
+GML has a vision of a Society using the best possible information to inform decisions on climate change, 
+weather variability, carbon cycle feedbacks, and ozone depletion.
+
+It's mission is to acquire, evaluate, and make available accurate, long-term records of atmospheric gases, 
+aerosol particles, clouds, and surface radiation in a manner that allows the causes and consequences of change to be understood.
+
+More about NOAA GML: [ https://gml.noaa.gov/about/aboutgmd.html ]
+
+atmospheric CO2: [ https://gml.noaa.gov/ccgg/trends/data.html ]
+atmospheric CO2: [ https://gml.noaa.gov/ccgg/trends/gl_data.html ]
+atmospheric CO2: [ https://www.esrl.noaa.gov/gmd/ccgg/mbl/crvfit/crvfit.html ] details on the curve fitting process
+atmospheric CH4: [ https://gml.noaa.gov/ccgg/trends_ch4/ ]
+atmospheric SF6: [ https://www.esrl.noaa.gov/gmd/ccgg/trends_sf6/ ]
+atmospheric N2O: [ https://gml.noaa.gov/ccgg/trends_n2o/ ]
